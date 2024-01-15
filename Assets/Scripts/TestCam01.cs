@@ -9,8 +9,8 @@ public class TestCam01 : MonoBehaviour
     private void Start()
     {
         //Confine and hide cursor
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
  
     float rotX = 0f;
