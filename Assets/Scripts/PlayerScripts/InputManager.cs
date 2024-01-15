@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField]
-    private PlayerMovement playerMovement;
+    [SerializeField] private PlayerMovement playerMovement;
 
     private PlayerControls controls;
     private PlayerControls.GroundMovementActions groundMovement;

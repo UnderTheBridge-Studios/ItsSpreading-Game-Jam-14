@@ -237,6 +237,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a6bc022183cc34bbef319b6197d457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 3433966552042880969}
+  speed: 11
+  gravity: -15
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &2941709444019296971
 GameObject:
   m_ObjectHideFlags: 0
