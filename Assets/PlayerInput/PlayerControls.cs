@@ -35,6 +35,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LookX"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""fcb890fa-f4da-451a-ba5d-8e727c6fd9e0"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LookY"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7c08b275-f015-480f-9fa2-0a66677d4275"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +110,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""HorizontalMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6879f28-4154-4cce-940b-4fc355732cbe"",
+                    ""path"": ""<Mouse>/delta/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69082a90-de64-4926-8121-d5a136fbee8c"",
+                    ""path"": ""<Mouse>/delta/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LookY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +141,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // GroundMovement
         m_GroundMovement = asset.FindActionMap("GroundMovement", throwIfNotFound: true);
         m_GroundMovement_HorizontalMovement = m_GroundMovement.FindAction("HorizontalMovement", throwIfNotFound: true);
+        m_GroundMovement_LookX = m_GroundMovement.FindAction("LookX", throwIfNotFound: true);
+        m_GroundMovement_LookY = m_GroundMovement.FindAction("LookY", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +205,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GroundMovement;
     private List<IGroundMovementActions> m_GroundMovementActionsCallbackInterfaces = new List<IGroundMovementActions>();
     private readonly InputAction m_GroundMovement_HorizontalMovement;
+    private readonly InputAction m_GroundMovement_LookX;
+    private readonly InputAction m_GroundMovement_LookY;
     public struct GroundMovementActions
     {
         private @PlayerControls m_Wrapper;
         public GroundMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @HorizontalMovement => m_Wrapper.m_GroundMovement_HorizontalMovement;
+        public InputAction @LookX => m_Wrapper.m_GroundMovement_LookX;
+        public InputAction @LookY => m_Wrapper.m_GroundMovement_LookY;
         public InputActionMap Get() { return m_Wrapper.m_GroundMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +226,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @HorizontalMovement.started += instance.OnHorizontalMovement;
             @HorizontalMovement.performed += instance.OnHorizontalMovement;
             @HorizontalMovement.canceled += instance.OnHorizontalMovement;
+            @LookX.started += instance.OnLookX;
+            @LookX.performed += instance.OnLookX;
+            @LookX.canceled += instance.OnLookX;
+            @LookY.started += instance.OnLookY;
+            @LookY.performed += instance.OnLookY;
+            @LookY.canceled += instance.OnLookY;
         }
 
         private void UnregisterCallbacks(IGroundMovementActions instance)
@@ -187,6 +239,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @HorizontalMovement.started -= instance.OnHorizontalMovement;
             @HorizontalMovement.performed -= instance.OnHorizontalMovement;
             @HorizontalMovement.canceled -= instance.OnHorizontalMovement;
+            @LookX.started -= instance.OnLookX;
+            @LookX.performed -= instance.OnLookX;
+            @LookX.canceled -= instance.OnLookX;
+            @LookY.started -= instance.OnLookY;
+            @LookY.performed -= instance.OnLookY;
+            @LookY.canceled -= instance.OnLookY;
         }
 
         public void RemoveCallbacks(IGroundMovementActions instance)
@@ -207,5 +265,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IGroundMovementActions
     {
         void OnHorizontalMovement(InputAction.CallbackContext context);
+        void OnLookX(InputAction.CallbackContext context);
+        void OnLookY(InputAction.CallbackContext context);
     }
 }
