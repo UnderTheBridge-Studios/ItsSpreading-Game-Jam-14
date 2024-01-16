@@ -26,14 +26,14 @@ public class MaterialBlockGrowth : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown("r") && currentPosition != 0 && !isShrinking)
+        if (Input.GetKeyDown("o") && currentPosition != 0 && !isShrinking)
         {
             //There is a delay between currentPosition and the function tick
             initialPosition = currentPosition;
             isShrinking = true;
             isGrowing = false;
         }
-        else if (Input.GetKeyDown("e") && currentPosition != 1 && !isGrowing)
+        else if (Input.GetKeyDown("p") && currentPosition != 1 && !isGrowing)
         {
             //There is a delay between currentPosition and the function tick
             initialPosition = currentPosition;
