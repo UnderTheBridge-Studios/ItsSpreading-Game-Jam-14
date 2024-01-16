@@ -13,6 +13,12 @@ public class PlayerLook : MonoBehaviour
     private float lookX;
     private float lookY;
 
+    private void Start()
+    {
+        //Confine and hide cursor
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     private void Update()
     {
         transform.Rotate(Vector3.up, lookX * Time.deltaTime);
