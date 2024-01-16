@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController m_controller;
     [SerializeField] private float m_speed = 11f;
+    [SerializeField] private float m_sprintSpeed = 16f;
     [SerializeField] private float m_gravity = -15f;
     [SerializeField] private LayerMask m_groundMask;
 
@@ -13,6 +15,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_horizontalVelocity;
     private Vector3 m_verticalVelocity;
     private bool m_isGrounded;
+    private bool m_isSprinting = false;
+
+    public bool IsGrounded => m_isGrounded;
+    public bool IsSprinting => m_isSprinting;
 
     private void Update()
     {
@@ -24,7 +30,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Horizontal Movement
-        m_horizontalVelocity = (transform.right * m_horizontalInput.x + transform.forward * m_horizontalInput.y) * m_speed;
+        if (!m_isSprinting)
+        {
+            m_horizontalVelocity = (transform.right * m_horizontalInput.x + transform.forward * m_horizontalInput.y) * m_speed;
+        }
+        else
+        {
+            m_horizontalVelocity = (transform.right * m_horizontalInput.x + transform.forward * m_horizontalInput.y) * m_sprintSpeed;
+        }
+
         m_controller.Move(m_horizontalVelocity * Time.deltaTime);
 
         //Vertical Movement
@@ -35,5 +49,15 @@ public class PlayerMovement : MonoBehaviour
     public void ReceiveInput(Vector2 _horizontalInput)
     {
         m_horizontalInput = _horizontalInput;
+    }
+
+    public void Sprint()
+    {
+        m_isSprinting = true;
+    }
+
+    public void EndSprint()
+    {
+        m_isSprinting = false;
     }
 }

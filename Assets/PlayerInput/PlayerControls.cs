@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""32edfea2-59dd-4f36-85df-ddbad1fd34a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""879767da-1bf5-4193-9fee-7e407ca4e56a"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_GroundMovement_LookX = m_GroundMovement.FindAction("LookX", throwIfNotFound: true);
         m_GroundMovement_LookY = m_GroundMovement.FindAction("LookY", throwIfNotFound: true);
         m_GroundMovement_Interact = m_GroundMovement.FindAction("Interact", throwIfNotFound: true);
+        m_GroundMovement_Sprint = m_GroundMovement.FindAction("Sprint", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +250,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GroundMovement_LookX;
     private readonly InputAction m_GroundMovement_LookY;
     private readonly InputAction m_GroundMovement_Interact;
+    private readonly InputAction m_GroundMovement_Sprint;
     public struct GroundMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -237,6 +259,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @LookX => m_Wrapper.m_GroundMovement_LookX;
         public InputAction @LookY => m_Wrapper.m_GroundMovement_LookY;
         public InputAction @Interact => m_Wrapper.m_GroundMovement_Interact;
+        public InputAction @Sprint => m_Wrapper.m_GroundMovement_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_GroundMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +281,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
         }
 
         private void UnregisterCallbacks(IGroundMovementActions instance)
@@ -274,6 +300,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
         }
 
         public void RemoveCallbacks(IGroundMovementActions instance)
@@ -297,5 +326,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLookX(InputAction.CallbackContext context);
         void OnLookY(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
 }

@@ -23,6 +23,9 @@ public class InputManager : MonoBehaviour
         m_groundMovement.LookX.performed += ctx => m_lookInput.x = ctx.ReadValue<float>();
         m_groundMovement.LookY.performed += ctx => m_lookInput.y = ctx.ReadValue<float>();
 
+        m_groundMovement.Sprint.performed += _ => m_playerMovement.Sprint();
+        m_groundMovement.Sprint.canceled += _ => m_playerMovement.EndSprint();
+
         m_groundMovement.Interact.performed += _ => m_playerInteract.OnInteractPressed();
     }
 

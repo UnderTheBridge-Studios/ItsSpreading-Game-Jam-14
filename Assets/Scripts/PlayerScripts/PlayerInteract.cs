@@ -20,7 +20,7 @@ public class PlayerInteract : MonoBehaviour
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, interactionDistance))
         {
             //currentInteractable == null || currentInteractable.ID != hit.collider.gameObject.GetComponent<IInteractable>().ID)
-            if (hit.collider.gameObject.CompareTag("Interactable") && currentInteractable == null)
+            if (hit.collider.gameObject.CompareTag("Interactable") && (currentInteractable == null || hit.collider.gameObject.GetComponent<IInteractable>().ID != currentInteractable.ID))
             {
                 hit.collider.TryGetComponent(out currentInteractable);
                 currentInteractable.OnFocus();
