@@ -16,10 +16,8 @@ public class PlayerInteract : MonoBehaviour
 
     private void InteractionCheck()
     {
-        //Debug.DrawRay(playerCamera.transform.position, playerCamera.transform.forward, Color.red, interactionDistance);
         if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, interactionDistance))
         {
-            //currentInteractable == null || currentInteractable.ID != hit.collider.gameObject.GetComponent<IInteractable>().ID)
             if (hit.collider.gameObject.CompareTag("Interactable") && (currentInteractable == null || hit.collider.gameObject.GetComponent<IInteractable>().ID != currentInteractable.ID))
             {
                 hit.collider.TryGetComponent(out currentInteractable);
@@ -36,6 +34,7 @@ public class PlayerInteract : MonoBehaviour
         else if (currentInteractable != null)
         {
             Debug.Log("Lose Focus de " + currentInteractable.ID);
+            currentInteractable.OnLoseFocus();
             currentInteractable = null;
         }
     }
