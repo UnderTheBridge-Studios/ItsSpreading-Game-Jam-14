@@ -24,7 +24,6 @@ public class LightProjectile : MonoBehaviour
     {
         m_collider.radius = m_radius;
 
-
         //velocity*50 is the true velocity, fixed update its called 50times per second
         yield return new WaitForSeconds(m_range/(m_velocity*50)); 
         Destroy(this.gameObject);
