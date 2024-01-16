@@ -7,33 +7,51 @@ public class LightProjectile : MonoBehaviour
     private SphereCollider m_collider;
     private Vector3 m_direcction;
 
-    [SerializeField] private float m_radius = 0.5f;
-    [SerializeField] private float m_velocity = 0.5f;
-    [SerializeField] private float m_range = 20;
+    private float m_radius = 0.5f;
+    private float m_velocity = 0.5f;
+    private float m_range = 20;
+    private float m_damage = 0.01f;
 
     private void Awake()
     {
         m_collider = GetComponent<SphereCollider>();
-        m_collider.radius = m_radius;
         m_direcction = Vector3.zero;
+        this.gameObject.SetActive(false);
+
     }
 
     private IEnumerator Start()
     {
+        m_collider.radius = m_radius;
+
+
         //velocity*50 is the true velocity, fixed update its called 50times per second
         yield return new WaitForSeconds(m_range/(m_velocity*50)); 
         Destroy(this.gameObject);
     }
 
-    public void Inicializate(Vector3 direction)
+    public void Inicializate(Vector3 direction, float range, float velocity, float radius)
     {
         m_direcction = direction.normalized;
+        m_velocity = velocity;
+        m_range = range;
+        m_radius = radius;
 
+        this.gameObject.SetActive(true);
     }
 
     private void FixedUpdate()
     {
         transform.position = transform.position + (m_direcction * m_velocity);
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.tag == "Alien")
+        {
+            collision.GetComponent<AlienTest>().damage(m_damage);
+        }
+        Destroy(this.gameObject);
     }
 
     private void OnDrawGizmos()
