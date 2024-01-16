@@ -2,40 +2,43 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement playerMovement;
-    [SerializeField] private PlayerLook playerLook;
+    [SerializeField] private PlayerMovement m_playerMovement;
+    [SerializeField] private PlayerLook m_playerLook;
+    [SerializeField] private PlayerInteract m_playerInteract;
 
-    private PlayerControls controls;
-    private PlayerControls.GroundMovementActions groundMovement;
+    private PlayerControls m_controls;
+    private PlayerControls.GroundMovementActions m_groundMovement;
 
-    private Vector2 horizontalInput;
-    private Vector2 lookInput;
+    private Vector2 m_horizontalInput;
+    private Vector2 m_lookInput;
 
     private void Awake()
     {
-        controls = new PlayerControls();
-        groundMovement = controls.GroundMovement;
+        m_controls = new PlayerControls();
+        m_groundMovement = m_controls.GroundMovement;
 
         // groundMovement.[action].performed += context => do something
-        groundMovement.HorizontalMovement.performed += ctx => horizontalInput = ctx.ReadValue<Vector2>();
+        m_groundMovement.HorizontalMovement.performed += ctx => m_horizontalInput = ctx.ReadValue<Vector2>();
         
-        groundMovement.LookX.performed += ctx => lookInput.x = ctx.ReadValue<float>();
-        groundMovement.LookY.performed += ctx => lookInput.y = ctx.ReadValue<float>();
+        m_groundMovement.LookX.performed += ctx => m_lookInput.x = ctx.ReadValue<float>();
+        m_groundMovement.LookY.performed += ctx => m_lookInput.y = ctx.ReadValue<float>();
+
+        m_groundMovement.Interact.performed += _ => m_playerInteract.OnInteractPressed();
     }
 
     private void Update()
     {
-        playerMovement.ReceiveInput(horizontalInput);
-        playerLook.ReceiveInput(lookInput);
+        m_playerMovement.ReceiveInput(m_horizontalInput);
+        m_playerLook.ReceiveInput(m_lookInput);
     }
 
     private void OnEnable()
     {
-        controls.Enable();
+        m_controls.Enable();
     }
 
     private void OnDisable()
     {
-        controls.Disable();
+        m_controls.Disable();
     }
 }

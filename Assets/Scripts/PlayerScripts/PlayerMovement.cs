@@ -4,36 +4,36 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private CharacterController controller;
-    [SerializeField] private float speed = 11f;
-    [SerializeField] private float gravity = -15f;
-    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private CharacterController m_controller;
+    [SerializeField] private float m_speed = 11f;
+    [SerializeField] private float m_gravity = -15f;
+    [SerializeField] private LayerMask m_groundMask;
 
-    private Vector2 horizontalInput;
-    private Vector3 horizontalVelocity;
-    private Vector3 verticalVelocity;
-    private bool isGrounded;
+    private Vector2 m_horizontalInput;
+    private Vector3 m_horizontalVelocity;
+    private Vector3 m_verticalVelocity;
+    private bool m_isGrounded;
 
     private void Update()
     {
         //Is grounded Check
-        isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundMask);
-        if (isGrounded)
+        m_isGrounded = Physics.CheckSphere(transform.position, 0.1f, m_groundMask);
+        if (m_isGrounded)
         {
-            verticalVelocity.y = 0;
+            m_verticalVelocity.y = 0;
         }
 
         //Horizontal Movement
-        horizontalVelocity = (transform.right * horizontalInput.x + transform.forward * horizontalInput.y) * speed;
-        controller.Move(horizontalVelocity * Time.deltaTime);
+        m_horizontalVelocity = (transform.right * m_horizontalInput.x + transform.forward * m_horizontalInput.y) * m_speed;
+        m_controller.Move(m_horizontalVelocity * Time.deltaTime);
 
         //Vertical Movement
-        verticalVelocity.y += gravity * Time.deltaTime;
-        controller.Move(verticalVelocity * Time.deltaTime);
+        m_verticalVelocity.y += m_gravity * Time.deltaTime;
+        m_controller.Move(m_verticalVelocity * Time.deltaTime);
     }
 
     public void ReceiveInput(Vector2 _horizontalInput)
     {
-        horizontalInput = _horizontalInput;
+        m_horizontalInput = _horizontalInput;
     }
 }
