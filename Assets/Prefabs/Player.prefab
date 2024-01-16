@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 4204994667157738951}
   - component: {fileID: 4424304689999144895}
   - component: {fileID: 7840657799937068534}
+  - component: {fileID: 3125761959522696208}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -251,6 +252,7 @@ MonoBehaviour:
   m_playerMovement: {fileID: 5730261161568649210}
   m_playerLook: {fileID: 4204994667157738951}
   m_playerInteract: {fileID: 7840657799937068534}
+  m_flashlight: {fileID: 3125761959522696208}
 --- !u!114 &7840657799937068534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +267,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 2516430736871969816}
   interactionDistance: 3
+--- !u!114 &3125761959522696208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459962071979092884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 764ffde31b7f87d429c36c978d2ccc61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_camera: {fileID: 1183786421419228034}
+  m_LightProjectile: {fileID: 6483078321381274704, guid: 05650b6fc4c00df49a2c6f8784e58bb9, type: 3}
+  m_range: 20
+  m_radius: 1
+  m_velocity: 2
+  m_ProjectileFov: 30
 --- !u!1 &2941709444019296971
 GameObject:
   m_ObjectHideFlags: 0

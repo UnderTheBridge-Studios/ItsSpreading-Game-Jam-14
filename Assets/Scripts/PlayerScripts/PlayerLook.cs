@@ -15,8 +15,14 @@ public class PlayerLook : MonoBehaviour
     private float m_xRotation = 0f;
     private float m_lookX;
     private float m_lookY;
-
     private Tween m_tween;
+
+    private void Start()
+    {
+        //Confine and hide cursor
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void Update()
     {

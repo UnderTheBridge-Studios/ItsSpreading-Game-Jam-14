@@ -101,12 +101,12 @@ Material:
     - _Growth: 1
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Offset: -2.75
+    - _Offset: 0
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Scale: 1
+    - _Scale: -0.52
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
