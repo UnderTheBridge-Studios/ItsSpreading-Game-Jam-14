@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController m_controller;
-    [SerializeField] private float m_speed = 11f;
+    [SerializeField] private PlayerLook m_playerLook;
+    [SerializeField] private float m_speed = 8f;
     [SerializeField] private float m_gravity = -15f;
     [SerializeField] private LayerMask m_groundMask;
 
@@ -13,6 +15,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 m_horizontalVelocity;
     private Vector3 m_verticalVelocity;
     private bool m_isGrounded;
+    private bool m_isSprinting = false;
+    private bool m_isMoving;
+    private bool m_isPreviouslyMoving;
+
+    public bool IsGrounded => m_isGrounded;
+    public bool IsSprinting => m_isSprinting;
 
     private void Update()
     {
@@ -30,6 +38,32 @@ public class PlayerMovement : MonoBehaviour
         //Vertical Movement
         m_verticalVelocity.y += m_gravity * Time.deltaTime;
         m_controller.Move(m_verticalVelocity * Time.deltaTime);
+
+        //Movement Check
+        m_isPreviouslyMoving = m_isMoving;
+        IsMovingCheck();
+
+        //Camera Bounce
+        if (!m_isPreviouslyMoving && m_isMoving)
+        {
+            m_playerLook.CameraBounce();
+        }
+        else if(m_isPreviouslyMoving && !m_isMoving)
+        {
+            m_playerLook.StopCameraBounce();
+        }
+    }
+
+    private void IsMovingCheck()
+    {
+        if(m_horizontalVelocity != Vector3.zero)
+        {
+            m_isMoving = true;
+        }
+        else
+        {
+            m_isMoving = false;
+        }
     }
 
     public void ReceiveInput(Vector2 _horizontalInput)
