@@ -270,7 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerInteractPoint: {fileID: 1759276995494068830}
   m_interactPront: {fileID: 0}
-  interactionDistance: 3
+  m_interactionDistance: 3
 --- !u!114 &3125761959522696208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764ffde31b7f87d429c36c978d2ccc61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_camera: {fileID: 1183786421419228034}
+  m_playerInteractPoint: {fileID: 1759276995494068830}
   m_LightProjectile: {fileID: 6483078321381274704, guid: 05650b6fc4c00df49a2c6f8784e58bb9, type: 3}
   m_range: 20
   m_radius: 1
