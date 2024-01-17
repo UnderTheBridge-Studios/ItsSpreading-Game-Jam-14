@@ -27,7 +27,11 @@ public class HUBManager : MonoBehaviour
     {
         m_interactPrompt.SetActive(false);
 
+
         m_poisonMaxWidth = m_poisonBar.GetComponent<RectTransform>().rect.width;
+        m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
+        m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
+
     }
 
     private void Update()
