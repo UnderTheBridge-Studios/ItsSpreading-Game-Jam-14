@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
-    [SerializeField] Camera playerCamera;
+    [SerializeField] Transform m_playerInteractPoint;
     [SerializeField] private GameObject m_interactPront;
-    [SerializeField] private float interactionDistance = 3f;
+    [SerializeField] private float m_interactionDistance = 3f;
 
     private IInteractable currentInteractable;
 
@@ -22,7 +22,7 @@ public class PlayerInteract : MonoBehaviour
 
     private void InteractionCheck()
     {
-        if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out RaycastHit hit, interactionDistance))
+        if (Physics.Raycast(m_playerInteractPoint.position, m_playerInteractPoint.transform.forward, out RaycastHit hit, m_interactionDistance))
         {
             if (hit.collider.gameObject.CompareTag("Interactable") && (currentInteractable == null || hit.collider.gameObject.GetComponent<IInteractable>().ID != currentInteractable.ID))
             {

@@ -6,6 +6,7 @@ using DG.Tweening;
 public class PlayerLook : MonoBehaviour
 {
     [SerializeField] private Transform m_playerCamera;
+    [SerializeField] private Transform m_playerInteractPoint;
     [SerializeField] private float m_BounceY = 3f;
     [SerializeField] private float m_BounceTime = 0.25f;
     [SerializeField] private float m_sensitivityX = 15f;
@@ -34,6 +35,7 @@ public class PlayerLook : MonoBehaviour
         Vector3 targetRotation = transform.eulerAngles;
         targetRotation.x = m_xRotation;
         m_playerCamera.eulerAngles = targetRotation;
+        m_playerInteractPoint.eulerAngles = targetRotation;
     }
 
     public void ReceiveInput(Vector2 cameraInput)
