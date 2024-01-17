@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 761113330499749552}
   - component: {fileID: 3163623596828088287}
   - component: {fileID: 46944586202444895}
+  - component: {fileID: 6553312721661921831}
   m_Layer: 0
   m_Name: trigger
-  m_TagString: Untagged
+  m_TagString: Alien
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +85,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6e9d60b2025d74cb889b6ba044b1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6553312721661921831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250626855871214339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ede83d67a48c46a408dab8d016e8dd53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_materialGrowth: {fileID: 4444140214006081965}
 --- !u!1 &7837061034690439852
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,8 +469,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3dee9befb598746935def7a9f0aa64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPosition: 1
-  growthSpeed: 1
+  m_currentPosition: 1
+  m_growthSpeed: 1
 --- !u!4 &1967245150142451943 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 45ae5c8d39aad8a45ab1fcb435f80815, type: 3}
