@@ -5,15 +5,9 @@ using UnityEngine;
 public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] Transform m_playerInteractPoint;
-    [SerializeField] private GameObject m_interactPront;
     [SerializeField] private float m_interactionDistance = 3f;
 
     private IInteractable currentInteractable;
-
-    private void Awake()
-    {
-        m_interactPront.SetActive(false);
-    }
 
     private void Update()
     {
@@ -28,13 +22,13 @@ public class PlayerInteract : MonoBehaviour
             {
                 hit.collider.TryGetComponent(out currentInteractable);
                 currentInteractable.OnFocus();
-                m_interactPront.SetActive(true);
+                HUBManager.instance.InteractPromptActive(true);
                 Debug.Log(currentInteractable.InteractionPromt);
             }
             else if (!hit.collider.gameObject.CompareTag("Interactable") && currentInteractable != null)
             {
                 currentInteractable.OnLoseFocus();
-                m_interactPront.SetActive(false);
+                HUBManager.instance.InteractPromptActive(false);
 
                 Debug.Log("Lose Focus de " + currentInteractable.ID);
                 currentInteractable = null;
@@ -44,7 +38,7 @@ public class PlayerInteract : MonoBehaviour
         {
             Debug.Log("Lose Focus de " + currentInteractable.ID);
             currentInteractable.OnLoseFocus();
-            m_interactPront.SetActive(false);
+            HUBManager.instance.InteractPromptActive(false);
             currentInteractable = null;
         }
     }
