@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class FlashLight : MonoBehaviour
 {
 
     [SerializeField] private Transform m_playerInteractPoint;
+    [SerializeField] private Light m_light;
 
     [SerializeField] private GameObject m_LightProjectile;
     [SerializeField] private float m_range = 20f;
@@ -19,10 +21,12 @@ public class FlashLight : MonoBehaviour
     public void EnableFlashlight()
     {
         m_shotingProjectile = StartCoroutine(ShootLightProjectile());
+        m_light.enabled = true;
     }
     public void DisableFlashlight()
     {
         StopCoroutine(m_shotingProjectile);
+        m_light.enabled = false;
     }
 
 
