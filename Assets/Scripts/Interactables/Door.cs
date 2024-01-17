@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IInteractable
 {
-    [SerializeField] private string id;
-    [SerializeField] private string prompt;
+    [SerializeField] private string m_id;
+    [SerializeField] private string m_prompt;
 
-    public string ID => id;
-    public string InteractionPromt => prompt;
+    public string ID => m_id;
+    public string InteractionPromt => m_prompt;
 
     public bool Interact(PlayerInteract interactor)
     {
