@@ -4,81 +4,63 @@ using UnityEngine;
 
 public class MaterialBlockGrowth : MonoBehaviour
 {
+    [Range(0.0f, 1.0f)]
+    [SerializeField] private float m_currentPosition = 1;
+    [SerializeField] private float m_growthSpeed = 1;
+
     //Material instance properties
-    public MaterialPropertyBlock materialBlock;
-    private MeshRenderer meshRenderer;
-    [SerializeField] public float currentPosition = 1;
-    [SerializeField] private float growthSpeed = 1;
+    public MaterialPropertyBlock m_materialBlock;
+    private MeshRenderer m_meshRenderer;
 
-    private bool isShrinking = false;
-    private bool isGrowing = false;
-    private float speedModifier = 1f;
-    private float interpolation = 0.0f;
-    private float initialPosition = 0;
+    private bool m_isChangingSize = false;
+    private float m_speedModifier = 1f;
+    private float m_interpolation = 0.0f;
+    private float m_initialPosition = 0;
+    private float m_targuetPosition;
+
+    public float CurrentGrowth => m_currentPosition;
+    public bool IsChangingSize => m_isChangingSize;
 
 
-    void Start()
-        {
-            print("O to grow, P to shrink");
-            materialBlock = new MaterialPropertyBlock();
-            meshRenderer = GetComponent<MeshRenderer>();
-        }
+    void Awake()
+    {
+        m_materialBlock = new MaterialPropertyBlock();
+        m_meshRenderer = GetComponent<MeshRenderer>();
+    }
+
 
     void Update()
     {
-        if (Input.GetKeyDown("o") && currentPosition != 0 && !isShrinking)
-        {
-            //There is a delay between currentPosition and the function tick
-            initialPosition = currentPosition;
-            isShrinking = true;
-            isGrowing = false;
-        }
-        else if (Input.GetKeyDown("p") && currentPosition != 1 && !isGrowing)
-        {
-            //There is a delay between currentPosition and the function tick
-            initialPosition = currentPosition;
-            isGrowing = true;
-            isShrinking = false;
-        }
+        if (!m_isChangingSize)
+            return;
 
-        if (isShrinking)
-        {
-            Shrink();
-        }
-        else if (isGrowing)
-        {
-            Grow();
-        }
+        ChangeSize();
+        Debug.Log("Is Growing?: " + m_isChangingSize);
     }
 
-    private void Shrink()
+    public void DoSizeChange(float targuetPosition)
     {
-        currentPosition = Mathf.Lerp(initialPosition, 0, interpolation);
-        ChangePropertyBlock(currentPosition);
-        interpolation += (growthSpeed*speedModifier) * Time.deltaTime;
-        if (currentPosition <= 0)
-        {
-            isShrinking = false;
-            interpolation = 0.0f;
-            //currentPosition = 0;
-        }
+        m_initialPosition = m_currentPosition;
+        m_targuetPosition = targuetPosition;
+        m_isChangingSize = true;
     }
 
-    private void Grow()
+    private void ChangeSize()
     {
-        currentPosition = Mathf.Lerp(initialPosition, 1, interpolation);
-        ChangePropertyBlock(currentPosition);
-        interpolation += (growthSpeed*speedModifier) * Time.deltaTime;
-        if (currentPosition >= 1)
+        m_currentPosition = Mathf.Lerp(m_initialPosition, m_targuetPosition, m_interpolation);
+        ChangePropertyBlock(m_currentPosition);
+        m_interpolation += (m_growthSpeed*m_speedModifier) * Time.deltaTime;
+        
+        if (m_currentPosition == m_targuetPosition)
         {
-            isGrowing = false;
-            interpolation = 0.0f;
-            //currentPosition = 1;
+            m_isChangingSize = false;
+            m_interpolation = 0.0f;
         }
     } 
+
     private void ChangePropertyBlock(float amount)
-        {
-            materialBlock.SetFloat("_Growth", amount);
-            meshRenderer.SetPropertyBlock(materialBlock);
-        }
+    {
+        m_materialBlock.SetFloat("_Growth", amount);
+        m_meshRenderer.SetPropertyBlock(m_materialBlock);
+    }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -48,8 +49,15 @@ public class LightProjectile : MonoBehaviour
     {
         if (collision.tag == "Alien")
         {
-            //collision.GetComponent<AlienTest>().damage(m_damage);
-            collision.GetComponent<AlienController>().AlienDamage(m_damage);
+            try
+            {
+                collision.GetComponent<AlienController>().AlienDamage(m_damage);
+            }
+            catch(NullReferenceException)
+            {
+                collision.GetComponent<AlienTest>().damage(m_damage);
+            }
+            
         }
         Destroy(this.gameObject);
     }
