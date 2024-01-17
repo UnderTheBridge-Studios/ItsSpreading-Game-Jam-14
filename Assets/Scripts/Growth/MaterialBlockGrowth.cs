@@ -5,9 +5,9 @@ using UnityEngine;
 public class MaterialBlockGrowth : MonoBehaviour
 {
     //Material instance properties
-    private MaterialPropertyBlock materialBlock;
+    public MaterialPropertyBlock materialBlock;
     private MeshRenderer meshRenderer;
-    [SerializeField] private float currentPosition = 1;
+    [SerializeField] public float currentPosition = 1;
     [SerializeField] private float growthSpeed = 1;
 
     private bool isShrinking = false;
@@ -19,7 +19,7 @@ public class MaterialBlockGrowth : MonoBehaviour
 
     void Start()
         {
-            print("E to grow, R to shrink");
+            print("O to grow, P to shrink");
             materialBlock = new MaterialPropertyBlock();
             meshRenderer = GetComponent<MeshRenderer>();
         }
