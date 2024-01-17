@@ -35,7 +35,6 @@ public class MaterialBlockGrowth : MonoBehaviour
             return;
 
         ChangeSize();
-        Debug.Log("Is Growing?: " + m_isChangingSize);
     }
 
     public void DoSizeChange(float targuetPosition)
