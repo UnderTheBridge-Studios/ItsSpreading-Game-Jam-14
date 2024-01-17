@@ -8,7 +8,11 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private float m_maxPoisonRate;
+    [Range(0, 0.1f)]
+    [SerializeField]
     private float m_poisonRate;
+    [Range(0,100)]
+    [SerializeField]
     private float m_poison;
 
     public float poison => m_poison;
@@ -31,7 +35,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        m_poison += m_poisonRate;
+        m_poison = Mathf.Clamp(m_poisonRate + m_poison, 0f, 100f);
     }
 
     public void SetPoison(float newPoison)
