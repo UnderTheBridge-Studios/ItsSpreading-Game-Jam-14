@@ -48,7 +48,8 @@ public class LightProjectile : MonoBehaviour
     {
         if (collision.tag == "Alien")
         {
-            collision.GetComponent<AlienTest>().damage(m_damage);
+            //collision.GetComponent<AlienTest>().damage(m_damage);
+            collision.GetComponent<AlienController>().AlienDamage(m_damage);
         }
         Destroy(this.gameObject);
     }
