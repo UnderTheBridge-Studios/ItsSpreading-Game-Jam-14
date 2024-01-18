@@ -27,7 +27,6 @@ public class HUBManager : MonoBehaviour
     {
         m_interactPrompt.SetActive(false);
 
-
         m_poisonMaxWidth = m_poisonBar.GetComponent<RectTransform>().rect.width;
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
         m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
@@ -36,7 +35,6 @@ public class HUBManager : MonoBehaviour
 
     private void Update()
     {
-
         //HealthBar
         m_learpSpeed = 5f * Time.deltaTime;
         m_poisonBar.sizeDelta = new Vector2(Mathf.Clamp(Mathf.Lerp(m_poisonBar.rect.width, GameManager.instance.poison / 100 * m_poisonMaxWidth, m_learpSpeed), 0f, m_poisonMaxWidth), m_poisonBar.rect.height);
