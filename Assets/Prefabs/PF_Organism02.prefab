@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: -1853578450375568067, guid: 38a6b7a87d89f76498cac547f04012ec, type: 3}
+    - target: {fileID: 5429176007565528065, guid: f7122f2d58fd3f7498fe1f3d22632621, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5429176007565528065, guid: f7122f2d58fd3f7498fe1f3d22632621, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -7,8 +7,6 @@ public class PlayerLook : MonoBehaviour
 {
     [SerializeField] private Transform m_playerCamera;
     [SerializeField] private Transform m_playerInteractPoint;
-    [SerializeField] private float m_BounceY = 3f;
-    [SerializeField] private float m_BounceTime = 0.25f;
     [SerializeField] private float m_sensitivityX = 15f;
     [SerializeField] private float m_sensitivityY = 0.5f;
     private float m_xClamp = 85f;
@@ -41,10 +39,10 @@ public class PlayerLook : MonoBehaviour
         m_playerInteractPoint.eulerAngles = targetRotation;
     }
 
-    public void CameraBounce()
+    public void CameraBounce(float bounceHight, float bounceTime)
     {
         if (m_tween == null)
-            m_tween = m_playerCamera.DOLocalMoveY(m_BounceY, m_BounceTime).SetLoops(2, LoopType.Yoyo);
+            m_tween = m_playerCamera.DOLocalMoveY(bounceHight, bounceTime).SetLoops(2, LoopType.Yoyo);
         
         m_tween.OnComplete(() => m_tween.Restart()).SetAutoKill(false);
     }
