@@ -8,13 +8,13 @@ public class AlienTest : MonoBehaviour
     
     [SerializeField] private RectTransform m_bar;
 
-    [Range(0.0f, 1.0f)]
+    [Range(0.0f, 10.0f)]
     [SerializeField] private float m_life;
 
 
     void Update()
     {
-        m_bar.sizeDelta = new Vector2(m_life, 0.15f);
+        m_bar.sizeDelta = new Vector2(m_life/10, 0.15f);
     }
 
 

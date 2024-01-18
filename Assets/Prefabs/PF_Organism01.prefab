@@ -98,6 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_materialGrowth: {fileID: 4444140214006081965}
+  m_timeRecovery: 5
+  m_deathTimeRecovery: 10
 --- !u!1 &7837061034690439852
 GameObject:
   m_ObjectHideFlags: 0
