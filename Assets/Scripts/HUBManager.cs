@@ -10,6 +10,7 @@ public class HUBManager : MonoBehaviour
     [SerializeField] private GameObject m_interactPrompt;
     [SerializeField] private RectTransform m_poisonBar;
     [SerializeField] private RectTransform m_poisonBarRate;
+    [SerializeField] private GameObject m_pauseMenu;
 
     private float m_learpSpeed;
     private float m_poisonMaxWidth;
@@ -26,6 +27,7 @@ public class HUBManager : MonoBehaviour
     private void Start()
     {
         m_interactPrompt.SetActive(false);
+        m_pauseMenu.SetActive(false);
 
         m_poisonMaxWidth = m_poisonBar.GetComponent<RectTransform>().rect.width;
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
@@ -57,4 +59,13 @@ public class HUBManager : MonoBehaviour
         m_interactPrompt.SetActive(value);
     }
 
+    public void pause()
+    {
+        m_pauseMenu.SetActive(true);
+    }
+
+    public void resume()
+    {
+        m_pauseMenu.SetActive(false);
+    }
 }

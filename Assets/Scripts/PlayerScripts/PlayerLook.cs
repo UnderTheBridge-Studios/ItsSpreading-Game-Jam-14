@@ -23,8 +23,11 @@ public class PlayerLook : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
+    public void ReceiveInput(Vector2 cameraInput)
     {
+        m_lookX = cameraInput.x * m_sensitivityX;
+        m_lookY = cameraInput.y * m_sensitivityY;
+
         transform.Rotate(Vector3.up, m_lookX * Time.deltaTime);
 
         m_xRotation -= m_lookY;
@@ -34,12 +37,6 @@ public class PlayerLook : MonoBehaviour
         targetRotation.x = m_xRotation;
         m_playerCamera.eulerAngles = targetRotation;
         m_playerInteractPoint.eulerAngles = targetRotation;
-    }
-
-    public void ReceiveInput(Vector2 cameraInput)
-    {
-        m_lookX = cameraInput.x * m_sensitivityX;
-        m_lookY = cameraInput.y * m_sensitivityY;
     }
 
     public void CameraBounce(float bounceHight, float bounceTime)

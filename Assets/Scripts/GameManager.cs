@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float m_poison;
 
+    private bool m_isPaused;
+
+    public bool isPaused => m_isPaused;
     public float poison => m_poison;
     public float poisonRate => m_poisonRate;
 
@@ -25,6 +28,11 @@ public class GameManager : MonoBehaviour
             Destroy(this);
         else
             instance = this;
+    }
+
+    private void Start()
+    {
+        m_isPaused = false;
     }
 
     public void ResetValues()
@@ -46,5 +54,21 @@ public class GameManager : MonoBehaviour
     public void SetPoisonRate(float newPoisonRate)
     {
         m_poisonRate = Mathf.Clamp(newPoisonRate, 0f, 100f);
+    }
+
+    public void PauseGame()
+    {
+        if (!m_isPaused)
+        {
+            Time.timeScale = 0;
+            m_isPaused = true;
+            HUBManager.instance.pause();
+        }   
+        else
+        {
+            Time.timeScale = 1;
+            m_isPaused = false;
+            HUBManager.instance.resume();
+        }
     }
 }
