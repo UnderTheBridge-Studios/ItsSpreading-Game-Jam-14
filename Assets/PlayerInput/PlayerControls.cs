@@ -71,6 +71,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""4607aa84-45f2-401c-8cf2-3f4758dde187"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7ea59eb5-ca1a-4f83-a2ba-7cbf519a0b1b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -172,6 +190,56 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Flashlight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9fe7730f-f1ca-475b-b9ec-96d1df53869f"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a8206ec-2f04-4539-bb38-273c0b4cb669"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""MenuNavigation"",
+            ""id"": ""fae829b7-23bb-4062-a935-a56bed7c1105"",
+            ""actions"": [
+                {
+                    ""name"": ""Resume"",
+                    ""type"": ""Button"",
+                    ""id"": ""74876b33-fe44-434c-bb12-b3adc76d372e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""52561caa-d8b7-44d7-a603-47a69bbe24d8"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Resume"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -185,6 +253,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_GroundMovement_LookY = m_GroundMovement.FindAction("LookY", throwIfNotFound: true);
         m_GroundMovement_Interact = m_GroundMovement.FindAction("Interact", throwIfNotFound: true);
         m_GroundMovement_Flashlight = m_GroundMovement.FindAction("Flashlight", throwIfNotFound: true);
+        m_GroundMovement_Pause = m_GroundMovement.FindAction("Pause", throwIfNotFound: true);
+        m_GroundMovement_Look = m_GroundMovement.FindAction("Look", throwIfNotFound: true);
+        // MenuNavigation
+        m_MenuNavigation = asset.FindActionMap("MenuNavigation", throwIfNotFound: true);
+        m_MenuNavigation_Resume = m_MenuNavigation.FindAction("Resume", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -251,6 +324,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GroundMovement_LookY;
     private readonly InputAction m_GroundMovement_Interact;
     private readonly InputAction m_GroundMovement_Flashlight;
+    private readonly InputAction m_GroundMovement_Pause;
+    private readonly InputAction m_GroundMovement_Look;
     public struct GroundMovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -260,6 +335,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @LookY => m_Wrapper.m_GroundMovement_LookY;
         public InputAction @Interact => m_Wrapper.m_GroundMovement_Interact;
         public InputAction @Flashlight => m_Wrapper.m_GroundMovement_Flashlight;
+        public InputAction @Pause => m_Wrapper.m_GroundMovement_Pause;
+        public InputAction @Look => m_Wrapper.m_GroundMovement_Look;
         public InputActionMap Get() { return m_Wrapper.m_GroundMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -284,6 +361,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Flashlight.started += instance.OnFlashlight;
             @Flashlight.performed += instance.OnFlashlight;
             @Flashlight.canceled += instance.OnFlashlight;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
         }
 
         private void UnregisterCallbacks(IGroundMovementActions instance)
@@ -303,6 +386,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Flashlight.started -= instance.OnFlashlight;
             @Flashlight.performed -= instance.OnFlashlight;
             @Flashlight.canceled -= instance.OnFlashlight;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
         }
 
         public void RemoveCallbacks(IGroundMovementActions instance)
@@ -320,6 +409,52 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public GroundMovementActions @GroundMovement => new GroundMovementActions(this);
+
+    // MenuNavigation
+    private readonly InputActionMap m_MenuNavigation;
+    private List<IMenuNavigationActions> m_MenuNavigationActionsCallbackInterfaces = new List<IMenuNavigationActions>();
+    private readonly InputAction m_MenuNavigation_Resume;
+    public struct MenuNavigationActions
+    {
+        private @PlayerControls m_Wrapper;
+        public MenuNavigationActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Resume => m_Wrapper.m_MenuNavigation_Resume;
+        public InputActionMap Get() { return m_Wrapper.m_MenuNavigation; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuNavigationActions set) { return set.Get(); }
+        public void AddCallbacks(IMenuNavigationActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MenuNavigationActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MenuNavigationActionsCallbackInterfaces.Add(instance);
+            @Resume.started += instance.OnResume;
+            @Resume.performed += instance.OnResume;
+            @Resume.canceled += instance.OnResume;
+        }
+
+        private void UnregisterCallbacks(IMenuNavigationActions instance)
+        {
+            @Resume.started -= instance.OnResume;
+            @Resume.performed -= instance.OnResume;
+            @Resume.canceled -= instance.OnResume;
+        }
+
+        public void RemoveCallbacks(IMenuNavigationActions instance)
+        {
+            if (m_Wrapper.m_MenuNavigationActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMenuNavigationActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MenuNavigationActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MenuNavigationActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MenuNavigationActions @MenuNavigation => new MenuNavigationActions(this);
     public interface IGroundMovementActions
     {
         void OnHorizontalMovement(InputAction.CallbackContext context);
@@ -327,5 +462,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnLookY(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFlashlight(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
+    }
+    public interface IMenuNavigationActions
+    {
+        void OnResume(InputAction.CallbackContext context);
     }
 }

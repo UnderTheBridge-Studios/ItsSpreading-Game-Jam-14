@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
@@ -9,39 +10,58 @@ public class InputManager : MonoBehaviour
 
     private PlayerControls m_controls;
     private PlayerControls.GroundMovementActions m_groundMovement;
-
-    private Vector2 m_horizontalInput;
-    private Vector2 m_lookInput;
+    private PlayerControls.MenuNavigationActions m_menuMovement;
 
     private void Awake()
     {
         m_controls = new PlayerControls();
         m_groundMovement = m_controls.GroundMovement;
+        m_menuMovement = m_controls.MenuNavigation;
 
-        // groundMovement.[action].performed += context => do something
-        m_groundMovement.HorizontalMovement.performed += ctx => m_horizontalInput = ctx.ReadValue<Vector2>();
-        
-        m_groundMovement.LookX.performed += ctx => m_lookInput.x = ctx.ReadValue<float>();
-        m_groundMovement.LookY.performed += ctx => m_lookInput.y = ctx.ReadValue<float>();
+        m_groundMovement.HorizontalMovement.performed += ctx => HorizontalMovement(ctx);
+        m_groundMovement.Look.performed += ctx => Look(ctx);
 
         m_groundMovement.Interact.performed += _ => m_playerInteract.OnInteractPressed();
         m_groundMovement.Flashlight.performed += _ => m_flashlight.EnableFlashlight();
-        m_groundMovement.Flashlight.canceled += _ => m_flashlight.DisableFlashlight() ;
+        m_groundMovement.Flashlight.canceled += _ => m_flashlight.DisableFlashlight();
+        m_groundMovement.Pause.performed += _ => Pause();
+        m_menuMovement.Resume.performed += _ => Resume();
     }
 
-    private void Update()
+    private void Look(InputAction.CallbackContext context)
     {
-        m_playerMovement.ReceiveInput(m_horizontalInput);
-        m_playerLook.ReceiveInput(m_lookInput);
+        var input = context.ReadValue<Vector2>();
+        m_playerLook.ReceiveInput(input);
+    }
+
+    private void HorizontalMovement(InputAction.CallbackContext context)
+    {
+        var input = context.ReadValue<Vector2>();
+        m_playerMovement.ReceiveInput(input);
     }
 
     private void OnEnable()
     {
         m_controls.Enable();
+        m_menuMovement.Disable();
     }
 
     private void OnDisable()
     {
         m_controls.Disable();
+    }
+
+    private void Pause()
+    {
+        GameManager.instance.PauseGame();
+        m_groundMovement.Disable();
+        m_menuMovement.Enable();
+    }
+
+    private void Resume()
+    {
+        GameManager.instance.PauseGame();
+        m_groundMovement.Enable();
+        m_menuMovement.Disable();
     }
 }
