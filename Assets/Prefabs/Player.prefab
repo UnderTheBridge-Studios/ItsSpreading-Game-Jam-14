@@ -67,7 +67,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -218,13 +218,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a6bc022183cc34bbef319b6197d457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_controller: {fileID: 3433966552042880969}
-  m_playerLook: {fileID: 4204994667157738951}
-  m_speed: 11
+  m_walkSpeed: 8
+  m_slowSpeed: 4
   m_gravity: -15
   m_groundMask:
     serializedVersion: 2
     m_Bits: 64
+  m_walkBounce: 3
+  m_walkBounceTime: 0.25
+  m_slowBounce: 2.7
+  m_slowBounceTime: 0.5
+  m_controller: {fileID: 3433966552042880969}
+  m_playerLook: {fileID: 4204994667157738951}
 --- !u!114 &4204994667157738951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,8 +244,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerCamera: {fileID: 6979059136604869273}
   m_playerInteractPoint: {fileID: 1759276995494068830}
-  m_BounceY: 3
-  m_BounceTime: 0.25
   m_sensitivityX: 15
   m_sensitivityY: 0.5
 --- !u!114 &4424304689999144895
@@ -580,7 +583,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0, b: 0.92387056, a: 1}
-  m_Intensity: 20
+  m_Intensity: 75
   m_Range: 20
   m_SpotAngle: 34.5
   m_InnerSpotAngle: 0
@@ -611,7 +614,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: 349d0bbed6c5b254ebdc22884368fa61, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -619,7 +622,7 @@ Light:
     serializedVersion: 2
     m_Bits: 247
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -713,6 +716,10 @@ PrefabInstance:
       propertyPath: m_StaticShadowCaster
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: 18a88d26185a08140bb0beed31276a39, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4432087543500685928, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
     - target: {fileID: 919132149155446097, guid: 18a88d26185a08140bb0beed31276a39, type: 3}
       propertyPath: m_Name
       value: Flashlight
@@ -749,6 +756,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 57845196716408572}
     m_Modifications:
+    - target: {fileID: 2115559712839375773, guid: 64888f2d3311c7a409caa2121543fcb0, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -2096353379144713259, guid: 24de833003708584cb13095c175a1153, type: 3}
     - target: {fileID: 2431927720508411522, guid: 64888f2d3311c7a409caa2121543fcb0, type: 3}
       propertyPath: m_Name
       value: LightBeam
@@ -759,19 +770,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3095136007841125432, guid: 64888f2d3311c7a409caa2121543fcb0, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.02
+      value: 0.015757399
       objectReference: {fileID: 0}
     - target: {fileID: 3095136007841125432, guid: 64888f2d3311c7a409caa2121543fcb0, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.02
+      value: 0.015757399
       objectReference: {fileID: 0}
     - target: {fileID: 3095136007841125432, guid: 64888f2d3311c7a409caa2121543fcb0, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.01
+      value: 0.010807421
       objectReference: {fileID: 0}
     - target: {fileID: 3095136007841125432, guid: 64888f2d3311c7a409caa2121543fcb0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0035
+      value: 0.00357
       objectReference: {fileID: 0}
     - target: {fileID: 3095136007841125432, guid: 64888f2d3311c7a409caa2121543fcb0, type: 3}
       propertyPath: m_LocalPosition.y
