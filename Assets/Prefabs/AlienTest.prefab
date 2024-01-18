@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_bar: {fileID: 6827298634114353232}
-  m_life: 1
+  m_life: 10
 --- !u!1 &3528093016861935641
 GameObject:
   m_ObjectHideFlags: 0

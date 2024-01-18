@@ -7,19 +7,23 @@ public class MaterialBlockGrowth : MonoBehaviour
     [Range(0.0f, 1.0f)]
     [SerializeField] private float m_currentPosition = 1;
     [SerializeField] private float m_growthSpeed = 1;
+    [SerializeField] private float m_speedGrowthModifier = 0.3f;
+    [SerializeField] private float m_speedShrinkModifier = 1f;
 
     //Material instance properties
     public MaterialPropertyBlock m_materialBlock;
     private MeshRenderer m_meshRenderer;
 
     private bool m_isChangingSize = false;
-    private float m_speedModifier = 1f;
+    private bool m_isGrowing = false;
+    private float m_speedModifier;
     private float m_interpolation = 0.0f;
     private float m_initialPosition = 0;
     private float m_targuetPosition;
 
     public float CurrentGrowth => m_currentPosition;
     public bool IsChangingSize => m_isChangingSize;
+    public bool IsGrowing => m_isGrowing;
 
 
     void Awake()
@@ -37,10 +41,12 @@ public class MaterialBlockGrowth : MonoBehaviour
         ChangeSize();
     }
 
-    public void DoSizeChange(float targuetPosition)
+    public void DoSizeChange(float targuetPosition, bool grow)
     {
         m_initialPosition = m_currentPosition;
         m_targuetPosition = targuetPosition;
+        m_speedModifier = grow ? m_speedGrowthModifier : m_speedShrinkModifier;
+        m_isGrowing = grow ? true : false;
         m_isChangingSize = true;
     }
 
@@ -53,6 +59,7 @@ public class MaterialBlockGrowth : MonoBehaviour
         if (m_currentPosition == m_targuetPosition)
         {
             m_isChangingSize = false;
+            m_isGrowing = false;
             m_interpolation = 0.0f;
         }
     } 
