@@ -1,28 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class FlashLight : MonoBehaviour
 {
 
     [SerializeField] private Transform m_playerInteractPoint;
+    [SerializeField] private Light m_light;
+    [SerializeField] private MeshRenderer m_lightMesh;
 
     [SerializeField] private GameObject m_LightProjectile;
     [SerializeField] private float m_range = 20f;
     [SerializeField] private float m_radius = 1f;
     [SerializeField] private float m_velocity = 2f;
     [SerializeField] private float m_ProjectileFov = 30f;
-
-  
+    
     private Coroutine m_shotingProjectile;
 
     public void EnableFlashlight()
     {
         m_shotingProjectile = StartCoroutine(ShootLightProjectile());
+        m_light.enabled = true;
+        m_lightMesh.enabled = true;
     }
     public void DisableFlashlight()
     {
         StopCoroutine(m_shotingProjectile);
+        m_light.enabled = false;
+        m_lightMesh.enabled = false;
     }
 
 

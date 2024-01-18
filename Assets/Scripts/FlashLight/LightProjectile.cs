@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,7 @@ public class LightProjectile : MonoBehaviour
     private float m_radius = 0.5f;
     private float m_velocity = 0.5f;
     private float m_range = 20;
-    private float m_damage = 0.01f;
+    private float m_damage = 0.1f;
 
     private void Awake()
     {
@@ -48,7 +49,15 @@ public class LightProjectile : MonoBehaviour
     {
         if (collision.tag == "Alien")
         {
-            collision.GetComponent<AlienTest>().damage(m_damage);
+            try
+            {
+                collision.GetComponent<AlienController>().AlienDamage(m_damage);
+            }
+            catch(NullReferenceException)
+            {
+                collision.GetComponent<AlienTest>().damage(m_damage);
+            }
+            
         }
         Destroy(this.gameObject);
     }

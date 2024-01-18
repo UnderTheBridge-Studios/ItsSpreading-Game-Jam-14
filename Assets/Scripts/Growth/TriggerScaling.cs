@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class TriggerScaling : MonoBehaviour
 {
-    private float currPos = 0;
-    
+    private float m_currPos = 0;
+    private MaterialBlockGrowth m_materialGrowth;
+    private Transform m_parentTransform;
+
+    private void Awake()
+    {
+        m_materialGrowth = GetComponentInParent<MaterialBlockGrowth>();
+        m_parentTransform = GetComponentInParent<Transform>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        var parentGrowth = GetComponentInParent<MaterialBlockGrowth>();
-        var parentTransform = GetComponentInParent<Transform>();
-        currPos = parentGrowth.currentPosition;
+        if (!m_materialGrowth.IsChangingSize)
+            return;
+
+        m_currPos = m_materialGrowth.CurrentGrowth;
 
         // Use Mathf.SmoothStep for smoother transitions
-        float smoothPos = Mathf.SmoothStep(0f, 1f, currPos);
+        float smoothPos = Mathf.SmoothStep(0f, 1f, m_currPos);
 
-        parentTransform.transform.localScale = Vector3.Lerp(new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1f, 1f, 1f), smoothPos);
+        m_parentTransform.transform.localScale = Vector3.Lerp(new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1f, 1f, 1f), smoothPos);
     }
 }
