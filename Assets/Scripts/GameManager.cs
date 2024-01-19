@@ -6,20 +6,29 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
-    [SerializeField]
-    private float m_maxPoisonRate;
+    [SerializeField] private float m_maxPoisonRate;
     [Range(0, 0.1f)]
-    [SerializeField]
-    private float m_poisonRate;
+    [SerializeField] private float m_poisonRate;
     [Range(0,100)]
-    [SerializeField]
-    private float m_poison;
+    [SerializeField] private float m_poison;
+    [SerializeField] private float m_batteryTimeDuration;
+    [Tooltip("When the flashlight start flickering")]
+    [SerializeField] private float m_batteryTimeFlicker;
+    [SerializeField] private float m_chargeBatteryDuration;
+    private float m_maxBattery;
+    private float m_battery;
+    private float m_batteryFlicker;
+    private float m_batteryRate;
+    private Coroutine m_batteryCharging;
 
     private bool m_isPaused;
+    private bool m_isFlickering;
+    private bool m_isCharging;
 
-    public bool isPaused => m_isPaused;
     public float poison => m_poison;
     public float poisonRate => m_poisonRate;
+    public float batery => m_battery;
+    public float bateryFlicker => m_batteryFlicker;
 
 
     private void Awake()
@@ -32,16 +41,23 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        m_isPaused = false;
+        m_maxBattery = 100;
+        ResetValues();
     }
 
     public void ResetValues()
     {
+        m_isPaused = false;
+        m_isFlickering = false;
+        m_isCharging = false;
+        m_battery = m_maxBattery;
+        m_batteryRate = 5f / m_batteryTimeDuration;
+        m_batteryFlicker = m_batteryTimeFlicker / m_batteryTimeDuration * m_maxBattery;
         m_poison = 0;
         m_poisonRate = 0;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         m_poison = Mathf.Clamp(m_poisonRate + m_poison, 0f, 100f);
     }
@@ -55,6 +71,39 @@ public class GameManager : MonoBehaviour
     {
         m_poisonRate = Mathf.Clamp(newPoisonRate, 0f, 100f);
     }
+
+ #region Battery
+    public void BatterySpending()
+    {
+        m_battery -= m_batteryRate;
+        if (!m_isFlickering && m_battery < m_batteryFlicker)
+            m_isFlickering = true;
+    }
+
+    public void ChargeBattery()
+    {
+        if (m_battery > 0)
+            return;
+
+        if (m_isCharging)
+        {
+            StopCoroutine(m_batteryCharging);
+            m_isCharging = false;
+        }
+        else
+            m_batteryCharging = StartCoroutine(ChargingBattery());
+    }
+
+    private IEnumerator ChargingBattery()
+    {
+        m_isCharging = true;
+        yield return new WaitForSeconds(m_chargeBatteryDuration);
+        m_isFlickering = false;
+        m_isCharging = false;
+        m_battery = m_maxBattery;
+        HUBManager.instance.RechargePromptActive(false);
+    }
+#endregion
 
     public void PauseGame()
     {

@@ -20,10 +20,14 @@ public class FlashLight : MonoBehaviour
 
     public void EnableFlashlight()
     {
+        if (GameManager.instance.batery <= 0)
+            return;
+
         m_shotingProjectile = StartCoroutine(ShootLightProjectile());
         m_light.enabled = true;
         m_lightMesh.enabled = true;
     }
+
     public void DisableFlashlight()
     {
         StopCoroutine(m_shotingProjectile);
@@ -31,10 +35,15 @@ public class FlashLight : MonoBehaviour
         m_lightMesh.enabled = false;
     }
 
-
     private IEnumerator ShootLightProjectile() {
         while (true)
         {
+            if (GameManager.instance.batery <= 0)
+            {
+                DisableFlashlight();
+                HUBManager.instance.RechargePromptActive(true);
+            }
+
             float projectileAngle = m_ProjectileFov / 2;
 
             Random.Range(projectileAngle, -projectileAngle);
@@ -47,10 +56,10 @@ public class FlashLight : MonoBehaviour
             GameObject centerProjectile = Instantiate(m_LightProjectile, m_playerInteractPoint.position, Quaternion.identity);
             centerProjectile.GetComponent<LightProjectile>().Inicializate(randomRotation * m_playerInteractPoint.forward, m_range, m_velocity, m_radius);
 
+            GameManager.instance.BatterySpending();
             yield return new WaitForSeconds(0.05f);
         }
     }
-
 
     //Draw the angle and range of the flashlight
     void OnDrawGizmos()

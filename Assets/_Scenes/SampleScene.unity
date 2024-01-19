@@ -266,6 +266,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2881071025459158636, guid: 5bdf00fef51eef94089626787096ca85, type: 3}
+      propertyPath: m_poisonRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2881071025459158636, guid: 5bdf00fef51eef94089626787096ca85, type: 3}
+      propertyPath: m_bateryTimeDuration
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 7085644527518342296, guid: 5bdf00fef51eef94089626787096ca85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1017.0769

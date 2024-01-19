@@ -37,19 +37,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LookX"",
+                    ""name"": ""Look"",
                     ""type"": ""PassThrough"",
-                    ""id"": ""fcb890fa-f4da-451a-ba5d-8e727c6fd9e0"",
-                    ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""LookY"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""7c08b275-f015-480f-9fa2-0a66677d4275"",
-                    ""expectedControlType"": ""Axis"",
+                    ""id"": ""7ea59eb5-ca1a-4f83-a2ba-7cbf519a0b1b"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -82,10 +73,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Look"",
-                    ""type"": ""PassThrough"",
-                    ""id"": ""7ea59eb5-ca1a-4f83-a2ba-7cbf519a0b1b"",
-                    ""expectedControlType"": """",
+                    ""name"": ""Recharge"",
+                    ""type"": ""Button"",
+                    ""id"": ""060eadd0-1a0a-49a0-8388-cff0a69f64a3"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -149,28 +140,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c6879f28-4154-4cce-940b-4fc355732cbe"",
-                    ""path"": ""<Mouse>/delta/x"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LookX"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""69082a90-de64-4926-8121-d5a136fbee8c"",
-                    ""path"": ""<Mouse>/delta/y"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""LookY"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""54b00633-f30b-4293-9243-ca61b126017c"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
@@ -212,6 +181,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f451c706-7e61-4d60-a29a-1c1b0dacb6da"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Recharge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -249,12 +229,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // GroundMovement
         m_GroundMovement = asset.FindActionMap("GroundMovement", throwIfNotFound: true);
         m_GroundMovement_HorizontalMovement = m_GroundMovement.FindAction("HorizontalMovement", throwIfNotFound: true);
-        m_GroundMovement_LookX = m_GroundMovement.FindAction("LookX", throwIfNotFound: true);
-        m_GroundMovement_LookY = m_GroundMovement.FindAction("LookY", throwIfNotFound: true);
+        m_GroundMovement_Look = m_GroundMovement.FindAction("Look", throwIfNotFound: true);
         m_GroundMovement_Interact = m_GroundMovement.FindAction("Interact", throwIfNotFound: true);
         m_GroundMovement_Flashlight = m_GroundMovement.FindAction("Flashlight", throwIfNotFound: true);
         m_GroundMovement_Pause = m_GroundMovement.FindAction("Pause", throwIfNotFound: true);
-        m_GroundMovement_Look = m_GroundMovement.FindAction("Look", throwIfNotFound: true);
+        m_GroundMovement_Recharge = m_GroundMovement.FindAction("Recharge", throwIfNotFound: true);
         // MenuNavigation
         m_MenuNavigation = asset.FindActionMap("MenuNavigation", throwIfNotFound: true);
         m_MenuNavigation_Resume = m_MenuNavigation.FindAction("Resume", throwIfNotFound: true);
@@ -320,23 +299,21 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GroundMovement;
     private List<IGroundMovementActions> m_GroundMovementActionsCallbackInterfaces = new List<IGroundMovementActions>();
     private readonly InputAction m_GroundMovement_HorizontalMovement;
-    private readonly InputAction m_GroundMovement_LookX;
-    private readonly InputAction m_GroundMovement_LookY;
+    private readonly InputAction m_GroundMovement_Look;
     private readonly InputAction m_GroundMovement_Interact;
     private readonly InputAction m_GroundMovement_Flashlight;
     private readonly InputAction m_GroundMovement_Pause;
-    private readonly InputAction m_GroundMovement_Look;
+    private readonly InputAction m_GroundMovement_Recharge;
     public struct GroundMovementActions
     {
         private @PlayerControls m_Wrapper;
         public GroundMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @HorizontalMovement => m_Wrapper.m_GroundMovement_HorizontalMovement;
-        public InputAction @LookX => m_Wrapper.m_GroundMovement_LookX;
-        public InputAction @LookY => m_Wrapper.m_GroundMovement_LookY;
+        public InputAction @Look => m_Wrapper.m_GroundMovement_Look;
         public InputAction @Interact => m_Wrapper.m_GroundMovement_Interact;
         public InputAction @Flashlight => m_Wrapper.m_GroundMovement_Flashlight;
         public InputAction @Pause => m_Wrapper.m_GroundMovement_Pause;
-        public InputAction @Look => m_Wrapper.m_GroundMovement_Look;
+        public InputAction @Recharge => m_Wrapper.m_GroundMovement_Recharge;
         public InputActionMap Get() { return m_Wrapper.m_GroundMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -349,12 +326,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @HorizontalMovement.started += instance.OnHorizontalMovement;
             @HorizontalMovement.performed += instance.OnHorizontalMovement;
             @HorizontalMovement.canceled += instance.OnHorizontalMovement;
-            @LookX.started += instance.OnLookX;
-            @LookX.performed += instance.OnLookX;
-            @LookX.canceled += instance.OnLookX;
-            @LookY.started += instance.OnLookY;
-            @LookY.performed += instance.OnLookY;
-            @LookY.canceled += instance.OnLookY;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -364,9 +338,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
+            @Recharge.started += instance.OnRecharge;
+            @Recharge.performed += instance.OnRecharge;
+            @Recharge.canceled += instance.OnRecharge;
         }
 
         private void UnregisterCallbacks(IGroundMovementActions instance)
@@ -374,12 +348,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @HorizontalMovement.started -= instance.OnHorizontalMovement;
             @HorizontalMovement.performed -= instance.OnHorizontalMovement;
             @HorizontalMovement.canceled -= instance.OnHorizontalMovement;
-            @LookX.started -= instance.OnLookX;
-            @LookX.performed -= instance.OnLookX;
-            @LookX.canceled -= instance.OnLookX;
-            @LookY.started -= instance.OnLookY;
-            @LookY.performed -= instance.OnLookY;
-            @LookY.canceled -= instance.OnLookY;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -389,9 +360,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
+            @Recharge.started -= instance.OnRecharge;
+            @Recharge.performed -= instance.OnRecharge;
+            @Recharge.canceled -= instance.OnRecharge;
         }
 
         public void RemoveCallbacks(IGroundMovementActions instance)
@@ -458,12 +429,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IGroundMovementActions
     {
         void OnHorizontalMovement(InputAction.CallbackContext context);
-        void OnLookX(InputAction.CallbackContext context);
-        void OnLookY(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnFlashlight(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
-        void OnLook(InputAction.CallbackContext context);
+        void OnRecharge(InputAction.CallbackContext context);
     }
     public interface IMenuNavigationActions
     {
