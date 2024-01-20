@@ -12,6 +12,8 @@ public class HUBManager : MonoBehaviour
     [SerializeField] private RectTransform m_poisonBar;
     [SerializeField] private RectTransform m_poisonBarRate;
     [SerializeField] private GameObject m_pauseMenu;
+    [SerializeField] private GameObject m_rechargePrompt;
+    [SerializeField] private GameObject m_rechargingPrompt;
     [SerializeField] private GameObject m_noteDisplay;
 
     private TextMeshProUGUI m_noteContent;
@@ -33,12 +35,14 @@ public class HUBManager : MonoBehaviour
     {
         m_interactPrompt.SetActive(false);
         m_pauseMenu.SetActive(false);
+        m_rechargePrompt.SetActive(false);
+        m_rechargingPrompt.SetActive(false);
         m_noteDisplay.SetActive(false);
 
-        m_poisonMaxWidth = m_poisonBar.GetComponent<RectTransform>().rect.width;
+        m_poisonBar.GetComponentInParent<VerticalLayoutGroup>().enabled = false;
+        m_poisonMaxWidth = m_poisonBar.rect.width;
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
         m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
-
         m_noteContent = m_noteDisplay.GetComponentInChildren<TextMeshProUGUI>();
     }
 
@@ -64,6 +68,16 @@ public class HUBManager : MonoBehaviour
     public void InteractPromptActive(bool value)
     {
         m_interactPrompt.SetActive(value);
+    }
+
+    public void RechargePromptActive(bool value)
+    {
+        m_rechargePrompt.SetActive(value);
+    }
+
+    public void RechargingPromptActive(bool value)
+    {
+        m_rechargingPrompt.SetActive(value);
     }
 
     public void ShowPauseMenu()

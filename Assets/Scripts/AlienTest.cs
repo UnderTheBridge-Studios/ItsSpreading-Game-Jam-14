@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class AlienTest : MonoBehaviour
 {
-    
     [SerializeField] private RectTransform m_bar;
 
     [Range(0.0f, 10.0f)]
@@ -16,7 +15,6 @@ public class AlienTest : MonoBehaviour
     {
         m_bar.sizeDelta = new Vector2(m_life/10, 0.15f);
     }
-
 
     public void damage(float value)
     {

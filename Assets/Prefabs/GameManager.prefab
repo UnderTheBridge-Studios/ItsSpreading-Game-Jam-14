@@ -47,3 +47,6 @@ MonoBehaviour:
   m_maxPoisonRate: 0
   m_poisonRate: 0
   m_poison: 0
+  m_batteryTimeDuration: 10
+  m_batteryTimeFlicker: 2
+  m_chargeBatteryDuration: 3

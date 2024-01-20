@@ -18,31 +18,59 @@ public class FlashLight : MonoBehaviour
     [SerializeField] private float m_projectileFov = 30f;
     [Range(0.01f, 1f)]
     [SerializeField] private float m_fireRate = 0.05f;
-    
-    private Coroutine m_shotingProjectile;
+    [Tooltip("When the flashlight is flickering, will flicker on a random time between 0 and fickerRandTime")]
+    [SerializeField] private float m_fickerRandTime = 0.5f;
+
+    private Coroutine m_flickering;
+
+    private bool m_isFlickering;
+    private bool m_isShooting;
 
     private void Awake()
     {
         m_light.spotAngle = m_projectileFov;
+        m_isFlickering = false;
     }
 
     public void EnableFlashlight()
     {
-        m_shotingProjectile = StartCoroutine(ShootLightProjectile());
+        if (GameManager.instance.batery <= 0 || GameManager.instance.isCharging)
+            return;
+
+        GameManager.instance.SetFlashlightActive(true);
+        m_isShooting = true;
+        StartCoroutine(ShootLightProjectile());
         m_light.enabled = true;
         m_lightMesh.enabled = true;
     }
+
     public void DisableFlashlight()
     {
-        StopCoroutine(m_shotingProjectile);
+        GameManager.instance.SetFlashlightActive(false);
+
         m_light.enabled = false;
         m_lightMesh.enabled = false;
+        m_isShooting = false;
     }
 
-
     private IEnumerator ShootLightProjectile() {
-        while (true)
+
+        while (m_isShooting)
         {
+            if (GameManager.instance.batery <= 0)
+            {
+                DisableFlashlight();
+                HUBManager.instance.RechargePromptActive(true);
+            }
+            if (GameManager.instance.isCharging)
+                DisableFlashlight();
+
+            if (GameManager.instance.isFlickering && !m_isFlickering)
+            {
+                Debug.Log("help");
+                StartFlickering();
+            }
+
             float projectileAngle = m_projectileFov / 2;
 
             Random.Range(projectileAngle, -projectileAngle);
@@ -57,8 +85,40 @@ public class FlashLight : MonoBehaviour
 
             yield return new WaitForSeconds(m_fireRate);
         }
+
+        StopFlickering();
     }
 
+    private void StartFlickering()
+    {
+        if (m_isFlickering)
+            return;
+
+        m_isFlickering = true;
+        m_flickering = StartCoroutine(Flickering());
+    }
+
+    private void StopFlickering()
+    {
+        if (m_flickering == null)
+            return;
+
+        m_isFlickering = false;
+        StopCoroutine(m_flickering);
+    }
+
+    private IEnumerator Flickering()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(Random.Range(0, m_fickerRandTime));
+            m_light.enabled = false;
+            m_lightMesh.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            m_light.enabled = true;
+            m_lightMesh.enabled = true;
+        }
+    }
 
     //Draw the angle and range of the flashlight
     void OnDrawGizmos()
