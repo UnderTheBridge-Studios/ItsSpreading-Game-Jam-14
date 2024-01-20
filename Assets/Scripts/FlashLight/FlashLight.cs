@@ -5,7 +5,6 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class FlashLight : MonoBehaviour
 {
-
     [SerializeField] private Transform m_playerInteractPoint;
     [SerializeField] private Light m_light;
     [SerializeField] private MeshRenderer m_lightMesh;
@@ -14,9 +13,18 @@ public class FlashLight : MonoBehaviour
     [SerializeField] private float m_range = 20f;
     [SerializeField] private float m_radius = 1f;
     [SerializeField] private float m_velocity = 2f;
-    [SerializeField] private float m_ProjectileFov = 30f;
+
+    [Range(1f, 100f)]
+    [SerializeField] private float m_projectileFov = 30f;
+    [Range(0.01f, 1f)]
+    [SerializeField] private float m_fireRate = 0.05f;
     
     private Coroutine m_shotingProjectile;
+
+    private void Awake()
+    {
+        m_light.spotAngle = m_projectileFov;
+    }
 
     public void EnableFlashlight()
     {
@@ -35,19 +43,19 @@ public class FlashLight : MonoBehaviour
     private IEnumerator ShootLightProjectile() {
         while (true)
         {
-            float projectileAngle = m_ProjectileFov / 2;
+            float projectileAngle = m_projectileFov / 2;
 
             Random.Range(projectileAngle, -projectileAngle);
             Quaternion randomRotation = Quaternion.AngleAxis(Random.Range(projectileAngle, -projectileAngle), m_playerInteractPoint.up) * Quaternion.AngleAxis(Random.Range(projectileAngle, -projectileAngle), m_playerInteractPoint.transform.right);
             GameObject projectile = Instantiate(m_LightProjectile, m_playerInteractPoint.position, Quaternion.identity);
             projectile.GetComponent<LightProjectile>().Inicializate(randomRotation * m_playerInteractPoint.forward, m_range, m_velocity, m_radius);
 
-            projectileAngle = m_ProjectileFov / 5;
+            projectileAngle = m_projectileFov / 5;
             randomRotation = Quaternion.AngleAxis(Random.Range(projectileAngle, -projectileAngle), m_playerInteractPoint.up) * Quaternion.AngleAxis(Random.Range(projectileAngle, -projectileAngle), m_playerInteractPoint.transform.right);
             GameObject centerProjectile = Instantiate(m_LightProjectile, m_playerInteractPoint.position, Quaternion.identity);
             centerProjectile.GetComponent<LightProjectile>().Inicializate(randomRotation * m_playerInteractPoint.forward, m_range, m_velocity, m_radius);
 
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(m_fireRate);
         }
     }
 
@@ -58,10 +66,10 @@ public class FlashLight : MonoBehaviour
         Gizmos.color = Color.red;
 
         //Edge lines
-        Vector3 line1 = Quaternion.AngleAxis(m_ProjectileFov / 2, m_playerInteractPoint.up) * Quaternion.AngleAxis(m_ProjectileFov / 2, m_playerInteractPoint.right) * m_playerInteractPoint.forward;
-        Vector3 line2 = Quaternion.AngleAxis(m_ProjectileFov / 2, m_playerInteractPoint.up) * Quaternion.AngleAxis(-m_ProjectileFov / 2, m_playerInteractPoint.right) * m_playerInteractPoint.forward;
-        Vector3 line3 = Quaternion.AngleAxis(-m_ProjectileFov / 2, m_playerInteractPoint.up) * Quaternion.AngleAxis(m_ProjectileFov / 2, m_playerInteractPoint.right) * m_playerInteractPoint.forward;
-        Vector3 line4 = Quaternion.AngleAxis(-m_ProjectileFov / 2, m_playerInteractPoint.up) * Quaternion.AngleAxis(-m_ProjectileFov / 2, m_playerInteractPoint.right) * m_playerInteractPoint.forward;
+        Vector3 line1 = Quaternion.AngleAxis(m_projectileFov / 2, m_playerInteractPoint.up) * Quaternion.AngleAxis(m_projectileFov / 2, m_playerInteractPoint.right) * m_playerInteractPoint.forward;
+        Vector3 line2 = Quaternion.AngleAxis(m_projectileFov / 2, m_playerInteractPoint.up) * Quaternion.AngleAxis(-m_projectileFov / 2, m_playerInteractPoint.right) * m_playerInteractPoint.forward;
+        Vector3 line3 = Quaternion.AngleAxis(-m_projectileFov / 2, m_playerInteractPoint.up) * Quaternion.AngleAxis(m_projectileFov / 2, m_playerInteractPoint.right) * m_playerInteractPoint.forward;
+        Vector3 line4 = Quaternion.AngleAxis(-m_projectileFov / 2, m_playerInteractPoint.up) * Quaternion.AngleAxis(-m_projectileFov / 2, m_playerInteractPoint.right) * m_playerInteractPoint.forward;
 
         Gizmos.DrawRay(m_playerInteractPoint.position, line1 * m_range);
         Gizmos.DrawRay(m_playerInteractPoint.position, line2 * m_range);
