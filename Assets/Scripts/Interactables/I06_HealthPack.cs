@@ -2,27 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour, IInteractable
+public class I06_HealthPack : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_id;
-    [SerializeField] private string m_prompt;
+    [SerializeField] private string m_prompt = "Grab HealthPack";
 
     public string ID => m_id;
     public string InteractionPromt => m_prompt;
 
     public bool Interact(PlayerInteract interactor)
     {
-        Debug.Log("Door Opened");
+        //pseudocode for when we have inventory
+        //GameManager.Inventory.AddHealthPack();
+        Debug.Log("HealthPack Grabbed");
+        Destroy(this.gameObject);
         return true;
     }
 
     public void OnFocus()
     {
-        Debug.Log("Focus on " + ID);
+        return;
     }
 
     public void OnLoseFocus()
     {
-        Debug.Log("Lose Focus on " + ID);
+        return;
     }
 }
