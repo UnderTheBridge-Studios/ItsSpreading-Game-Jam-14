@@ -29,6 +29,14 @@ public class GameManager : MonoBehaviour
     public float batery => m_battery;
     public bool isFlickering => m_isFlickering;
     public bool isCharging => m_isCharging;
+ 
+    private List<string> m_keyIDs = new List<string>();
+    private float m_inhibitors;
+
+    public bool IsPaused => m_isPaused;
+    public float Poison => m_poison;
+    public float PoisonRate => m_poisonRate;
+    public float Inhibitors => m_inhibitors;
 
 
     private void Awake()
@@ -118,13 +126,49 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             m_isPaused = true;
-            HUBManager.instance.pause();
+
+            if(!HUBManager.instance.IsShowingNote)
+                HUBManager.instance.ShowPauseMenu();
         }   
         else
         {
             Time.timeScale = 1;
             m_isPaused = false;
-            HUBManager.instance.resume();
+
+            if (!HUBManager.instance.IsShowingNote)
+                HUBManager.instance.HidePauseMenu();
+            else
+                HUBManager.instance.HideNote();
         }
+    }
+
+    //Invetory functions
+    public void AddKey(string keyID)
+    {
+        m_keyIDs.Add(keyID);
+    }
+
+    public bool HasKey(string keyID)
+    {
+        foreach (string id in m_keyIDs)
+        {
+            if (id == keyID)
+                return true;
+        }
+
+        return false;
+    }
+
+    public void AddInhibitor()
+    {
+        m_inhibitors += 1;
+    }
+
+    public void UseInhibitor()
+    {
+        if (m_inhibitors == 0)
+            return;
+
+        m_inhibitors -= 1;
     }
 }

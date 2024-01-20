@@ -2,27 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour, IInteractable
+public class I06_Inhibitor : MonoBehaviour, IInteractable
 {
-    [SerializeField] private string m_id;
-    [SerializeField] private string m_prompt;
+    [SerializeField] private string m_id = "";
+    [SerializeField] private string m_prompt = "Grab Inhibitor";
 
     public string ID => m_id;
     public string InteractionPromt => m_prompt;
 
     public bool Interact(PlayerInteract interactor)
     {
-        Debug.Log("Grabbing Key");
+        GameManager.instance.AddInhibitor();
+        Debug.Log("Inhibitor Grabbed");
+        Destroy(this.gameObject);
         return true;
     }
 
     public void OnFocus()
     {
-        Debug.Log("Focus on " + ID);
+        return;
     }
 
     public void OnLoseFocus()
     {
-        Debug.Log("Lose Focus on " + ID);
+        return;
     }
 }

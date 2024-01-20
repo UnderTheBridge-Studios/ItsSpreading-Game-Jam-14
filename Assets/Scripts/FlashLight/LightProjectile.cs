@@ -18,7 +18,6 @@ public class LightProjectile : MonoBehaviour
         m_collider = GetComponent<SphereCollider>();
         m_direcction = Vector3.zero;
         this.gameObject.SetActive(false);
-
     }
 
     private IEnumerator Start()
