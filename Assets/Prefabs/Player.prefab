@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_walkSpeed: 8
-  m_slowSpeed: 4
+  m_slowSpeed: 3
   m_gravity: -15
   m_groundMask:
     serializedVersion: 2
@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_playerInteractPoint: {fileID: 1759276995494068830}
-  m_interactionDistance: 3
+  m_interactionDistance: 4
 --- !u!114 &3125761959522696208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +295,8 @@ MonoBehaviour:
   m_range: 20
   m_radius: 1
   m_velocity: 2
-  m_ProjectileFov: 30
+  m_projectileFov: 30
+  m_fireRate: 0.05
 --- !u!1 &2941709444019296971
 GameObject:
   m_ObjectHideFlags: 0
