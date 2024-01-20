@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8719381749930953781}
   - component: {fileID: 5608794678238064274}
   m_Layer: 0
-  m_Name: I02_Door
+  m_Name: I02_DoorButton
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e5ca6b93ad0c0442bd733308c0c4c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: Door01
-  prompt: Open Door
+  m_id: 
+  m_prompt: 
