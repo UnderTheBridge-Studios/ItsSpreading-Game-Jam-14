@@ -21,10 +21,10 @@ public class FlashLight : MonoBehaviour
     [Tooltip("When the flashlight is flickering, will flicker on a random time between 0 and fickerRandTime")]
     [SerializeField] private float m_fickerRandTime = 0.5f;
 
-    private Coroutine m_shotingProjectile;
     private Coroutine m_flickering;
 
     private bool m_isFlickering;
+    private bool m_isShooting;
 
     private void Awake()
     {
@@ -38,7 +38,8 @@ public class FlashLight : MonoBehaviour
             return;
 
         GameManager.instance.SetFlashlightActive(true);
-        m_shotingProjectile = StartCoroutine(ShootLightProjectile());
+        m_isShooting = true;
+        StartCoroutine(ShootLightProjectile());
         m_light.enabled = true;
         m_lightMesh.enabled = true;
     }
@@ -46,14 +47,15 @@ public class FlashLight : MonoBehaviour
     public void DisableFlashlight()
     {
         GameManager.instance.SetFlashlightActive(false);
-        StopCoroutine(m_shotingProjectile);
+
         m_light.enabled = false;
         m_lightMesh.enabled = false;
-        StopFlickering();
+        m_isShooting = false;
     }
 
     private IEnumerator ShootLightProjectile() {
-        while (true)
+
+        while (m_isShooting)
         {
             if (GameManager.instance.batery <= 0)
             {
@@ -64,9 +66,10 @@ public class FlashLight : MonoBehaviour
                 DisableFlashlight();
 
             if (GameManager.instance.isFlickering && !m_isFlickering)
+            {
+                Debug.Log("help");
                 StartFlickering();
-
-            Debug.Log("aaa");
+            }
 
             float projectileAngle = m_projectileFov / 2;
 
@@ -82,15 +85,14 @@ public class FlashLight : MonoBehaviour
 
             yield return new WaitForSeconds(m_fireRate);
         }
+
+        StopFlickering();
     }
 
     private void StartFlickering()
     {
         if (m_isFlickering)
             return;
-
-        Debug.Log("StartFlickering");
-
 
         m_isFlickering = true;
         m_flickering = StartCoroutine(Flickering());
@@ -109,7 +111,7 @@ public class FlashLight : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(m_fickerRandTime);
+            yield return new WaitForSeconds(Random.Range(0, m_fickerRandTime));
             m_light.enabled = false;
             m_lightMesh.enabled = false;
             yield return new WaitForSeconds(0.1f);

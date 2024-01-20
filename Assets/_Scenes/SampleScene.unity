@@ -266,6 +266,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 2881071025459158636, guid: 5bdf00fef51eef94089626787096ca85, type: 3}
+      propertyPath: m_batteryTimeFlicker
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7085644527518342296, guid: 5bdf00fef51eef94089626787096ca85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1017.0769
@@ -979,6 +983,10 @@ PrefabInstance:
     - target: {fileID: 1459962071979092884, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3125761959522696208, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
+      propertyPath: m_fickerRandTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4204994667157738951, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
       propertyPath: sensitivityX
