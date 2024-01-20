@@ -126,19 +126,11 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             m_isPaused = true;
-
-            if(!HUBManager.instance.IsShowingNote)
-                HUBManager.instance.ShowPauseMenu();
         }   
         else
         {
             Time.timeScale = 1;
             m_isPaused = false;
-
-            if (!HUBManager.instance.IsShowingNote)
-                HUBManager.instance.HidePauseMenu();
-            else
-                HUBManager.instance.HideNote();
         }
     }
 
