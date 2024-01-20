@@ -39,7 +39,6 @@ public class InputManager : MonoBehaviour
 
         //Notes PopUp Inputs
         m_notesPopUp.CloseNote.performed += _ => CloseNotePopUp();
-        m_notesPopUp.CloseNoteMouse.performed += _ => CloseWithMouse();
     }
     private void OnEnable()
     {
@@ -103,12 +102,5 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Enable();
         m_menuNavigation.Disable();
         m_notesPopUp.Disable();
-    }
-
-    private void CloseWithMouse()
-    {
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(m_camera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if (!rayHit.collider)
-            CloseNotePopUp();
     }
 }
