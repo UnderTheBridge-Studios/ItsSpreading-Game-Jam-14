@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviour
     private float m_poison;
 
     private bool m_isPaused;
+    private List<string> m_keyIDs = new List<string>();
+    private float m_inhibitors;
 
-    public bool isPaused => m_isPaused;
-    public float poison => m_poison;
-    public float poisonRate => m_poisonRate;
+    public bool IsPaused => m_isPaused;
+    public float Poison => m_poison;
+    public float PoisonRate => m_poisonRate;
+    public float Inhibitors => m_inhibitors;
 
 
     private void Awake()
@@ -76,5 +79,35 @@ public class GameManager : MonoBehaviour
             else
                 HUBManager.instance.HideNote();
         }
+    }
+
+    //Invetory functions
+    public void AddKey(string keyID)
+    {
+        m_keyIDs.Add(keyID);
+    }
+
+    public bool HasKey(string keyID)
+    {
+        foreach (string id in m_keyIDs)
+        {
+            if (id == keyID)
+                return true;
+        }
+
+        return false;
+    }
+
+    public void AddInhibitor()
+    {
+        m_inhibitors += 1;
+    }
+
+    public void UseInhibitor()
+    {
+        if (m_inhibitors == 0)
+            return;
+
+        m_inhibitors -= 1;
     }
 }
