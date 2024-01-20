@@ -30,13 +30,13 @@ public class InputManager : MonoBehaviour
 
     private void Look(InputAction.CallbackContext context)
     {
-        var input = context.ReadValue<Vector2>();
+        Vector2 input = context.ReadValue<Vector2>();
         m_playerLook.ReceiveInput(input);
     }
 
     private void HorizontalMovement(InputAction.CallbackContext context)
     {
-        var input = context.ReadValue<Vector2>();
+        Vector2 input = context.ReadValue<Vector2>();
         m_playerMovement.ReceiveInput(input);
     }
 
@@ -51,14 +51,14 @@ public class InputManager : MonoBehaviour
         m_controls.Disable();
     }
 
-    private void Pause()
+    public void Pause()
     {
         GameManager.instance.PauseGame();
         m_groundMovement.Disable();
         m_menuMovement.Enable();
     }
 
-    private void Resume()
+    public void Resume()
     {
         GameManager.instance.PauseGame();
         m_groundMovement.Enable();

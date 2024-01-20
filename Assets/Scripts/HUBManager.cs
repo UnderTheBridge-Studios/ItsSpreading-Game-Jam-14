@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,10 +12,14 @@ public class HUBManager : MonoBehaviour
     [SerializeField] private RectTransform m_poisonBar;
     [SerializeField] private RectTransform m_poisonBarRate;
     [SerializeField] private GameObject m_pauseMenu;
+    [SerializeField] private GameObject m_noteDisplay;
 
+    private TextMeshProUGUI m_noteContent;
     private float m_learpSpeed;
     private float m_poisonMaxWidth;
+    private bool m_isShowingNote;
 
+    public bool IsShowingNote => m_isShowingNote;
 
     private void Awake()
     {
@@ -28,11 +33,13 @@ public class HUBManager : MonoBehaviour
     {
         m_interactPrompt.SetActive(false);
         m_pauseMenu.SetActive(false);
+        m_noteDisplay.SetActive(false);
 
         m_poisonMaxWidth = m_poisonBar.GetComponent<RectTransform>().rect.width;
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
         m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
 
+        m_noteContent = m_noteDisplay.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     private void Update()
@@ -59,13 +66,26 @@ public class HUBManager : MonoBehaviour
         m_interactPrompt.SetActive(value);
     }
 
-    public void pause()
+    public void ShowPauseMenu()
     {
         m_pauseMenu.SetActive(true);
     }
 
-    public void resume()
+    public void HidePauseMenu()
     {
         m_pauseMenu.SetActive(false);
+    }
+
+    public void ShowNote(string noteContent)
+    {
+        m_noteDisplay.SetActive(true);
+        m_isShowingNote = true;
+        m_noteContent.text = noteContent;
+    }
+
+    public void HideNote()
+    {
+        m_isShowingNote = false;
+        m_noteDisplay.SetActive(false);
     }
 }
