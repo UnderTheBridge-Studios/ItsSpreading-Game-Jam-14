@@ -235,6 +235,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseNoteMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""7deecf31-8d35-4fd0-857d-9a94725a6928"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -262,12 +271,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""799a6bf5-9b26-4340-81b6-058a3d5543b2"",
+                    ""id"": ""2654e66b-b768-437c-8b63-5336155eeeed"",
                     ""path"": ""<Mouse>/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CloseNote"",
+                    ""action"": ""CloseNoteMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -290,6 +299,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // NotesPopUp
         m_NotesPopUp = asset.FindActionMap("NotesPopUp", throwIfNotFound: true);
         m_NotesPopUp_CloseNote = m_NotesPopUp.FindAction("CloseNote", throwIfNotFound: true);
+        m_NotesPopUp_CloseNoteMouse = m_NotesPopUp.FindAction("CloseNoteMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -484,11 +494,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_NotesPopUp;
     private List<INotesPopUpActions> m_NotesPopUpActionsCallbackInterfaces = new List<INotesPopUpActions>();
     private readonly InputAction m_NotesPopUp_CloseNote;
+    private readonly InputAction m_NotesPopUp_CloseNoteMouse;
     public struct NotesPopUpActions
     {
         private @PlayerControls m_Wrapper;
         public NotesPopUpActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @CloseNote => m_Wrapper.m_NotesPopUp_CloseNote;
+        public InputAction @CloseNoteMouse => m_Wrapper.m_NotesPopUp_CloseNoteMouse;
         public InputActionMap Get() { return m_Wrapper.m_NotesPopUp; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -501,6 +513,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @CloseNote.started += instance.OnCloseNote;
             @CloseNote.performed += instance.OnCloseNote;
             @CloseNote.canceled += instance.OnCloseNote;
+            @CloseNoteMouse.started += instance.OnCloseNoteMouse;
+            @CloseNoteMouse.performed += instance.OnCloseNoteMouse;
+            @CloseNoteMouse.canceled += instance.OnCloseNoteMouse;
         }
 
         private void UnregisterCallbacks(INotesPopUpActions instance)
@@ -508,6 +523,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @CloseNote.started -= instance.OnCloseNote;
             @CloseNote.performed -= instance.OnCloseNote;
             @CloseNote.canceled -= instance.OnCloseNote;
+            @CloseNoteMouse.started -= instance.OnCloseNoteMouse;
+            @CloseNoteMouse.performed -= instance.OnCloseNoteMouse;
+            @CloseNoteMouse.canceled -= instance.OnCloseNoteMouse;
         }
 
         public void RemoveCallbacks(INotesPopUpActions instance)
@@ -541,5 +559,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface INotesPopUpActions
     {
         void OnCloseNote(InputAction.CallbackContext context);
+        void OnCloseNoteMouse(InputAction.CallbackContext context);
     }
 }

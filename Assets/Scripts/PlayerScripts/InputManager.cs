@@ -13,12 +13,16 @@ public class InputManager : MonoBehaviour
     private PlayerControls.MenuNavigationActions m_menuNavigation;
     private PlayerControls.NotesPopUpActions m_notesPopUp;
 
+    private Camera m_camera;
+
     private void Awake()
     {
         m_controls = new PlayerControls();
         m_gamePlay = m_controls.GamePlay;
         m_menuNavigation = m_controls.MenuNavigation;
         m_notesPopUp = m_controls.NotesPopUp;
+
+        m_camera = Camera.main;
 
         //Gameplay Inputs
         m_gamePlay.HorizontalMovement.performed += ctx => HorizontalMovement(ctx);
@@ -35,6 +39,7 @@ public class InputManager : MonoBehaviour
 
         //Notes PopUp Inputs
         m_notesPopUp.CloseNote.performed += _ => CloseNotePopUp();
+        m_notesPopUp.CloseNoteMouse.performed += _ => CloseWithMouse();
     }
     private void OnEnable()
     {
@@ -98,5 +103,12 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Enable();
         m_menuNavigation.Disable();
         m_notesPopUp.Disable();
+    }
+
+    private void CloseWithMouse()
+    {
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(m_camera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if (!rayHit.collider)
+            CloseNotePopUp();
     }
 }

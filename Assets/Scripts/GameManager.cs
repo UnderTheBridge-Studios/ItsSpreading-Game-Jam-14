@@ -126,11 +126,17 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             m_isPaused = true;
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }   
         else
         {
             Time.timeScale = 1;
             m_isPaused = false;
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 

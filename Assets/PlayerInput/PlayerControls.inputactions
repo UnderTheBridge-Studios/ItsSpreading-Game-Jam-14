@@ -213,6 +213,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CloseNoteMouse",
+                    "type": "Button",
+                    "id": "7deecf31-8d35-4fd0-857d-9a94725a6928",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -240,12 +249,12 @@
                 },
                 {
                     "name": "",
-                    "id": "799a6bf5-9b26-4340-81b6-058a3d5543b2",
+                    "id": "2654e66b-b768-437c-8b63-5336155eeeed",
                     "path": "<Mouse>/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CloseNote",
+                    "action": "CloseNoteMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
