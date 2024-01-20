@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
+  m_Name: FogProfile01
+  m_EditorClassIdentifier: 
+  components:
+  - {fileID: 2817040851695729827}
+--- !u!114 &2817040851695729827
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8752436c1c6e30f4da82236df21c18e3, type: 3}
+  m_Name: Fog
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    m_OverrideState: 1
+    m_Value: 1
+  quality:
+    m_OverrideState: 1
+    m_Value: 3
+  alphaMultiplier:
+    m_OverrideState: 1
+    m_Value: 0.362
+  additionalLightsIntensityMultiplier:
+    m_OverrideState: 1
+    m_Value: 1
+  jitter:
+    m_OverrideState: 1
+    m_Value: 0.053
+  downsample:
+    m_OverrideState: 0
+    m_Value: 4
+  steps:
+    m_OverrideState: 0
+    m_Value: 80
+  stepSize:
+    m_OverrideState: 0
+    m_Value: 0.5
+  density:
+    m_OverrideState: 1
+    m_Value: 1
+  minDensity:
+    m_OverrideState: 1
+    m_Value: 0.008
+  fogColor:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
+  brightness:
+    m_OverrideState: 1
+    m_Value: 0.035
+  anisotropy:
+    m_OverrideState: 1
+    m_Value: 0.603
+  blurRadius:
+    m_OverrideState: 1
+    m_Value: 0
+  blurStrength:
+    m_OverrideState: 1
+    m_Value: 0.01
+  blurIterations:
+    m_OverrideState: 1
+    m_Value: 0

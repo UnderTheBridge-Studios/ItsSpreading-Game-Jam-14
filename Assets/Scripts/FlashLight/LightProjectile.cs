@@ -57,8 +57,12 @@ public class LightProjectile : MonoBehaviour
             {
                 collision.GetComponent<AlienTest>().damage(m_damage);
             }
-            
+            Destroy(this.gameObject);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
         Destroy(this.gameObject);
     }
 

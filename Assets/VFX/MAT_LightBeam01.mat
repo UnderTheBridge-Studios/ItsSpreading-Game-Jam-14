@@ -99,8 +99,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _AlphaMult: 1.75
-    - _AlphaPow: 1
+    - _AlphaMult: 2.63
+    - _AlphaPow: 1.2
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
@@ -118,13 +118,13 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Multiply: 2.68
+    - _Multiply: 2.12
     - _NoiseMult: 1.64
     - _NoisePow: 1.06
     - _OcclusionStrength: 1
-    - _Opacity: 0.27
+    - _Opacity: 0.06
     - _Parallax: 0.005
-    - _Power: 1
+    - _Power: -0.73
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1

@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7678263443333829071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffbb178211ed1d34096fa48b59d44a43, type: 3}
+  m_Name: CloudShadows
+  m_EditorClassIdentifier: 
+  m_Active: 0
+--- !u!114 &-1392153889804063081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7725262c56f980242baea390a6f1c577, type: 3}
+  m_Name: SkyRenderer
+  m_EditorClassIdentifier: 
+  m_Active: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17,7 +43,10 @@ MonoBehaviour:
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
   - {fileID: 6277813865036299803}
-  m_RendererFeatureMap: 1bbe82ef72461f57
+  - {fileID: -1392153889804063081}
+  - {fileID: -7678263443333829071}
+  - {fileID: 2960961117254842511}
+  m_RendererFeatureMap: 1bbe82ef72461f5797ee8cc56913aeec312e3858145471958ff8b7c372721729
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -56,6 +85,19 @@ MonoBehaviour:
   m_CopyDepthMode: 1
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &2960961117254842511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d10afe2c6061a4687da47258d35146, type: 3}
+  m_Name: FogRenderer
+  m_EditorClassIdentifier: 
+  m_Active: 1
 --- !u!114 &6277813865036299803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5cc89b7a1e4541429be42aa1d90eb07, type: 3}
   m_Name: PixelizeFeature
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     renderPassEvent: 550
-    screenHeight: 1080
+    screenHeight: 340
