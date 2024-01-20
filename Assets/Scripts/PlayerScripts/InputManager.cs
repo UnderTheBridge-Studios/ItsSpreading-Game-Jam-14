@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
         m_groundMovement.Flashlight.performed += _ => m_flashlight.EnableFlashlight();
         m_groundMovement.Flashlight.canceled += _ => m_flashlight.DisableFlashlight();
         m_groundMovement.Recharge.performed += _ => GameManager.instance.ChargeBattery();
-        m_groundMovement.Recharge.canceled += _ => GameManager.instance.ChargeBattery();
+        m_groundMovement.Recharge.canceled += _ => GameManager.instance.StopChargingBattery();
         m_groundMovement.Pause.performed += _ => Pause();
         m_menuMovement.Resume.performed += _ => Resume();
     }

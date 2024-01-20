@@ -15,20 +15,20 @@ public class GameManager : MonoBehaviour
     [Tooltip("When the flashlight start flickering")]
     [SerializeField] private float m_batteryTimeFlicker;
     [SerializeField] private float m_chargeBatteryDuration;
-    private float m_maxBattery;
     private float m_battery;
-    private float m_batteryFlicker;
     private float m_batteryRate;
     private Coroutine m_batteryCharging;
 
     private bool m_isPaused;
     private bool m_isFlickering;
+    private bool m_isFlashlightActive;
     private bool m_isCharging;
 
     public float poison => m_poison;
     public float poisonRate => m_poisonRate;
     public float batery => m_battery;
-    public float bateryFlicker => m_batteryFlicker;
+    public bool isFlickering => m_isFlickering;
+    public bool isCharging => m_isCharging;
 
 
     private void Awake()
@@ -41,7 +41,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        m_maxBattery = 100;
         ResetValues();
     }
 
@@ -50,16 +49,23 @@ public class GameManager : MonoBehaviour
         m_isPaused = false;
         m_isFlickering = false;
         m_isCharging = false;
-        m_battery = m_maxBattery;
+        m_battery = m_batteryTimeDuration;
         m_batteryRate = 5f / m_batteryTimeDuration;
-        m_batteryFlicker = m_batteryTimeFlicker / m_batteryTimeDuration * m_maxBattery;
         m_poison = 0;
         m_poisonRate = 0;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        //*time.deltaTime
         m_poison = Mathf.Clamp(m_poisonRate + m_poison, 0f, 100f);
+
+        if (m_isFlashlightActive)
+        {
+            m_battery -= Time.deltaTime;
+            if (m_battery < m_batteryTimeFlicker)
+                m_isFlickering = true;
+        }
     }
 
     public void SetPoison(float newPoison)
@@ -72,36 +78,37 @@ public class GameManager : MonoBehaviour
         m_poisonRate = Mathf.Clamp(newPoisonRate, 0f, 100f);
     }
 
- #region Battery
-    public void BatterySpending()
+    public void SetFlashlightActive(bool value)
     {
-        m_battery -= m_batteryRate;
-        if (!m_isFlickering && m_battery < m_batteryFlicker)
-            m_isFlickering = true;
+        m_isFlashlightActive = value;
     }
 
+ #region Battery
     public void ChargeBattery()
     {
-        if (m_battery > 0)
+        m_isCharging = true;
+        HUBManager.instance.RechargingPromptActive(true);
+        m_batteryCharging = StartCoroutine(ChargingBattery());
+    }
+
+    public void StopChargingBattery()
+    {
+        if (m_batteryCharging == null)
             return;
 
-        if (m_isCharging)
-        {
-            StopCoroutine(m_batteryCharging);
-            m_isCharging = false;
-        }
-        else
-            m_batteryCharging = StartCoroutine(ChargingBattery());
+        StopCoroutine(m_batteryCharging);
+        HUBManager.instance.RechargingPromptActive(false);
+        m_isCharging = false;
     }
 
     private IEnumerator ChargingBattery()
     {
-        m_isCharging = true;
         yield return new WaitForSeconds(m_chargeBatteryDuration);
         m_isFlickering = false;
         m_isCharging = false;
-        m_battery = m_maxBattery;
+        m_battery = m_batteryTimeDuration;
         HUBManager.instance.RechargePromptActive(false);
+        HUBManager.instance.RechargingPromptActive(false);
     }
 #endregion
 

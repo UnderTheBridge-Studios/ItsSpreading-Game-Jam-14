@@ -28,9 +28,10 @@ public class FlashLight : MonoBehaviour
 
     public void EnableFlashlight()
     {
-        if (GameManager.instance.batery <= 0)
+        if (GameManager.instance.batery <= 0 || GameManager.instance.isCharging)
             return;
 
+        GameManager.instance.SetFlashlightActive(true);
         m_shotingProjectile = StartCoroutine(ShootLightProjectile());
         m_light.enabled = true;
         m_lightMesh.enabled = true;
@@ -38,6 +39,7 @@ public class FlashLight : MonoBehaviour
 
     public void DisableFlashlight()
     {
+        GameManager.instance.SetFlashlightActive(false);
         StopCoroutine(m_shotingProjectile);
         m_light.enabled = false;
         m_lightMesh.enabled = false;
@@ -51,6 +53,8 @@ public class FlashLight : MonoBehaviour
                 DisableFlashlight();
                 HUBManager.instance.RechargePromptActive(true);
             }
+            if (GameManager.instance.isCharging)
+                DisableFlashlight();
 
             float projectileAngle = m_projectileFov / 2;
 
@@ -64,7 +68,6 @@ public class FlashLight : MonoBehaviour
             GameObject centerProjectile = Instantiate(m_LightProjectile, m_playerInteractPoint.position, Quaternion.identity);
             centerProjectile.GetComponent<LightProjectile>().Inicializate(randomRotation * m_playerInteractPoint.forward, m_range, m_velocity, m_radius);
 
-            GameManager.instance.BatterySpending();
             yield return new WaitForSeconds(m_fireRate);
         }
     }

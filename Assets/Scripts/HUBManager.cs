@@ -12,6 +12,7 @@ public class HUBManager : MonoBehaviour
     [SerializeField] private RectTransform m_poisonBarRate;
     [SerializeField] private GameObject m_pauseMenu;
     [SerializeField] private GameObject m_rechargePrompt;
+    [SerializeField] private GameObject m_rechargingPrompt;
 
     private float m_learpSpeed;
     private float m_poisonMaxWidth;
@@ -30,6 +31,7 @@ public class HUBManager : MonoBehaviour
         m_interactPrompt.SetActive(false);
         m_pauseMenu.SetActive(false);
         m_rechargePrompt.SetActive(false);
+        m_rechargingPrompt.SetActive(false);
 
         m_poisonBar.GetComponentInParent<VerticalLayoutGroup>().enabled = false;
         m_poisonMaxWidth = m_poisonBar.rect.width;
@@ -64,6 +66,11 @@ public class HUBManager : MonoBehaviour
     public void RechargePromptActive(bool value)
     {
         m_rechargePrompt.SetActive(value);
+    }
+
+    public void RechargingPromptActive(bool value)
+    {
+        m_rechargingPrompt.SetActive(value);
     }
 
     public void pause()
