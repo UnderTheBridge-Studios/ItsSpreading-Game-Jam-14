@@ -14,10 +14,8 @@ public class I05_Note : MonoBehaviour, IInteractable
 
     public bool Interact(PlayerInteract interactor)
     {
-        HUBManager.instance.ShowNote(m_content);
-
         m_inputManager = interactor.GetComponent<InputManager>();
-        m_inputManager.Pause();
+        m_inputManager.OpenNotePopUp(m_content);
 
         return true;
     }

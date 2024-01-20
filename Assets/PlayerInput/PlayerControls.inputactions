@@ -2,7 +2,7 @@
     "name": "PlayerControls",
     "maps": [
         {
-            "name": "GroundMovement",
+            "name": "GamePlay",
             "id": "3a31eba2-b56b-4cc7-8acd-943cf68af912",
             "actions": [
                 {
@@ -196,6 +196,65 @@
                     "processors": "",
                     "groups": "",
                     "action": "Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "NotesPopUp",
+            "id": "a164e7c7-5bda-4f2a-8cc9-ea811b8bf767",
+            "actions": [
+                {
+                    "name": "CloseNote",
+                    "type": "Button",
+                    "id": "10bbe9a5-e631-4555-87fe-c18894047d80",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseNoteMouse",
+                    "type": "Button",
+                    "id": "7deecf31-8d35-4fd0-857d-9a94725a6928",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2b616ffb-ea15-4552-946c-9fd2d0b80c52",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseNote",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cea48597-e672-41c6-afa0-d39c3114f0a2",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseNote",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2654e66b-b768-437c-8b63-5336155eeeed",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseNoteMouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

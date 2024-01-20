@@ -24,7 +24,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     ""name"": ""PlayerControls"",
     ""maps"": [
         {
-            ""name"": ""GroundMovement"",
+            ""name"": ""GamePlay"",
             ""id"": ""3a31eba2-b56b-4cc7-8acd-943cf68af912"",
             ""actions"": [
                 {
@@ -222,21 +222,84 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""NotesPopUp"",
+            ""id"": ""a164e7c7-5bda-4f2a-8cc9-ea811b8bf767"",
+            ""actions"": [
+                {
+                    ""name"": ""CloseNote"",
+                    ""type"": ""Button"",
+                    ""id"": ""10bbe9a5-e631-4555-87fe-c18894047d80"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CloseNoteMouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""7deecf31-8d35-4fd0-857d-9a94725a6928"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2b616ffb-ea15-4552-946c-9fd2d0b80c52"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseNote"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cea48597-e672-41c6-afa0-d39c3114f0a2"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseNote"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2654e66b-b768-437c-8b63-5336155eeeed"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CloseNoteMouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // GroundMovement
-        m_GroundMovement = asset.FindActionMap("GroundMovement", throwIfNotFound: true);
-        m_GroundMovement_HorizontalMovement = m_GroundMovement.FindAction("HorizontalMovement", throwIfNotFound: true);
-        m_GroundMovement_Look = m_GroundMovement.FindAction("Look", throwIfNotFound: true);
-        m_GroundMovement_Interact = m_GroundMovement.FindAction("Interact", throwIfNotFound: true);
-        m_GroundMovement_Flashlight = m_GroundMovement.FindAction("Flashlight", throwIfNotFound: true);
-        m_GroundMovement_Pause = m_GroundMovement.FindAction("Pause", throwIfNotFound: true);
-        m_GroundMovement_Recharge = m_GroundMovement.FindAction("Recharge", throwIfNotFound: true);
+        // GamePlay
+        m_GamePlay = asset.FindActionMap("GamePlay", throwIfNotFound: true);
+        m_GamePlay_HorizontalMovement = m_GamePlay.FindAction("HorizontalMovement", throwIfNotFound: true);
+        m_GamePlay_Look = m_GamePlay.FindAction("Look", throwIfNotFound: true);
+        m_GamePlay_Interact = m_GamePlay.FindAction("Interact", throwIfNotFound: true);
+        m_GamePlay_Flashlight = m_GamePlay.FindAction("Flashlight", throwIfNotFound: true);
+        m_GamePlay_Pause = m_GamePlay.FindAction("Pause", throwIfNotFound: true);
+        m_GamePlay_Recharge = m_GamePlay.FindAction("Recharge", throwIfNotFound: true);
         // MenuNavigation
         m_MenuNavigation = asset.FindActionMap("MenuNavigation", throwIfNotFound: true);
         m_MenuNavigation_Resume = m_MenuNavigation.FindAction("Resume", throwIfNotFound: true);
+        // NotesPopUp
+        m_NotesPopUp = asset.FindActionMap("NotesPopUp", throwIfNotFound: true);
+        m_NotesPopUp_CloseNote = m_NotesPopUp.FindAction("CloseNote", throwIfNotFound: true);
+        m_NotesPopUp_CloseNoteMouse = m_NotesPopUp.FindAction("CloseNoteMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -295,34 +358,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // GroundMovement
-    private readonly InputActionMap m_GroundMovement;
-    private List<IGroundMovementActions> m_GroundMovementActionsCallbackInterfaces = new List<IGroundMovementActions>();
-    private readonly InputAction m_GroundMovement_HorizontalMovement;
-    private readonly InputAction m_GroundMovement_Look;
-    private readonly InputAction m_GroundMovement_Interact;
-    private readonly InputAction m_GroundMovement_Flashlight;
-    private readonly InputAction m_GroundMovement_Pause;
-    private readonly InputAction m_GroundMovement_Recharge;
-    public struct GroundMovementActions
+    // GamePlay
+    private readonly InputActionMap m_GamePlay;
+    private List<IGamePlayActions> m_GamePlayActionsCallbackInterfaces = new List<IGamePlayActions>();
+    private readonly InputAction m_GamePlay_HorizontalMovement;
+    private readonly InputAction m_GamePlay_Look;
+    private readonly InputAction m_GamePlay_Interact;
+    private readonly InputAction m_GamePlay_Flashlight;
+    private readonly InputAction m_GamePlay_Pause;
+    private readonly InputAction m_GamePlay_Recharge;
+    public struct GamePlayActions
     {
         private @PlayerControls m_Wrapper;
-        public GroundMovementActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @HorizontalMovement => m_Wrapper.m_GroundMovement_HorizontalMovement;
-        public InputAction @Look => m_Wrapper.m_GroundMovement_Look;
-        public InputAction @Interact => m_Wrapper.m_GroundMovement_Interact;
-        public InputAction @Flashlight => m_Wrapper.m_GroundMovement_Flashlight;
-        public InputAction @Pause => m_Wrapper.m_GroundMovement_Pause;
-        public InputAction @Recharge => m_Wrapper.m_GroundMovement_Recharge;
-        public InputActionMap Get() { return m_Wrapper.m_GroundMovement; }
+        public GamePlayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @HorizontalMovement => m_Wrapper.m_GamePlay_HorizontalMovement;
+        public InputAction @Look => m_Wrapper.m_GamePlay_Look;
+        public InputAction @Interact => m_Wrapper.m_GamePlay_Interact;
+        public InputAction @Flashlight => m_Wrapper.m_GamePlay_Flashlight;
+        public InputAction @Pause => m_Wrapper.m_GamePlay_Pause;
+        public InputAction @Recharge => m_Wrapper.m_GamePlay_Recharge;
+        public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GroundMovementActions set) { return set.Get(); }
-        public void AddCallbacks(IGroundMovementActions instance)
+        public static implicit operator InputActionMap(GamePlayActions set) { return set.Get(); }
+        public void AddCallbacks(IGamePlayActions instance)
         {
-            if (instance == null || m_Wrapper.m_GroundMovementActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_GroundMovementActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_GamePlayActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_GamePlayActionsCallbackInterfaces.Add(instance);
             @HorizontalMovement.started += instance.OnHorizontalMovement;
             @HorizontalMovement.performed += instance.OnHorizontalMovement;
             @HorizontalMovement.canceled += instance.OnHorizontalMovement;
@@ -343,7 +406,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Recharge.canceled += instance.OnRecharge;
         }
 
-        private void UnregisterCallbacks(IGroundMovementActions instance)
+        private void UnregisterCallbacks(IGamePlayActions instance)
         {
             @HorizontalMovement.started -= instance.OnHorizontalMovement;
             @HorizontalMovement.performed -= instance.OnHorizontalMovement;
@@ -365,21 +428,21 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Recharge.canceled -= instance.OnRecharge;
         }
 
-        public void RemoveCallbacks(IGroundMovementActions instance)
+        public void RemoveCallbacks(IGamePlayActions instance)
         {
-            if (m_Wrapper.m_GroundMovementActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_GamePlayActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IGroundMovementActions instance)
+        public void SetCallbacks(IGamePlayActions instance)
         {
-            foreach (var item in m_Wrapper.m_GroundMovementActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_GamePlayActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_GroundMovementActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_GamePlayActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public GroundMovementActions @GroundMovement => new GroundMovementActions(this);
+    public GamePlayActions @GamePlay => new GamePlayActions(this);
 
     // MenuNavigation
     private readonly InputActionMap m_MenuNavigation;
@@ -426,7 +489,61 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public MenuNavigationActions @MenuNavigation => new MenuNavigationActions(this);
-    public interface IGroundMovementActions
+
+    // NotesPopUp
+    private readonly InputActionMap m_NotesPopUp;
+    private List<INotesPopUpActions> m_NotesPopUpActionsCallbackInterfaces = new List<INotesPopUpActions>();
+    private readonly InputAction m_NotesPopUp_CloseNote;
+    private readonly InputAction m_NotesPopUp_CloseNoteMouse;
+    public struct NotesPopUpActions
+    {
+        private @PlayerControls m_Wrapper;
+        public NotesPopUpActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CloseNote => m_Wrapper.m_NotesPopUp_CloseNote;
+        public InputAction @CloseNoteMouse => m_Wrapper.m_NotesPopUp_CloseNoteMouse;
+        public InputActionMap Get() { return m_Wrapper.m_NotesPopUp; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(NotesPopUpActions set) { return set.Get(); }
+        public void AddCallbacks(INotesPopUpActions instance)
+        {
+            if (instance == null || m_Wrapper.m_NotesPopUpActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_NotesPopUpActionsCallbackInterfaces.Add(instance);
+            @CloseNote.started += instance.OnCloseNote;
+            @CloseNote.performed += instance.OnCloseNote;
+            @CloseNote.canceled += instance.OnCloseNote;
+            @CloseNoteMouse.started += instance.OnCloseNoteMouse;
+            @CloseNoteMouse.performed += instance.OnCloseNoteMouse;
+            @CloseNoteMouse.canceled += instance.OnCloseNoteMouse;
+        }
+
+        private void UnregisterCallbacks(INotesPopUpActions instance)
+        {
+            @CloseNote.started -= instance.OnCloseNote;
+            @CloseNote.performed -= instance.OnCloseNote;
+            @CloseNote.canceled -= instance.OnCloseNote;
+            @CloseNoteMouse.started -= instance.OnCloseNoteMouse;
+            @CloseNoteMouse.performed -= instance.OnCloseNoteMouse;
+            @CloseNoteMouse.canceled -= instance.OnCloseNoteMouse;
+        }
+
+        public void RemoveCallbacks(INotesPopUpActions instance)
+        {
+            if (m_Wrapper.m_NotesPopUpActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(INotesPopUpActions instance)
+        {
+            foreach (var item in m_Wrapper.m_NotesPopUpActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_NotesPopUpActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public NotesPopUpActions @NotesPopUp => new NotesPopUpActions(this);
+    public interface IGamePlayActions
     {
         void OnHorizontalMovement(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
@@ -438,5 +555,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IMenuNavigationActions
     {
         void OnResume(InputAction.CallbackContext context);
+    }
+    public interface INotesPopUpActions
+    {
+        void OnCloseNote(InputAction.CallbackContext context);
+        void OnCloseNoteMouse(InputAction.CallbackContext context);
     }
 }

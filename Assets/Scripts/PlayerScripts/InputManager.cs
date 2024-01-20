@@ -9,24 +9,48 @@ public class InputManager : MonoBehaviour
     [SerializeField] private FlashLight m_flashlight;
 
     private PlayerControls m_controls;
-    private PlayerControls.GroundMovementActions m_groundMovement;
-    private PlayerControls.MenuNavigationActions m_menuMovement;
+    private PlayerControls.GamePlayActions m_gamePlay;
+    private PlayerControls.MenuNavigationActions m_menuNavigation;
+    private PlayerControls.NotesPopUpActions m_notesPopUp;
+
+    private Camera m_camera;
 
     private void Awake()
     {
         m_controls = new PlayerControls();
-        m_groundMovement = m_controls.GroundMovement;
-        m_menuMovement = m_controls.MenuNavigation;
+        m_gamePlay = m_controls.GamePlay;
+        m_menuNavigation = m_controls.MenuNavigation;
+        m_notesPopUp = m_controls.NotesPopUp;
 
-        m_groundMovement.HorizontalMovement.performed += ctx => HorizontalMovement(ctx);
-        m_groundMovement.Look.performed += ctx => Look(ctx);
+        m_camera = Camera.main;
 
-        m_groundMovement.Interact.performed += _ => m_playerInteract.OnInteractPressed();
-        m_groundMovement.Flashlight.performed += _ => m_flashlight.ToggleFlashlight();
-        m_groundMovement.Recharge.performed += _ => GameManager.instance.ChargeBattery();
-        m_groundMovement.Recharge.canceled += _ => GameManager.instance.StopChargingBattery();
-        m_groundMovement.Pause.performed += _ => Pause();
-        m_menuMovement.Resume.performed += _ => Resume();
+        //Gameplay Inputs
+        m_gamePlay.HorizontalMovement.performed += ctx => HorizontalMovement(ctx);
+        m_gamePlay.Look.performed += ctx => Look(ctx);
+
+        m_gamePlay.Interact.performed += _ => m_playerInteract.OnInteractPressed();
+        m_gamePlay.Flashlight.performed += _ => m_flashlight.ToggleFlashlight();
+        m_gamePlay.Recharge.performed += _ => GameManager.instance.ChargeBattery();
+        m_gamePlay.Recharge.canceled += _ => GameManager.instance.StopChargingBattery();
+        m_gamePlay.Pause.performed += _ => OpenPauseMenu();
+
+        //Menu Navigation Inputs
+        m_menuNavigation.Resume.performed += _ => ClosePauseMenu();
+
+        //Notes PopUp Inputs
+        m_notesPopUp.CloseNote.performed += _ => CloseNotePopUp();
+        m_notesPopUp.CloseNoteMouse.performed += _ => CloseWithMouse();
+    }
+    private void OnEnable()
+    {
+        m_controls.Enable();
+        m_menuNavigation.Disable();
+        m_notesPopUp.Disable();
+    }
+
+    private void OnDisable()
+    {
+        m_controls.Disable();
     }
 
     private void Look(InputAction.CallbackContext context)
@@ -41,28 +65,50 @@ public class InputManager : MonoBehaviour
         m_playerMovement.ReceiveInput(input);
     }
 
-    private void OnEnable()
-    {
-        m_controls.Enable();
-        m_menuMovement.Disable();
-    }
-
-    private void OnDisable()
-    {
-        m_controls.Disable();
-    }
-
-    public void Pause()
+    public void OpenPauseMenu()
     {
         GameManager.instance.PauseGame();
-        m_groundMovement.Disable();
-        m_menuMovement.Enable();
+        HUBManager.instance.ShowPauseMenu();
+
+        m_gamePlay.Disable();
+        m_menuNavigation.Enable();
+        m_notesPopUp.Disable();
     }
 
-    public void Resume()
+    public void ClosePauseMenu()
     {
         GameManager.instance.PauseGame();
-        m_groundMovement.Enable();
-        m_menuMovement.Disable();
+        HUBManager.instance.HidePauseMenu();
+
+        m_gamePlay.Enable();
+        m_menuNavigation.Disable();
+        m_notesPopUp.Disable();
+    }
+
+    public void OpenNotePopUp(string content)
+    {
+        GameManager.instance.PauseGame();
+        HUBManager.instance.ShowNote(content);
+
+        m_gamePlay.Disable();
+        m_menuNavigation.Disable();
+        m_notesPopUp.Enable();
+    }
+
+    public void CloseNotePopUp()
+    {
+        GameManager.instance.PauseGame();
+        HUBManager.instance.HideNote();
+
+        m_gamePlay.Enable();
+        m_menuNavigation.Disable();
+        m_notesPopUp.Disable();
+    }
+
+    private void CloseWithMouse()
+    {
+        RaycastHit2D rayHit = Physics2D.GetRayIntersection(m_camera.ScreenPointToRay(Mouse.current.position.ReadValue()));
+        if (!rayHit.collider)
+            CloseNotePopUp();
     }
 }

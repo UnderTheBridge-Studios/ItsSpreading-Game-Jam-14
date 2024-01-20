@@ -19,9 +19,6 @@ public class HUBManager : MonoBehaviour
     private TextMeshProUGUI m_noteContent;
     private float m_learpSpeed;
     private float m_poisonMaxWidth;
-    private bool m_isShowingNote;
-
-    public bool IsShowingNote => m_isShowingNote;
 
     private void Awake()
     {
@@ -92,13 +89,11 @@ public class HUBManager : MonoBehaviour
     public void ShowNote(string noteContent)
     {
         m_noteDisplay.SetActive(true);
-        m_isShowingNote = true;
         m_noteContent.text = noteContent;
     }
 
     public void HideNote()
     {
-        m_isShowingNote = false;
         m_noteDisplay.SetActive(false);
     }
 }
