@@ -1918,6 +1918,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: I01_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 3543057397235945103, guid: 7eb300012f7b41047ac5054d3b81bf9e, type: 3}
+      propertyPath: m_doorButton
+      value: 
+      objectReference: {fileID: 1807254506}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2774,6 +2778,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7197358058904414628, guid: 4b74985bacb02074ba97694a692ecaa1, type: 3}
   m_PrefabInstance: {fileID: 1807254504}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1807254506 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5608794678238064274, guid: 4b74985bacb02074ba97694a692ecaa1, type: 3}
+  m_PrefabInstance: {fileID: 1807254504}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5ca6b93ad0c0442bd733308c0c4c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1821931566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7549711548576026430, guid: 54e584a023fc56a4fac2f29bd3ac902f, type: 3}
