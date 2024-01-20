@@ -25,8 +25,7 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Look.performed += ctx => Look(ctx);
 
         m_gamePlay.Interact.performed += _ => m_playerInteract.OnInteractPressed();
-        m_gamePlay.Flashlight.performed += _ => m_flashlight.EnableFlashlight();
-        m_gamePlay.Flashlight.canceled += _ => m_flashlight.DisableFlashlight();
+        m_gamePlay.Flashlight.performed += _ => m_flashlight.ToggleFlashlight();
         m_gamePlay.Recharge.performed += _ => GameManager.instance.ChargeBattery();
         m_gamePlay.Recharge.canceled += _ => GameManager.instance.StopChargingBattery();
         m_gamePlay.Pause.performed += _ => OpenPauseMenu();
