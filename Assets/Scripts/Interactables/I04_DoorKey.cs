@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class I04_DoorKey : I08_Door
 {
-    [SerializeField] private I03_Key m_key;
+    [SerializeField] private string m_keyID;
 
     public override bool Interact(PlayerInteract interactor)
     {
-        if (GameManager.instance.HasKey(m_key.ID))
+        if (GameManager.instance.HasKey(m_keyID))
         {
             OpenDoor();
             return true;
