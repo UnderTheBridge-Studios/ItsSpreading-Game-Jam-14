@@ -18,12 +18,18 @@ public class FlashLight : MonoBehaviour
     [SerializeField] private float m_projectileFov = 30f;
     [Range(0.01f, 1f)]
     [SerializeField] private float m_fireRate = 0.05f;
-    
+    [Tooltip("When the flashlight is flickering, will flicker on a random time between 0 and fickerRandTime")]
+    [SerializeField] private float m_fickerRandTime = 0.5f;
+
     private Coroutine m_shotingProjectile;
+    private Coroutine m_flickering;
+
+    private bool m_isFlickering;
 
     private void Awake()
     {
         m_light.spotAngle = m_projectileFov;
+        m_isFlickering = false;
     }
 
     public void EnableFlashlight()
@@ -43,6 +49,7 @@ public class FlashLight : MonoBehaviour
         StopCoroutine(m_shotingProjectile);
         m_light.enabled = false;
         m_lightMesh.enabled = false;
+        StopFlickering();
     }
 
     private IEnumerator ShootLightProjectile() {
@@ -55,6 +62,11 @@ public class FlashLight : MonoBehaviour
             }
             if (GameManager.instance.isCharging)
                 DisableFlashlight();
+
+            if (GameManager.instance.isFlickering && !m_isFlickering)
+                StartFlickering();
+
+            Debug.Log("aaa");
 
             float projectileAngle = m_projectileFov / 2;
 
@@ -69,6 +81,40 @@ public class FlashLight : MonoBehaviour
             centerProjectile.GetComponent<LightProjectile>().Inicializate(randomRotation * m_playerInteractPoint.forward, m_range, m_velocity, m_radius);
 
             yield return new WaitForSeconds(m_fireRate);
+        }
+    }
+
+    private void StartFlickering()
+    {
+        if (m_isFlickering)
+            return;
+
+        Debug.Log("StartFlickering");
+
+
+        m_isFlickering = true;
+        m_flickering = StartCoroutine(Flickering());
+    }
+
+    private void StopFlickering()
+    {
+        if (m_flickering == null)
+            return;
+
+        m_isFlickering = false;
+        StopCoroutine(m_flickering);
+    }
+
+    private IEnumerator Flickering()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(m_fickerRandTime);
+            m_light.enabled = false;
+            m_lightMesh.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            m_light.enabled = true;
+            m_lightMesh.enabled = true;
         }
     }
 
