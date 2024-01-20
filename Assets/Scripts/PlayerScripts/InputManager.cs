@@ -35,7 +35,7 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Pause.performed += _ => OpenPauseMenu();
 
         //Menu Navigation Inputs
-        m_menuNavigation.Resume.performed += _ => ClosePauseMenu();
+        m_menuNavigation.Cancel.performed += _ => ClosePauseMenu();
 
         //Notes PopUp Inputs
         m_notesPopUp.CloseNote.performed += _ => CloseNotePopUp();
