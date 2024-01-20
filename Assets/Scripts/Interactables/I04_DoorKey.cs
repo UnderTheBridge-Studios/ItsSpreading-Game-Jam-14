@@ -2,49 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class I04_DoorKey : MonoBehaviour, IInteractable
+public class I04_DoorKey : I08_Door
 {
-    [SerializeField] private string m_id;
-    [SerializeField] private string m_prompt = "Open Door";
+    [SerializeField] private string m_keyID;
 
-    private BoxCollider m_collider;
-
-    public string ID => m_id;
-    public string InteractionPromt => m_prompt;
-
-    private void Awake()
+    public override bool Interact(PlayerInteract interactor)
     {
-        m_collider = GetComponent<BoxCollider>();
-    }
-    public bool Interact(PlayerInteract interactor)
-    {
-        //pseudocode for when we have inventory
-        /*if (GameManager.Inventory.HasKey(m_key.ID))
-         *{
-         *  OpenDoor();
-         *  return true;
-         *}
-         *else
-         *{
-         *  Debug.Log("Key is missing");
-         *  return false;
-         *}*/
-        return false;
-    }
-
-    public void OnFocus()
-    {
-        return;
-    }
-
-    public void OnLoseFocus()
-    {
-        return;
-    }
-
-    public void OpenDoor()
-    {
-        m_collider.enabled = false;
-        Debug.Log("Door: The door " + ID + " has been opened.");
+        if (GameManager.instance.HasKey(m_keyID))
+        {
+            OpenDoor();
+            return true;
+        }
+        else
+        {
+            Debug.Log("Key is missing");
+            return false;
+        }
     }
 }
