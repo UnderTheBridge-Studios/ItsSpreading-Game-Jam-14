@@ -1,17 +1,34 @@
 using UnityEngine.Audio;
+using System.Collections;
+using System.Collections.Generic;
 using System;
 using UnityEngine;
+
+
+
+
 
 public class AudioManager : MonoBehaviour
 {
 
-    public Sound[] sounds;
+
 
     public static AudioManager instance;
 
+    public AudioSource themeSource;
+    public Theme[] themes;
 
 
-     void Awake()
+    public AudioSource SFXSource;
+    public SFXs[] Sounds;
+
+
+    private Theme m_currentTheme = null;
+
+    
+
+
+    void Awake()
     {
 
         if (instance == null)
@@ -26,48 +43,111 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        foreach(Sound s in sounds)
+
+    }
+
+    void Start()
+    {
+
+
+    }
+
+
+    //THEME FUNCTIONS
+    public void PlayTheme(string name,bool fade)
+    {
+
+        Theme t = Array.Find(themes, selectedTheme => selectedTheme.name == name);
+
+        if (t != null)
         {
 
+            if (themeSource.clip == t.track)
+            {
+                Debug.Log(t.name + " is already playing");
+            }
+            else
+            {
 
-            s.source=gameObject.AddComponent<AudioSource>();
+                if (fade)
+                {
+                    themeSource.clip = t.track;
+                
+                    if (themeSource.isPlaying) {
+
+                        //StartCoroutine(FadeTheme(themeSource,themeSource.volume,0f,1f));
+                        //themeSource.Play();
+                        //StartCoroutine(FadeTheme(themeSource, themeSource.volume, 1f, 1f));
+
+                    }
+                    else
+                    {
+
+                       // StartCoroutine(FadeTheme(themeSource,0,1f, 1f));
+
+                    }
+         
+                }
+                else
+                {
+
+                    themeSource.clip = t.track;
+                    themeSource.Play();
+                  
+                }
+
+
+                m_currentTheme = t;
+            }
+
+
           
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-
-
-
-        }        
-
-
-    }
-
-     void Start()
-    {
-        PlaySound("theme");
-    }
-
-    public void PlaySound(string soundToPlay)
-    {
-
-        
-        Sound s = Array.Find(sounds, sound => sound.name == soundToPlay);
-
-        if (s == null)
+        }
+        else
         {
-            Debug.Log("Sound "+ soundToPlay + " not found");
+            Debug.Log("Theme with name: " + name + " not found");
             return;
         }
-        Debug.Log("Sound Playing");
-        s.source.Play();
+
+
+       
+
+    }
+    public void StopTheme() { themeSource.Stop(); }
+    public void ModifyVolume(float vol) { themeSource.volume = vol; }
+    private Theme ReturnClip(string name){
+
+        foreach(Theme t in themes)
+        {
+            if (t.name == name)
+                return t;
+
+        }
+
+        Debug.Log("Clip not found");
+        return null;
         
-        
-        
+     }
+    public static IEnumerator FadeTheme(AudioSource audioSource,float startVolume,float targetVolume, float duration)
+    {
+        float currentTime = 0;
+        float start = startVolume;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(start, targetVolume, currentTime / duration);
+            yield return null;
+        }
+        yield break;
     }
 
+   //SOUND FUNCTIONS
 
+    public void PlayOneShot(SFXs sound)
+    {
+
+    }
 
 
 }
