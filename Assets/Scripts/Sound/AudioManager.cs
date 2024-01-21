@@ -44,23 +44,23 @@ public class AudioManager : MonoBehaviour
 
     }
 
-    private void Start()
+     void Start()
     {
-        PlaySound("Theme");
+        PlaySound("theme");
     }
 
     public void PlaySound(string soundToPlay)
     {
 
         
-        Sound s = Array.Find(sounds, sound => sound.name == name );
+        Sound s = Array.Find(sounds, sound => sound.name == soundToPlay);
 
-        if (s ==null)
+        if (s == null)
         {
             Debug.Log("Sound "+ soundToPlay + " not found");
             return;
         }
-   
+        Debug.Log("Sound Playing");
         s.source.Play();
         
         
