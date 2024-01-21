@@ -37,7 +37,6 @@ public class FlashLight : MonoBehaviour
     {
         if (!m_isFlashlightEnabled && GameManager.instance.batery > 0 && !GameManager.instance.isCharging)
         {
-
             m_isFlashlightEnabled = true;
             StartCoroutine(ShootLightProjectile());
         }
