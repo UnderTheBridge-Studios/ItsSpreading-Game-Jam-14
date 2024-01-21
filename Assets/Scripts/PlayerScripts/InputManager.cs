@@ -32,6 +32,7 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Flashlight.performed += _ => m_flashlight.ToggleFlashlight();
         m_gamePlay.Recharge.performed += _ => GameManager.instance.ChargeBattery();
         m_gamePlay.Recharge.canceled += _ => GameManager.instance.StopChargingBattery();
+        m_gamePlay.Inhibitor.performed += _ => GameManager.instance.UseInhibitor();
         m_gamePlay.Pause.performed += _ => OpenPauseMenu();
 
         //Menu Navigation Inputs

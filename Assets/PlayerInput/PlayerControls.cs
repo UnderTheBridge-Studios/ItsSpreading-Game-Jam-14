@@ -80,6 +80,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inhibitor"",
+                    ""type"": ""Button"",
+                    ""id"": ""268dcad8-1cfb-4120-b812-d11e0da4deea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -190,6 +199,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Recharge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72ce42ab-1e4c-42bf-90b3-70ad9b70ee20"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inhibitor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -507,6 +527,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_GamePlay_Flashlight = m_GamePlay.FindAction("Flashlight", throwIfNotFound: true);
         m_GamePlay_Pause = m_GamePlay.FindAction("Pause", throwIfNotFound: true);
         m_GamePlay_Recharge = m_GamePlay.FindAction("Recharge", throwIfNotFound: true);
+        m_GamePlay_Inhibitor = m_GamePlay.FindAction("Inhibitor", throwIfNotFound: true);
         // MenuNavigation
         m_MenuNavigation = asset.FindActionMap("MenuNavigation", throwIfNotFound: true);
         m_MenuNavigation_Navigate = m_MenuNavigation.FindAction("Navigate", throwIfNotFound: true);
@@ -584,6 +605,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Flashlight;
     private readonly InputAction m_GamePlay_Pause;
     private readonly InputAction m_GamePlay_Recharge;
+    private readonly InputAction m_GamePlay_Inhibitor;
     public struct GamePlayActions
     {
         private @PlayerControls m_Wrapper;
@@ -594,6 +616,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Flashlight => m_Wrapper.m_GamePlay_Flashlight;
         public InputAction @Pause => m_Wrapper.m_GamePlay_Pause;
         public InputAction @Recharge => m_Wrapper.m_GamePlay_Recharge;
+        public InputAction @Inhibitor => m_Wrapper.m_GamePlay_Inhibitor;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -621,6 +644,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Recharge.started += instance.OnRecharge;
             @Recharge.performed += instance.OnRecharge;
             @Recharge.canceled += instance.OnRecharge;
+            @Inhibitor.started += instance.OnInhibitor;
+            @Inhibitor.performed += instance.OnInhibitor;
+            @Inhibitor.canceled += instance.OnInhibitor;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -643,6 +669,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Recharge.started -= instance.OnRecharge;
             @Recharge.performed -= instance.OnRecharge;
             @Recharge.canceled -= instance.OnRecharge;
+            @Inhibitor.started -= instance.OnInhibitor;
+            @Inhibitor.performed -= instance.OnInhibitor;
+            @Inhibitor.canceled -= instance.OnInhibitor;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -792,6 +821,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnFlashlight(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnRecharge(InputAction.CallbackContext context);
+        void OnInhibitor(InputAction.CallbackContext context);
     }
     public interface IMenuNavigationActions
     {
