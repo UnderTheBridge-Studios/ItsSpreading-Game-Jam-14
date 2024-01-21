@@ -276,6 +276,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerInteractPoint: {fileID: 1759276995494068830}
   m_interactionDistance: 4
+  m_ignoreLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &3125761959522696208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,6 +300,7 @@ MonoBehaviour:
   m_velocity: 2
   m_projectileFov: 30
   m_fireRate: 0.05
+  m_fickerRandTime: 0.5
 --- !u!1 &2941709444019296971
 GameObject:
   m_ObjectHideFlags: 0
