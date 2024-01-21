@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 407009161915905226}
   - component: {fileID: 5241901893229016518}
   - component: {fileID: 2973098824150452352}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: LightProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

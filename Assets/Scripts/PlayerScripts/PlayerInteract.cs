@@ -7,7 +7,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] Transform m_playerInteractPoint;
     [SerializeField] private float m_interactionDistance = 3f;
 
-    private IInteractable currentInteractable;
+    private IInteractable m_currentInteractable;
 
     private void Update()
     {
@@ -16,35 +16,35 @@ public class PlayerInteract : MonoBehaviour
 
     private void InteractionCheck()
     {
-        if (Physics.Raycast(m_playerInteractPoint.position, m_playerInteractPoint.transform.forward, out RaycastHit hit, m_interactionDistance))
+        if (Physics.Raycast(m_playerInteractPoint.position, m_playerInteractPoint.transform.forward, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.CompareTag("Interactable") && (currentInteractable == null || hit.collider.gameObject.GetComponent<IInteractable>().ID != currentInteractable.ID))
+            if (hit.collider.gameObject.CompareTag("Interactable") && (m_currentInteractable == null || hit.collider.gameObject.GetComponent<IInteractable>().ID != m_currentInteractable.ID))
             {
-                hit.collider.TryGetComponent(out currentInteractable);
-                currentInteractable.OnFocus();
+                hit.collider.TryGetComponent(out m_currentInteractable);
+                m_currentInteractable.OnFocus();
                 HUBManager.instance.InteractPromptActive(true);
             }
-            else if (!hit.collider.gameObject.CompareTag("Interactable") && currentInteractable != null)
+            else if (!hit.collider.gameObject.CompareTag("Interactable") && m_currentInteractable != null)
             {
-                currentInteractable.OnLoseFocus();
+                m_currentInteractable.OnLoseFocus();
                 HUBManager.instance.InteractPromptActive(false);
 
-                currentInteractable = null;
+                m_currentInteractable = null;
             }
         }
-        else if (currentInteractable != null)
+        else if (m_currentInteractable != null)
         {
-            currentInteractable.OnLoseFocus();
+            m_currentInteractable.OnLoseFocus();
             HUBManager.instance.InteractPromptActive(false);
-            currentInteractable = null;
+            m_currentInteractable = null;
         }
     }
 
     public void OnInteractPressed()
     {
-        if (currentInteractable != null)
+        if (m_currentInteractable != null)
         {
-            if (currentInteractable.Interact(this))
+            if (m_currentInteractable.Interact(this))
             {
                 return;
             }
