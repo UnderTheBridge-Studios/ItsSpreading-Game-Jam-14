@@ -80,6 +80,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inhibitor"",
+                    ""type"": ""Button"",
+                    ""id"": ""268dcad8-1cfb-4120-b812-d11e0da4deea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Recharge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""72ce42ab-1e4c-42bf-90b3-70ad9b70ee20"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inhibitor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -200,24 +220,247 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""fae829b7-23bb-4062-a935-a56bed7c1105"",
             ""actions"": [
                 {
-                    ""name"": ""Resume"",
+                    ""name"": ""Navigate"",
                     ""type"": ""Button"",
-                    ""id"": ""74876b33-fe44-434c-bb12-b3adc76d372e"",
+                    ""id"": ""fadce713-0ed1-4830-9903-a6e24a38b52b"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6c74049-b0fb-4da0-a0b9-0772d4937080"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""2cc35403-9d7e-4393-b6b7-e761162977af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""1620c534-6447-4486-b9fa-4734c4b8966d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Point"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""f5066b95-d170-4b41-abd3-26458d8d6822"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""4a20e6f6-b01b-4b96-a05b-85411cbad4f6"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""33291c33-6bb4-4760-b0ef-9ad3258ac6fb"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""0f7bbe37-4e73-4b8e-9223-54923f5d2dc9"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""1d6c353d-7265-44fd-9aee-a9489471b264"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""ccf3554e-33eb-4b1e-9b94-a9a86af1ce0c"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""5ae4c692-c24e-4328-9b15-cde54ceb6fed"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""c1b32b74-c75e-43b5-b790-0125697bc9e3"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""849bdea5-3c24-43e6-bcd1-1e3874cd4a3d"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""f3680766-ff74-40e2-b8e4-6da6801695aa"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Navigate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
-                    ""id"": ""52561caa-d8b7-44d7-a603-47a69bbe24d8"",
+                    ""id"": ""b15673a3-27d4-4b37-aacc-6d402405e58f"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e3945cd5-2a4e-4516-b990-a5588f856ce4"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d34f393-c0fb-4922-8bd3-fbe1cb392c83"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4cbadf6b-545f-4ccb-907c-2dbd947e5732"",
+                    ""path"": ""*/{Cancel}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7c7ac63-1e99-4a44-be3d-d0b9d81b54e4"",
                     ""path"": ""<Keyboard>/0"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Resume"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b67d5ab-caf3-4f1e-a62b-78047a692658"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a148b66-9430-4f70-8ed2-d9cc80099644"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d6d2faf-6e0f-4d0c-bbe0-b3455141e5db"",
+                    ""path"": ""<Pen>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff5b0bb3-8a51-4b58-bda2-a2ab3b5bfbf2"",
+                    ""path"": ""<Touchscreen>/touch*/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Point"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -231,15 +474,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""CloseNote"",
                     ""type"": ""Button"",
                     ""id"": ""10bbe9a5-e631-4555-87fe-c18894047d80"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""CloseNoteMouse"",
-                    ""type"": ""Button"",
-                    ""id"": ""7deecf31-8d35-4fd0-857d-9a94725a6928"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -271,12 +505,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2654e66b-b768-437c-8b63-5336155eeeed"",
+                    ""id"": ""732bd18e-35b1-4ac3-96fe-ea074093013c"",
                     ""path"": ""<Mouse>/press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CloseNoteMouse"",
+                    ""action"": ""CloseNote"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -293,13 +527,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_GamePlay_Flashlight = m_GamePlay.FindAction("Flashlight", throwIfNotFound: true);
         m_GamePlay_Pause = m_GamePlay.FindAction("Pause", throwIfNotFound: true);
         m_GamePlay_Recharge = m_GamePlay.FindAction("Recharge", throwIfNotFound: true);
+        m_GamePlay_Inhibitor = m_GamePlay.FindAction("Inhibitor", throwIfNotFound: true);
         // MenuNavigation
         m_MenuNavigation = asset.FindActionMap("MenuNavigation", throwIfNotFound: true);
-        m_MenuNavigation_Resume = m_MenuNavigation.FindAction("Resume", throwIfNotFound: true);
+        m_MenuNavigation_Navigate = m_MenuNavigation.FindAction("Navigate", throwIfNotFound: true);
+        m_MenuNavigation_Submit = m_MenuNavigation.FindAction("Submit", throwIfNotFound: true);
+        m_MenuNavigation_Cancel = m_MenuNavigation.FindAction("Cancel", throwIfNotFound: true);
+        m_MenuNavigation_Click = m_MenuNavigation.FindAction("Click", throwIfNotFound: true);
+        m_MenuNavigation_Point = m_MenuNavigation.FindAction("Point", throwIfNotFound: true);
         // NotesPopUp
         m_NotesPopUp = asset.FindActionMap("NotesPopUp", throwIfNotFound: true);
         m_NotesPopUp_CloseNote = m_NotesPopUp.FindAction("CloseNote", throwIfNotFound: true);
-        m_NotesPopUp_CloseNoteMouse = m_NotesPopUp.FindAction("CloseNoteMouse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -367,6 +605,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_GamePlay_Flashlight;
     private readonly InputAction m_GamePlay_Pause;
     private readonly InputAction m_GamePlay_Recharge;
+    private readonly InputAction m_GamePlay_Inhibitor;
     public struct GamePlayActions
     {
         private @PlayerControls m_Wrapper;
@@ -377,6 +616,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Flashlight => m_Wrapper.m_GamePlay_Flashlight;
         public InputAction @Pause => m_Wrapper.m_GamePlay_Pause;
         public InputAction @Recharge => m_Wrapper.m_GamePlay_Recharge;
+        public InputAction @Inhibitor => m_Wrapper.m_GamePlay_Inhibitor;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -404,6 +644,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Recharge.started += instance.OnRecharge;
             @Recharge.performed += instance.OnRecharge;
             @Recharge.canceled += instance.OnRecharge;
+            @Inhibitor.started += instance.OnInhibitor;
+            @Inhibitor.performed += instance.OnInhibitor;
+            @Inhibitor.canceled += instance.OnInhibitor;
         }
 
         private void UnregisterCallbacks(IGamePlayActions instance)
@@ -426,6 +669,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Recharge.started -= instance.OnRecharge;
             @Recharge.performed -= instance.OnRecharge;
             @Recharge.canceled -= instance.OnRecharge;
+            @Inhibitor.started -= instance.OnInhibitor;
+            @Inhibitor.performed -= instance.OnInhibitor;
+            @Inhibitor.canceled -= instance.OnInhibitor;
         }
 
         public void RemoveCallbacks(IGamePlayActions instance)
@@ -447,12 +693,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // MenuNavigation
     private readonly InputActionMap m_MenuNavigation;
     private List<IMenuNavigationActions> m_MenuNavigationActionsCallbackInterfaces = new List<IMenuNavigationActions>();
-    private readonly InputAction m_MenuNavigation_Resume;
+    private readonly InputAction m_MenuNavigation_Navigate;
+    private readonly InputAction m_MenuNavigation_Submit;
+    private readonly InputAction m_MenuNavigation_Cancel;
+    private readonly InputAction m_MenuNavigation_Click;
+    private readonly InputAction m_MenuNavigation_Point;
     public struct MenuNavigationActions
     {
         private @PlayerControls m_Wrapper;
         public MenuNavigationActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Resume => m_Wrapper.m_MenuNavigation_Resume;
+        public InputAction @Navigate => m_Wrapper.m_MenuNavigation_Navigate;
+        public InputAction @Submit => m_Wrapper.m_MenuNavigation_Submit;
+        public InputAction @Cancel => m_Wrapper.m_MenuNavigation_Cancel;
+        public InputAction @Click => m_Wrapper.m_MenuNavigation_Click;
+        public InputAction @Point => m_Wrapper.m_MenuNavigation_Point;
         public InputActionMap Get() { return m_Wrapper.m_MenuNavigation; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -462,16 +716,40 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_MenuNavigationActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_MenuNavigationActionsCallbackInterfaces.Add(instance);
-            @Resume.started += instance.OnResume;
-            @Resume.performed += instance.OnResume;
-            @Resume.canceled += instance.OnResume;
+            @Navigate.started += instance.OnNavigate;
+            @Navigate.performed += instance.OnNavigate;
+            @Navigate.canceled += instance.OnNavigate;
+            @Submit.started += instance.OnSubmit;
+            @Submit.performed += instance.OnSubmit;
+            @Submit.canceled += instance.OnSubmit;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
+            @Point.started += instance.OnPoint;
+            @Point.performed += instance.OnPoint;
+            @Point.canceled += instance.OnPoint;
         }
 
         private void UnregisterCallbacks(IMenuNavigationActions instance)
         {
-            @Resume.started -= instance.OnResume;
-            @Resume.performed -= instance.OnResume;
-            @Resume.canceled -= instance.OnResume;
+            @Navigate.started -= instance.OnNavigate;
+            @Navigate.performed -= instance.OnNavigate;
+            @Navigate.canceled -= instance.OnNavigate;
+            @Submit.started -= instance.OnSubmit;
+            @Submit.performed -= instance.OnSubmit;
+            @Submit.canceled -= instance.OnSubmit;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
+            @Point.started -= instance.OnPoint;
+            @Point.performed -= instance.OnPoint;
+            @Point.canceled -= instance.OnPoint;
         }
 
         public void RemoveCallbacks(IMenuNavigationActions instance)
@@ -494,13 +772,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_NotesPopUp;
     private List<INotesPopUpActions> m_NotesPopUpActionsCallbackInterfaces = new List<INotesPopUpActions>();
     private readonly InputAction m_NotesPopUp_CloseNote;
-    private readonly InputAction m_NotesPopUp_CloseNoteMouse;
     public struct NotesPopUpActions
     {
         private @PlayerControls m_Wrapper;
         public NotesPopUpActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @CloseNote => m_Wrapper.m_NotesPopUp_CloseNote;
-        public InputAction @CloseNoteMouse => m_Wrapper.m_NotesPopUp_CloseNoteMouse;
         public InputActionMap Get() { return m_Wrapper.m_NotesPopUp; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -513,9 +789,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @CloseNote.started += instance.OnCloseNote;
             @CloseNote.performed += instance.OnCloseNote;
             @CloseNote.canceled += instance.OnCloseNote;
-            @CloseNoteMouse.started += instance.OnCloseNoteMouse;
-            @CloseNoteMouse.performed += instance.OnCloseNoteMouse;
-            @CloseNoteMouse.canceled += instance.OnCloseNoteMouse;
         }
 
         private void UnregisterCallbacks(INotesPopUpActions instance)
@@ -523,9 +796,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @CloseNote.started -= instance.OnCloseNote;
             @CloseNote.performed -= instance.OnCloseNote;
             @CloseNote.canceled -= instance.OnCloseNote;
-            @CloseNoteMouse.started -= instance.OnCloseNoteMouse;
-            @CloseNoteMouse.performed -= instance.OnCloseNoteMouse;
-            @CloseNoteMouse.canceled -= instance.OnCloseNoteMouse;
         }
 
         public void RemoveCallbacks(INotesPopUpActions instance)
@@ -551,14 +821,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnFlashlight(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnRecharge(InputAction.CallbackContext context);
+        void OnInhibitor(InputAction.CallbackContext context);
     }
     public interface IMenuNavigationActions
     {
-        void OnResume(InputAction.CallbackContext context);
+        void OnNavigate(InputAction.CallbackContext context);
+        void OnSubmit(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
+        void OnClick(InputAction.CallbackContext context);
+        void OnPoint(InputAction.CallbackContext context);
     }
     public interface INotesPopUpActions
     {
         void OnCloseNote(InputAction.CallbackContext context);
-        void OnCloseNoteMouse(InputAction.CallbackContext context);
     }
 }

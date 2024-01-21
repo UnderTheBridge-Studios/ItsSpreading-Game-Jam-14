@@ -32,14 +32,14 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Flashlight.performed += _ => m_flashlight.ToggleFlashlight();
         m_gamePlay.Recharge.performed += _ => GameManager.instance.ChargeBattery();
         m_gamePlay.Recharge.canceled += _ => GameManager.instance.StopChargingBattery();
+        m_gamePlay.Inhibitor.performed += _ => GameManager.instance.UseInhibitor();
         m_gamePlay.Pause.performed += _ => OpenPauseMenu();
 
         //Menu Navigation Inputs
-        m_menuNavigation.Resume.performed += _ => ClosePauseMenu();
+        m_menuNavigation.Cancel.performed += _ => ClosePauseMenu();
 
         //Notes PopUp Inputs
         m_notesPopUp.CloseNote.performed += _ => CloseNotePopUp();
-        m_notesPopUp.CloseNoteMouse.performed += _ => CloseWithMouse();
     }
     private void OnEnable()
     {
@@ -103,12 +103,5 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Enable();
         m_menuNavigation.Disable();
         m_notesPopUp.Disable();
-    }
-
-    private void CloseWithMouse()
-    {
-        RaycastHit2D rayHit = Physics2D.GetRayIntersection(m_camera.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if (!rayHit.collider)
-            CloseNotePopUp();
     }
 }
