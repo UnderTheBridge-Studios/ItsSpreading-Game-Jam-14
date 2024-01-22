@@ -11,10 +11,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float m_poisonRate;
     [Range(0,100)]
     [SerializeField] private float m_poison;
+    [Tooltip("How much poison the inhibitor heal, from 0 to 100")]
+    [SerializeField] private float m_inhibitorHealth;
+
+    [Header("Battery")]
     [SerializeField] private float m_batteryTimeDuration;
     [Tooltip("When the flashlight start flickering")]
     [SerializeField] private float m_batteryTimeFlicker;
     [SerializeField] private float m_chargeBatteryDuration;
+
     private float m_battery;
     private float m_batteryRate;
     private Coroutine m_batteryCharging;
@@ -24,14 +29,14 @@ public class GameManager : MonoBehaviour
     private bool m_isFlashlightActive;
     private bool m_isCharging;
 
+    private List<string> m_keyIDs = new List<string>();
+    private float m_inhibitors;
+
     public float poison => m_poison;
     public float poisonRate => m_poisonRate;
     public float batery => m_battery;
     public bool isFlickering => m_isFlickering;
     public bool isCharging => m_isCharging;
- 
-    private List<string> m_keyIDs = new List<string>();
-    private float m_inhibitors;
 
     public bool IsPaused => m_isPaused;
     public float Poison => m_poison;
@@ -160,13 +165,19 @@ public class GameManager : MonoBehaviour
     public void AddInhibitor()
     {
         m_inhibitors += 1;
+
+        HUBManager.instance.UpdateInhibitors();
     }
 
     public void UseInhibitor()
     {
-        if (m_inhibitors == 0)
+        if (m_inhibitors <= 0)
             return;
 
+        m_poison = Mathf.Clamp(m_poison - m_inhibitorHealth, 0f, 100f);
         m_inhibitors -= 1;
+
+        HUBManager.instance.UpdateInhibitors();
+
     }
 }

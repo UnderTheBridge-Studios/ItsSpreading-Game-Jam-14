@@ -16,9 +16,17 @@ public class HUBManager : MonoBehaviour
     [SerializeField] private GameObject m_rechargingPrompt;
     [SerializeField] private GameObject m_noteDisplay;
 
+    [Header("Inhibitors")]
+    [SerializeField] private GameObject m_inhibitors;
+    [SerializeField] private GameObject m_inhibitorImage;
+    [SerializeField] private GameObject m_noInhibitorImage;
+    [SerializeField] private TextMeshProUGUI m_inhibitorNumbers;
+
     private TextMeshProUGUI m_noteContent;
     private float m_learpSpeed;
     private float m_poisonMaxWidth;
+
+    private bool m_isInhibitorsFound; //if the player have picked up inhibitors for the first time
 
     private void Awake()
     {
@@ -40,6 +48,9 @@ public class HUBManager : MonoBehaviour
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
         m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
         m_noteContent = m_noteDisplay.GetComponentInChildren<TextMeshProUGUI>();
+
+        m_isInhibitorsFound = false;
+        HideInhibitors();
     }
 
     private void Update()
@@ -96,4 +107,40 @@ public class HUBManager : MonoBehaviour
     {
         m_noteDisplay.SetActive(false);
     }
+
+#region Inhibitors
+    public void UpdateInhibitors()
+    {
+        //The inhibitors are hide before the payer found the first one
+        if (!m_isInhibitorsFound)
+        {
+            m_isInhibitorsFound = true;
+            ShowInhibitors();
+        }
+
+        if (GameManager.instance.Inhibitors <= 0) {
+            m_inhibitorImage.SetActive(false);
+            m_noInhibitorImage.SetActive(true);
+        }
+        else
+        {
+            m_inhibitorImage.SetActive(true);
+            m_noInhibitorImage.SetActive(false);
+        }
+
+        m_inhibitorNumbers.text = GameManager.instance.Inhibitors.ToString();
+    }
+
+    public void ShowInhibitors()
+    {
+        m_inhibitors.SetActive(true);
+    }
+
+    public void HideInhibitors()
+    {
+        m_inhibitors.SetActive(false);
+    }
+
+    #endregion
+
 }
