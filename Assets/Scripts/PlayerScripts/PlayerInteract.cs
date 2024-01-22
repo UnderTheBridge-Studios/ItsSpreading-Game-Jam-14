@@ -16,7 +16,7 @@ public class PlayerInteract : MonoBehaviour
 
     private void InteractionCheck()
     {
-        if (Physics.Raycast(m_playerInteractPoint.position, m_playerInteractPoint.transform.forward, out RaycastHit hit))
+        if (Physics.Raycast(m_playerInteractPoint.position, m_playerInteractPoint.transform.forward, out RaycastHit hit, m_interactionDistance))
         {
             if (hit.collider.gameObject.CompareTag("Interactable") && (m_currentInteractable == null || hit.collider.gameObject.GetComponent<IInteractable>().ID != m_currentInteractable.ID))
             {
