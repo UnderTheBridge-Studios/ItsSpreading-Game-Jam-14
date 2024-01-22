@@ -6,11 +6,14 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
+    [Header("Poison Values")]
     [SerializeField] private float m_maxPoisonRate;
     [Range(0, 0.1f)]
     [SerializeField] private float m_poisonRate;
     [Range(0,100)]
     [SerializeField] private float m_poison;
+
+    [Header("Battery Values")]
     [SerializeField] private float m_batteryTimeDuration;
     [Tooltip("When the flashlight start flickering")]
     [SerializeField] private float m_batteryTimeFlicker;
@@ -23,12 +26,6 @@ public class GameManager : MonoBehaviour
     private bool m_isFlickering;
     private bool m_isFlashlightActive;
     private bool m_isCharging;
-
-    public float poison => m_poison;
-    public float poisonRate => m_poisonRate;
-    public float batery => m_battery;
-    public bool isFlickering => m_isFlickering;
-    public bool isCharging => m_isCharging;
  
     private List<string> m_keyIDs = new List<string>();
     private float m_inhibitors;
@@ -36,6 +33,9 @@ public class GameManager : MonoBehaviour
     public bool IsPaused => m_isPaused;
     public float Poison => m_poison;
     public float PoisonRate => m_poisonRate;
+    public float Batery => m_battery;
+    public bool IsFlickering => m_isFlickering;
+    public bool IsCharging => m_isCharging;
     public float Inhibitors => m_inhibitors;
 
 
@@ -76,22 +76,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    #region Poison
     public void SetPoison(float newPoison)
     {
-        m_poison = Mathf.Clamp(newPoison, 0f, 100f); 
+        m_poison = Mathf.Clamp(m_poison + newPoison, 0f, 100f);
+        Debug.Log(m_poison);
     }
 
     public void SetPoisonRate(float newPoisonRate)
     {
         m_poisonRate = Mathf.Clamp(newPoisonRate, 0f, 100f);
     }
+    #endregion
 
-    public void SetFlashlightActive(bool value)
-    {
-        m_isFlashlightActive = value;
-    }
-
- #region Battery
+    #region Battery
     public void ChargeBattery()
     {
         m_isCharging = true;
@@ -120,27 +118,7 @@ public class GameManager : MonoBehaviour
     }
 #endregion
 
-    public void PauseGame()
-    {
-        if (!m_isPaused)
-        {
-            Time.timeScale = 0;
-            m_isPaused = true;
-
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }   
-        else
-        {
-            Time.timeScale = 1;
-            m_isPaused = false;
-
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
-
-    //Invetory functions
+    #region Inventory
     public void AddKey(string keyID)
     {
         m_keyIDs.Add(keyID);
@@ -168,5 +146,31 @@ public class GameManager : MonoBehaviour
             return;
 
         m_inhibitors -= 1;
+    }
+    #endregion
+
+    public void SetFlashlightActive(bool value)
+    {
+        m_isFlashlightActive = value;
+    }
+
+    public void PauseGame()
+    {
+        if (!m_isPaused)
+        {
+            Time.timeScale = 0;
+            m_isPaused = true;
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            m_isPaused = false;
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }
