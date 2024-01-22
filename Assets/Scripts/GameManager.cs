@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
     private List<string> m_keyIDs = new List<string>();
     private float m_inhibitors;
 
+    private GameObject m_player;
+
+    public GameObject Player => m_player;
     public bool IsPaused => m_isPaused;
     public float Poison => m_poison;
     public float PoisonRate => m_poisonRate;
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ResetValues();
+        m_player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void ResetValues()

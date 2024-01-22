@@ -502,17 +502,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""CloseNote"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""732bd18e-35b1-4ac3-96fe-ea074093013c"",
-                    ""path"": ""<Mouse>/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""CloseNote"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
