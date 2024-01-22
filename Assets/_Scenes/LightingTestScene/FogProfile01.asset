@@ -32,7 +32,7 @@ MonoBehaviour:
     m_Value: 1
   quality:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 4
   alphaMultiplier:
     m_OverrideState: 1
     m_Value: 0.362
@@ -43,14 +43,14 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0.053
   downsample:
-    m_OverrideState: 0
-    m_Value: 4
+    m_OverrideState: 1
+    m_Value: 2
   steps:
     m_OverrideState: 0
-    m_Value: 80
+    m_Value: 125
   stepSize:
     m_OverrideState: 0
-    m_Value: 0.5
+    m_Value: 0.2
   density:
     m_OverrideState: 1
     m_Value: 1
