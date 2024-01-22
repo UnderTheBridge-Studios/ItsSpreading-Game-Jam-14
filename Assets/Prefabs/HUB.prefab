@@ -1171,6 +1171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_interactPrompt: {fileID: 6682195555634439730}
+  m_healthBar: {fileID: 4498248475869099912}
   m_poisonBar: {fileID: 1421241928172832165}
   m_poisonBarRate: {fileID: 4804823103690687335}
   m_pauseMenu: {fileID: 8982252307026202791}

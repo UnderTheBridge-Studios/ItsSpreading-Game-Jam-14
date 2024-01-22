@@ -9,6 +9,7 @@ public class HUBManager : MonoBehaviour
     public static HUBManager instance { get; private set; }
 
     [SerializeField] private GameObject m_interactPrompt;
+    [SerializeField] private GameObject m_healthBar;
     [SerializeField] private RectTransform m_poisonBar;
     [SerializeField] private RectTransform m_poisonBarRate;
     [SerializeField] private GameObject m_pauseMenu;
@@ -31,6 +32,7 @@ public class HUBManager : MonoBehaviour
     private void Start()
     {
         m_interactPrompt.SetActive(false);
+        m_healthBar.SetActive(false);
         m_pauseMenu.SetActive(false);
         m_rechargePrompt.SetActive(false);
         m_rechargingPrompt.SetActive(false);
@@ -64,6 +66,11 @@ public class HUBManager : MonoBehaviour
     public void InteractPromptActive(bool value)
     {
         m_interactPrompt.SetActive(value);
+    }
+
+    public void HealthBarActive(bool value)
+    {
+        m_healthBar.SetActive(value);
     }
 
     public void RechargePromptActive(bool value)

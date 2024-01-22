@@ -90,11 +90,18 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag != "Alien")
             return;
 
+        if (!GameManager.instance.IsPoisoned)
+        {
+            GameManager.instance.SetPoisonRate();
+            HUBManager.instance.HealthBarActive(true);
+        }
+
         if (m_currentAlien != null)
             m_currentAlien.GetComponent<AlienController>().AlienStopHit();
 
         m_currentAlien = other.gameObject;
         m_currentAlien.GetComponent<AlienController>().AlienHits();
+
         m_currentSpeed = m_slowSpeed;
         m_currentBounce = m_slowBounce;
         m_currentBounceTime = m_slowBounceTime;
@@ -109,6 +116,8 @@ public class PlayerMovement : MonoBehaviour
             return;
 
         m_currentAlien.GetComponent<AlienController>().AlienStopHit();
+        m_currentAlien = null;
+
         m_currentSpeed = m_walkSpeed;
         m_currentBounce = m_walkBounce;
         m_currentBounceTime = m_walkBounceTime;

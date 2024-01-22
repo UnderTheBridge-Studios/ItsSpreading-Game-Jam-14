@@ -7,11 +7,15 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
 
     [Header("Poison Values")]
-    [SerializeField] private float m_maxPoisonRate;
     [Range(0, 0.1f)]
-    [SerializeField] private float m_poisonRate;
+    [Tooltip("The poison rate you get when first poisoned")]
+    [SerializeField] private float m_firstPoisonRate = 0.01f;
+    [Range(0, 0.1f)]
+    [Tooltip("The current poison rate")]
+    [SerializeField] private float m_poisonRate = 0f;
     [Range(0,100)]
-    [SerializeField] private float m_poison;
+    [Tooltip("The current poison")]
+    [SerializeField] private float m_poison = 0f;
 
     [Header("Battery Values")]
     [SerializeField] private float m_batteryTimeDuration;
@@ -26,6 +30,7 @@ public class GameManager : MonoBehaviour
     private bool m_isFlickering;
     private bool m_isFlashlightActive;
     private bool m_isCharging;
+    private bool m_isPoisoned;
  
     private List<string> m_keyIDs = new List<string>();
     private float m_inhibitors;
@@ -36,6 +41,7 @@ public class GameManager : MonoBehaviour
     public float Batery => m_battery;
     public bool IsFlickering => m_isFlickering;
     public bool IsCharging => m_isCharging;
+    public bool IsPoisoned => m_isPoisoned;
     public float Inhibitors => m_inhibitors;
 
 
@@ -57,6 +63,7 @@ public class GameManager : MonoBehaviour
         m_isPaused = false;
         m_isFlickering = false;
         m_isCharging = false;
+        m_isPoisoned = false;
         m_battery = m_batteryTimeDuration;
         m_batteryRate = 5f / m_batteryTimeDuration;
         m_poison = 0;
@@ -80,12 +87,12 @@ public class GameManager : MonoBehaviour
     public void SetPoison(float newPoison)
     {
         m_poison = Mathf.Clamp(m_poison + newPoison, 0f, 100f);
-        Debug.Log(m_poison);
     }
 
-    public void SetPoisonRate(float newPoisonRate)
+    public void SetPoisonRate()
     {
-        m_poisonRate = Mathf.Clamp(newPoisonRate, 0f, 100f);
+        m_poisonRate = Mathf.Clamp(m_firstPoisonRate, 0f, 100f);
+        m_isPoisoned = true;
     }
     #endregion
 
