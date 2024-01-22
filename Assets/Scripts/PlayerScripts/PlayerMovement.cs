@@ -12,9 +12,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask m_groundMask;
 
     [Header("Camera Bounce Values")]
-    [SerializeField] private float m_walkBounce = 3f;
+    [SerializeField] private float m_walkBounce = 2.7f;
     [SerializeField] private float m_walkBounceTime = 0.25f;
-    [SerializeField] private float m_slowBounce = 2.7f;
+    [SerializeField] private float m_slowBounce = 2.6f;
     [SerializeField] private float m_slowBounceTime = 0.5f;
 
     [Header("References")]

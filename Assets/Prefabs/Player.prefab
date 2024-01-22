@@ -224,9 +224,9 @@ MonoBehaviour:
   m_groundMask:
     serializedVersion: 2
     m_Bits: 64
-  m_walkBounce: 3
+  m_walkBounce: 2.7
   m_walkBounceTime: 0.25
-  m_slowBounce: 2.7
+  m_slowBounce: 2.6
   m_slowBounceTime: 0.5
   m_controller: {fileID: 3433966552042880969}
   m_playerLook: {fileID: 4204994667157738951}
@@ -276,9 +276,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_playerInteractPoint: {fileID: 1759276995494068830}
   m_interactionDistance: 4
-  m_ignoreLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!114 &3125761959522696208
 MonoBehaviour:
   m_ObjectHideFlags: 0
