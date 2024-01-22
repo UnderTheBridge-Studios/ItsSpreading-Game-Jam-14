@@ -65,10 +65,30 @@ public class InputManager : MonoBehaviour
         m_playerMovement.ReceiveInput(input);
     }
 
+    public void OpenMainMenu()
+    {
+        GameManager.instance.PauseGame();
+        HUBManager.instance.MainMenuActive(true);
+
+        m_gamePlay.Disable();
+        m_menuNavigation.Enable();
+        m_notesPopUp.Disable();
+    }
+
+    public void CloseMainMenu()
+    {
+        GameManager.instance.PauseGame();
+        HUBManager.instance.MainMenuActive(false);
+
+        m_gamePlay.Enable();
+        m_menuNavigation.Disable();
+        m_notesPopUp.Disable();
+    }
+
     public void OpenPauseMenu()
     {
         GameManager.instance.PauseGame();
-        HUBManager.instance.ShowPauseMenu();
+        HUBManager.instance.PauseMenuActive(true);
 
         m_gamePlay.Disable();
         m_menuNavigation.Enable();
@@ -78,7 +98,7 @@ public class InputManager : MonoBehaviour
     public void ClosePauseMenu()
     {
         GameManager.instance.PauseGame();
-        HUBManager.instance.HidePauseMenu();
+        HUBManager.instance.PauseMenuActive(false);
 
         m_gamePlay.Enable();
         m_menuNavigation.Disable();

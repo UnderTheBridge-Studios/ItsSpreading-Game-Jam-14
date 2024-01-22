@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
+    public bool UseMainMenu;
+
     [Header("Poison Values")]
     [Range(0, 0.1f)]
     [Tooltip("The poison rate you get when first poisoned")]
@@ -60,6 +62,11 @@ public class GameManager : MonoBehaviour
     {
         ResetValues();
         m_player = GameObject.FindGameObjectWithTag("Player");
+
+        if (UseMainMenu)
+            m_player.GetComponent<InputManager>().OpenMainMenu();
+        else
+            HUBManager.instance.MainMenuActive(false);
     }
 
     public void ResetValues()

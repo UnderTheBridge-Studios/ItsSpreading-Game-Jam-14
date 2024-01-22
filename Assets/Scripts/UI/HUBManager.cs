@@ -13,6 +13,7 @@ public class HUBManager : MonoBehaviour
     [SerializeField] private RectTransform m_poisonBar;
     [SerializeField] private RectTransform m_poisonBarRate;
     [SerializeField] private GameObject m_pauseMenu;
+    [SerializeField] private GameObject m_mainMenu;
     [SerializeField] private GameObject m_rechargePrompt;
     [SerializeField] private GameObject m_rechargingPrompt;
     [SerializeField] private GameObject m_noteDisplay;
@@ -83,14 +84,14 @@ public class HUBManager : MonoBehaviour
         m_rechargingPrompt.SetActive(value);
     }
 
-    public void ShowPauseMenu()
+    public void PauseMenuActive(bool value)
     {
-        m_pauseMenu.SetActive(true);
+        m_pauseMenu.SetActive(value);
     }
 
-    public void HidePauseMenu()
+    public void MainMenuActive(bool value)
     {
-        m_pauseMenu.SetActive(false);
+        m_mainMenu.SetActive(value);
     }
 
     public void ShowNote(string noteContent)
