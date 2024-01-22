@@ -34,7 +34,7 @@ public class AlienController : MonoBehaviour
         m_materialGrowth.DoSizeChange(m_targuetGrowth, true);
     }
 
-    public void AlienDamage(float value)
+    public void AlienGetsHit(float value)
     {
         if (CheckDeath())
             return;

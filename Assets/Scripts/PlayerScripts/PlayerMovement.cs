@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterController m_controller;
     [SerializeField] private PlayerLook m_playerLook;
 
+    private GameObject m_currentAlien;
+
     private Vector2 m_horizontalInput;
     private Vector3 m_horizontalVelocity;
     private Vector3 m_verticalVelocity;
@@ -88,6 +90,8 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag != "Alien")
             return;
 
+        m_currentAlien = other.gameObject;
+
         m_currentSpeed = m_slowSpeed;
         m_currentBounce = m_slowBounce;
         m_currentBounceTime = m_slowBounceTime;
@@ -96,6 +100,9 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag != "Alien")
+            return;
+
+        if (m_currentAlien != other.gameObject || m_currentAlien == null)
             return;
 
         m_currentSpeed = m_walkSpeed;
