@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NoteDisplayController : MonoBehaviour
+public class UINoteDisplay : MonoBehaviour
 {
     [SerializeField] private Button m_BackgroundButton;
 
