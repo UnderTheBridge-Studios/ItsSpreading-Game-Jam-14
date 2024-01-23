@@ -65,10 +65,7 @@ public class GameManager : MonoBehaviour
         ResetValues();
         m_player = GameObject.FindGameObjectWithTag("Player");
 
-        if (m_useMainMenu)
-            m_player.GetComponent<InputManager>().OpenMainMenu();
-        else
-            HUBManager.instance.MainMenuActive(false);
+        StartCoroutine(SceneLoadedStart());
     }
 
     public void ResetValues()
@@ -96,6 +93,16 @@ public class GameManager : MonoBehaviour
             if (m_battery < m_batteryTimeFlicker)
                 m_isFlickering = true;
         }
+    }
+
+    private IEnumerator SceneLoadedStart()
+    {
+        yield return new WaitUntil(() => SceneStreamer.IsSceneLoaded(m_firstSceneName) == true);
+
+        if (m_useMainMenu)
+            m_player.GetComponent<InputManager>().OpenMainMenu();
+        else
+            HUBManager.instance.MainMenuActive(false);
     }
 
     #region Poison
