@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
 
     [SerializeField] private bool m_useMainMenu;
+    [SerializeField] private string m_firstSceneName;
 
     [Header("Poison Values")]
     [Range(0, 0.1f)]
@@ -204,7 +205,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame(bool fromPauseMenu)
     {
-        SceneStreamer.SetCurrentScene("Scene01");
+        SceneStreamer.SetCurrentScene(m_firstSceneName);
 
         StartCoroutine(SceneLoaded());
         ResetValues();
@@ -220,7 +221,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SceneLoaded()
     {
-        yield return new WaitUntil(()=> SceneStreamer.IsSceneLoaded("Scene01") == true);
+        yield return new WaitUntil(()=> SceneStreamer.IsSceneLoaded(m_firstSceneName) == true);
 
         m_player.transform.position = Vector3.zero;
         m_player.transform.rotation = Quaternion.identity;
