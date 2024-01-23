@@ -8,15 +8,21 @@ public class HUBManager : MonoBehaviour
 {
     public static HUBManager instance { get; private set; }
 
+    [Header("Menu References")]
     [SerializeField] private GameObject m_interactPrompt;
+    [SerializeField] private GameObject m_healthBar;
     [SerializeField] private RectTransform m_poisonBar;
     [SerializeField] private RectTransform m_poisonBarRate;
     [SerializeField] private GameObject m_pauseMenu;
+    [SerializeField] private GameObject m_mainMenu;
     [SerializeField] private GameObject m_rechargePrompt;
     [SerializeField] private GameObject m_rechargingPrompt;
     [SerializeField] private GameObject m_noteDisplay;
+    [SerializeField] private TextMeshProUGUI m_noteContent;
 
-    private TextMeshProUGUI m_noteContent;
+    [Header("Material References")]
+    [SerializeField] private Material m_oclusionMaterial;
+
     private float m_learpSpeed;
     private float m_poisonMaxWidth;
 
@@ -30,16 +36,7 @@ public class HUBManager : MonoBehaviour
 
     private void Start()
     {
-        m_interactPrompt.SetActive(false);
-        m_pauseMenu.SetActive(false);
-        m_rechargePrompt.SetActive(false);
-        m_rechargingPrompt.SetActive(false);
-        m_noteDisplay.SetActive(false);
-
-        m_poisonMaxWidth = m_poisonBar.rect.width;
-        m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
-        m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
-        m_noteContent = m_noteDisplay.GetComponentInChildren<TextMeshProUGUI>();
+        ResetHUB();
     }
 
     private void Update()
@@ -47,6 +44,8 @@ public class HUBManager : MonoBehaviour
         //HealthBar
         m_learpSpeed = 5f * Time.deltaTime;
         m_poisonBar.sizeDelta = new Vector2(Mathf.Clamp(Mathf.Lerp(m_poisonBar.rect.width, GameManager.instance.Poison / 100 * m_poisonMaxWidth, m_learpSpeed), 0f, m_poisonMaxWidth), m_poisonBar.rect.height);
+
+        m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), 1 - (GameManager.instance.Poison/100), m_learpSpeed));
 
         //in case the poison its full poisonRate hides
         if (GameManager.instance.Poison == 100f)
@@ -61,9 +60,30 @@ public class HUBManager : MonoBehaviour
         }
     }
 
+    public void ResetHUB()
+    {
+        m_interactPrompt.SetActive(false);
+        m_healthBar.SetActive(false);
+        m_pauseMenu.SetActive(false);
+        m_rechargePrompt.SetActive(false);
+        m_rechargingPrompt.SetActive(false);
+        m_noteDisplay.SetActive(false);
+
+        m_poisonMaxWidth = m_poisonBar.rect.width;
+        m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
+        m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
+
+        m_oclusionMaterial.SetFloat("_VignetteRadius", 1);
+    }
+
     public void InteractPromptActive(bool value)
     {
         m_interactPrompt.SetActive(value);
+    }
+
+    public void HealthBarActive(bool value)
+    {
+        m_healthBar.SetActive(value);
     }
 
     public void RechargePromptActive(bool value)
@@ -76,14 +96,14 @@ public class HUBManager : MonoBehaviour
         m_rechargingPrompt.SetActive(value);
     }
 
-    public void ShowPauseMenu()
+    public void PauseMenuActive(bool value)
     {
-        m_pauseMenu.SetActive(true);
+        m_pauseMenu.SetActive(value);
     }
 
-    public void HidePauseMenu()
+    public void MainMenuActive(bool value)
     {
-        m_pauseMenu.SetActive(false);
+        m_mainMenu.SetActive(value);
     }
 
     public void ShowNote(string noteContent)
