@@ -2010,6 +2010,8 @@ MonoBehaviour:
   m_rechargePrompt: {fileID: 572024771275460494}
   m_rechargingPrompt: {fileID: 9090140206343948541}
   m_noteDisplay: {fileID: 4056935748321271656}
+  m_noteContent: {fileID: 515753658507696819}
+  m_oclusionMaterial: {fileID: 2100000, guid: f1c21f483e6071f489b868934c119e9f, type: 2}
 --- !u!1 &4675196926851100526
 GameObject:
   m_ObjectHideFlags: 0

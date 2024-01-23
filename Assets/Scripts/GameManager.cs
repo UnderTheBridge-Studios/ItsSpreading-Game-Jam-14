@@ -208,6 +208,7 @@ public class GameManager : MonoBehaviour
 
         StartCoroutine(SceneLoaded());
         ResetValues();
+        HUBManager.instance.ResetHUB();
 
         if (fromPauseMenu)
         {
