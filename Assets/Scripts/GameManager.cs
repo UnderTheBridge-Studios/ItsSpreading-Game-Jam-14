@@ -1,3 +1,4 @@
+using PixelCrushers.SceneStreamer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
-    public bool UseMainMenu;
+    [SerializeField] private bool m_useMainMenu;
 
     [Header("Poison Values")]
     [Range(0, 0.1f)]
@@ -63,7 +64,7 @@ public class GameManager : MonoBehaviour
         ResetValues();
         m_player = GameObject.FindGameObjectWithTag("Player");
 
-        if (UseMainMenu)
+        if (m_useMainMenu)
             m_player.GetComponent<InputManager>().OpenMainMenu();
         else
             HUBManager.instance.MainMenuActive(false);
@@ -83,6 +84,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        CheckDeath();
+
         //*time.deltaTime
         m_poison = Mathf.Clamp(m_poisonRate + m_poison, 0f, 100f);
 
@@ -167,6 +170,13 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    private void CheckDeath()
+    {
+        if (m_poison < 100)
+            return;
+
+        RestartGame(false);
+    }
     public void SetFlashlightActive(bool value)
     {
         m_isFlashlightActive = value;
@@ -190,5 +200,29 @@ public class GameManager : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    public void RestartGame(bool fromPauseMenu)
+    {
+        SceneStreamer.SetCurrentScene("Scene01");
+
+        StartCoroutine(SceneLoaded());
+        ResetValues();
+
+        if (fromPauseMenu)
+        {
+            m_isPaused = true;
+            m_player.GetComponent<InputManager>().ClosePauseMenu();
+            m_player.GetComponent<InputManager>().OpenMainMenu();
+        }
+    }
+
+    private IEnumerator SceneLoaded()
+    {
+        yield return new WaitUntil(()=> SceneStreamer.IsSceneLoaded("Scene01") == true);
+
+        m_player.transform.position = Vector3.zero;
+        m_player.transform.rotation = Quaternion.identity;
+        m_player.GetComponentInChildren<Camera>().transform.rotation = Quaternion.identity;
     }
 }

@@ -1,7 +1,9 @@
+using PixelCrushers.SceneStreamer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIPauseMenu : MonoBehaviour
@@ -29,6 +31,6 @@ public class UIPauseMenu : MonoBehaviour
 
     private void Exit()
     {
-        //Go to main menu
+        GameManager.instance.RestartGame(true);
     }
 }
