@@ -19,14 +19,4 @@ public class I05_Note : MonoBehaviour, IInteractable
 
         return true;
     }
-
-    public void OnFocus()
-    {
-        return;
-    }
-
-    public void OnLoseFocus()
-    {
-        return;
-    }
 }

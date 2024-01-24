@@ -21,17 +21,6 @@ public class I08_Door : MonoBehaviour, IInteractable
         OpenDoor();
         return true;
     }
-
-    public void OnFocus()
-    {
-        return;
-    }
-
-    public void OnLoseFocus()
-    {
-        return;
-    }
-
     public void OpenDoor()
     {
         m_collider.enabled = false;

@@ -1,3 +1,4 @@
+using PixelCrushers.SceneStreamer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,38 +7,58 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
-    [SerializeField] private float m_maxPoisonRate;
+    [SerializeField] private bool m_useMainMenu;
+    public bool InitialFlashlight;
+    [SerializeField] private string m_firstSceneName;
+
+    [Header("Poison Values")]
     [Range(0, 0.1f)]
-    [SerializeField] private float m_poisonRate;
+    [Tooltip("The poison rate you get when first poisoned")]
+    [SerializeField] private float m_firstPoisonRate = 0.01f;
+    [Range(0, 0.1f)]
+    [Tooltip("The current poison rate")]
+    [SerializeField] private float m_poisonRate = 0f;
     [Range(0,100)]
-    [SerializeField] private float m_poison;
+    [Tooltip("The current poison")]
+    [SerializeField] private float m_poison = 0f;
+    [Tooltip("How much poison the inhibitor heal, from 0 to 100")]
+    [SerializeField] private float m_inhibitorHealth;
+
+    [Header("Battery Values")]
     [SerializeField] private float m_batteryTimeDuration;
     [Tooltip("When the flashlight start flickering")]
     [SerializeField] private float m_batteryTimeFlicker;
     [SerializeField] private float m_chargeBatteryDuration;
+
     private float m_battery;
     private float m_batteryRate;
     private Coroutine m_batteryCharging;
+    private GameObject m_player;
 
     private bool m_isPaused;
     private bool m_isFlickering;
     private bool m_isFlashlightActive;
     private bool m_isCharging;
+    private bool m_isPoisoned;
+
+    private List<string> m_keyIDs = new List<string>();
+    private float m_inhibitors;
 
     public float poison => m_poison;
     public float poisonRate => m_poisonRate;
     public float batery => m_battery;
     public bool isFlickering => m_isFlickering;
     public bool isCharging => m_isCharging;
- 
-    private List<string> m_keyIDs = new List<string>();
-    private float m_inhibitors;
 
+    public GameObject Player => m_player;
     public bool IsPaused => m_isPaused;
     public float Poison => m_poison;
     public float PoisonRate => m_poisonRate;
+    public float Batery => m_battery;
+    public bool IsFlickering => m_isFlickering;
+    public bool IsCharging => m_isCharging;
+    public bool IsPoisoned => m_isPoisoned;
     public float Inhibitors => m_inhibitors;
-
 
     private void Awake()
     {
@@ -49,7 +70,34 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        m_player = GameObject.FindGameObjectWithTag("Player");
+
+        StartCoroutine(SceneLoaded(m_useMainMenu));
+    }
+
+    public void RestartGame(bool showMainMenu)
+    {
+        SceneStreamer.UnloadAll();
+        SceneStreamer.SetCurrentScene(m_firstSceneName);
+        StartCoroutine(SceneLoaded(showMainMenu));
+    }
+
+    private IEnumerator SceneLoaded(bool showMainMenu)
+    {
+        if (m_isPaused)
+            m_player.GetComponent<InputManager>().ClosePauseMenu();
+
         ResetValues();
+        HUBManager.instance.ResetHUB();
+        m_player.GetComponent<FlashLight>().ResetValues();
+        m_player.GetComponent<PlayerMovement>().SetWalkingSpeed();
+
+        yield return new WaitUntil(() => SceneStreamer.IsSceneLoaded(m_firstSceneName) == true);
+
+        m_player.GetComponent<PlayerMovement>().ResetPosition();
+
+        if (showMainMenu)
+            m_player.GetComponent<InputManager>().OpenMainMenu();
     }
 
     public void ResetValues()
@@ -57,6 +105,7 @@ public class GameManager : MonoBehaviour
         m_isPaused = false;
         m_isFlickering = false;
         m_isCharging = false;
+        m_isPoisoned = false;
         m_battery = m_batteryTimeDuration;
         m_batteryRate = 5f / m_batteryTimeDuration;
         m_poison = 0;
@@ -65,6 +114,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        CheckDeath();
+
         //*time.deltaTime
         m_poison = Mathf.Clamp(m_poisonRate + m_poison, 0f, 100f);
 
@@ -75,26 +126,32 @@ public class GameManager : MonoBehaviour
                 m_isFlickering = true;
         }
     }
+    private void CheckDeath()
+    {
+        if (m_poison < 100)
+            return;
 
+        RestartGame(false);
+    }
+
+    #region Poison
     public void SetPoison(float newPoison)
     {
-        m_poison = Mathf.Clamp(newPoison, 0f, 100f); 
+        m_poison = Mathf.Clamp(m_poison + newPoison, 0f, 100f);
     }
 
-    public void SetPoisonRate(float newPoisonRate)
+    public void SetPoisonRate()
     {
-        m_poisonRate = Mathf.Clamp(newPoisonRate, 0f, 100f);
+        m_poisonRate = Mathf.Clamp(m_firstPoisonRate, 0f, 100f);
+        m_isPoisoned = true;
     }
+    #endregion
 
-    public void SetFlashlightActive(bool value)
-    {
-        m_isFlashlightActive = value;
-    }
-
- #region Battery
+    #region Battery
     public void ChargeBattery()
     {
         m_isCharging = true;
+        m_player.GetComponent<PlayerMovement>().SetSlowSpeed();
         HUBManager.instance.RechargingPromptActive(true);
         m_batteryCharging = StartCoroutine(ChargingBattery());
     }
@@ -107,6 +164,7 @@ public class GameManager : MonoBehaviour
         StopCoroutine(m_batteryCharging);
         HUBManager.instance.RechargingPromptActive(false);
         m_isCharging = false;
+        m_player.GetComponent<PlayerMovement>().SetWalkingSpeed();
     }
 
     private IEnumerator ChargingBattery()
@@ -120,27 +178,7 @@ public class GameManager : MonoBehaviour
     }
 #endregion
 
-    public void PauseGame()
-    {
-        if (!m_isPaused)
-        {
-            Time.timeScale = 0;
-            m_isPaused = true;
-
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }   
-        else
-        {
-            Time.timeScale = 1;
-            m_isPaused = false;
-
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
-
-    //Invetory functions
+    #region Inventory
     public void AddKey(string keyID)
     {
         m_keyIDs.Add(keyID);
@@ -160,13 +198,45 @@ public class GameManager : MonoBehaviour
     public void AddInhibitor()
     {
         m_inhibitors += 1;
+
+        HUBManager.instance.UpdateInhibitors();
     }
 
     public void UseInhibitor()
     {
-        if (m_inhibitors == 0)
+        if (m_inhibitors <= 0)
             return;
 
+        m_poison = Mathf.Clamp(m_poison - m_inhibitorHealth, 0f, 100f);
         m_inhibitors -= 1;
+
+        HUBManager.instance.UpdateInhibitors();
+
+    }
+    #endregion
+
+    public void SetFlashlightActive(bool value)
+    {
+        m_isFlashlightActive = value;
+    }
+
+    public void PauseGame()
+    {
+        if (!m_isPaused)
+        {
+            Time.timeScale = 0;
+            m_isPaused = true;
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            m_isPaused = false;
+
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }

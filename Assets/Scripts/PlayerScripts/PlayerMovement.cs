@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask m_groundMask;
 
     [Header("Camera Bounce Values")]
+    [SerializeField] private float m_timeToStartBounce = 0.1f;
     [SerializeField] private float m_walkBounce = 2.7f;
     [SerializeField] private float m_walkBounceTime = 0.25f;
     [SerializeField] private float m_slowBounce = 2.6f;
@@ -20,6 +21,13 @@ public class PlayerMovement : MonoBehaviour
     [Header("References")]
     [SerializeField] private CharacterController m_controller;
     [SerializeField] private PlayerLook m_playerLook;
+
+    [Header("Initial Position")]
+    [SerializeField] private Vector3 m_initialPosition;
+    [SerializeField] private Quaternion m_initialRotation;
+    [SerializeField] private Quaternion m_initialCameraRotation;
+
+    private GameObject m_currentAlien;
 
     private Vector2 m_horizontalInput;
     private Vector3 m_horizontalVelocity;
@@ -31,7 +39,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool m_isGrounded;
     private bool m_isMoving;
-    private bool m_isPreviouslyMoving;
+
+    private float m_cameraTimer = 0;
 
     public bool IsGrounded => m_isGrounded;
 
@@ -44,8 +53,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("IsTouchingAlien" + m_isTouchingAlien);
-
         //Is grounded Check
         m_isGrounded = Physics.CheckSphere(transform.position, 0.1f, m_groundMask);
         if (m_isGrounded)
@@ -60,14 +67,28 @@ public class PlayerMovement : MonoBehaviour
         m_controller.Move(m_verticalVelocity * Time.deltaTime);
 
         //Movement Check
-        m_isPreviouslyMoving = m_isMoving;
         IsMovingCheck();
 
         //Camera Bounce
-        if (!m_isPreviouslyMoving && m_isMoving)
+        if (m_isMoving)
+            m_cameraTimer += Time.deltaTime;
+        else
+            m_cameraTimer = 0;
+
+        if (m_cameraTimer >= m_timeToStartBounce)
             m_playerLook.CameraBounce(m_currentBounce, m_currentBounceTime);
-        else if(m_isPreviouslyMoving && !m_isMoving)
+        else
             m_playerLook.StopCameraBounce();
+
+        //Alien exit via death check
+        CheckAlienDeath();
+    }
+
+    public void ResetPosition()
+    {
+        gameObject.transform.position = m_initialPosition;
+        gameObject.transform.rotation = m_initialRotation;
+        m_playerLook.SetCameraRotation(m_initialCameraRotation);
     }
 
     private void IsMovingCheck()
@@ -83,14 +104,51 @@ public class PlayerMovement : MonoBehaviour
         m_horizontalInput = _horizontalInput;
     }
 
+    public void SetSlowSpeed()
+    {
+        m_currentSpeed = m_slowSpeed;
+        m_currentBounce = m_slowBounce;
+        m_currentBounceTime = m_slowBounceTime;
+    }
+
+    public void SetWalkingSpeed()
+    {
+        m_currentSpeed = m_walkSpeed;
+        m_currentBounce = m_walkBounce;
+        m_currentBounceTime = m_walkBounceTime;
+    }
+
+    private void CheckAlienDeath()
+    {
+        if (m_currentAlien == null)
+            return;
+
+        if (!m_currentAlien.GetComponent<AlienController>().CheckDeath())
+            return;
+            
+        m_currentAlien.GetComponent<AlienController>().AlienStopHit();
+        SetWalkingSpeed();
+        m_currentAlien = null;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag != "Alien")
             return;
 
-        m_currentSpeed = m_slowSpeed;
-        m_currentBounce = m_slowBounce;
-        m_currentBounceTime = m_slowBounceTime;
+        if (!GameManager.instance.IsPoisoned)
+        {
+            HUBManager.instance.HealthBarActive(true);
+            GameManager.instance.SetPoisonRate();
+        }
+
+        if (m_currentAlien != null)
+            m_currentAlien.GetComponent<AlienController>().AlienStopHit();
+
+        m_currentAlien = other.gameObject;
+        m_currentAlien.GetComponent<AlienController>().AlienHits();
+
+        SetSlowSpeed();
     }
 
     private void OnTriggerExit(Collider other)
@@ -98,8 +156,12 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag != "Alien")
             return;
 
-        m_currentSpeed = m_walkSpeed;
-        m_currentBounce = m_walkBounce;
-        m_currentBounceTime = m_walkBounceTime;
+        if (m_currentAlien != other.gameObject)
+            return;
+
+        m_currentAlien.GetComponent<AlienController>().AlienStopHit();
+        m_currentAlien = null;
+
+        SetWalkingSpeed();
     }
 }

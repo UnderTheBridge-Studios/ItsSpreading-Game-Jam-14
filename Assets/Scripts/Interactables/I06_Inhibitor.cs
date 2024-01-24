@@ -17,14 +17,4 @@ public class I06_Inhibitor : MonoBehaviour, IInteractable
         Destroy(this.gameObject);
         return true;
     }
-
-    public void OnFocus()
-    {
-        return;
-    }
-
-    public void OnLoseFocus()
-    {
-        return;
-    }
 }

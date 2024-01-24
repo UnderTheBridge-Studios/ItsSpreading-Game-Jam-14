@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class AlienController : MonoBehaviour
 {
-    [SerializeField] private MaterialBlockGrowth m_materialGrowth;
+    [Header("Alien Gets Hit")]
     [Tooltip("Wait time to recover sice last hit")]
     [SerializeField] private float m_timeRecovery = 5f;
     [Tooltip("Wait time to recover sice death")]
-    [SerializeField] private float m_deathTimeRecovery = 15f;
+    [SerializeField] private float m_deathTimeRecovery = 10f;
+
+    [Header("Alien Hits")]
+    [SerializeField] private float m_damage = 0.5f;
+    [SerializeField] private float m_timeForNextHit = 0.5f;
+
+    [Header("References")]
+    [SerializeField] private MaterialBlockGrowth m_materialGrowth;
 
     private BoxCollider m_collider;
-
     private float m_targuetGrowth;
-
-    private Coroutine m_GrowthCoroutine;
+    private Coroutine m_growthCoroutine;
+    private Coroutine m_hitPlayerCoroutine;
+    private bool m_isTouchingPlayer = false;
 
     private void Awake()
     {
@@ -22,19 +29,28 @@ public class AlienController : MonoBehaviour
         m_collider = GetComponent<BoxCollider>();
     }
 
-    public void AlienGrowth (float value)
+    public void AlienHits()
     {
-        if (CheckDeath())
-            return;
-
-        if (m_targuetGrowth > 1)
-            return;
-
-        m_targuetGrowth += value;
-        m_materialGrowth.DoSizeChange(m_targuetGrowth, true);
+        m_isTouchingPlayer = true;
+        m_hitPlayerCoroutine = StartCoroutine(AlienHitsCoroutine());
     }
 
-    public void AlienDamage(float value)
+    public void AlienStopHit()
+    {
+        m_isTouchingPlayer = false;
+        StopCoroutine(m_hitPlayerCoroutine);
+    }
+
+    private IEnumerator AlienHitsCoroutine()
+    {
+        while(m_isTouchingPlayer)
+        {
+            GameManager.instance.SetPoison(m_damage);
+            yield return new WaitForSeconds(m_timeForNextHit);
+        }
+    }
+
+    public void AlienGetsHit(float value)
     {
         if (CheckDeath())
             return;
@@ -47,12 +63,12 @@ public class AlienController : MonoBehaviour
 
         m_materialGrowth.DoSizeChange(m_targuetGrowth, false);
 
-        if (m_GrowthCoroutine != null)
-            StopCoroutine(m_GrowthCoroutine);
+        if (m_growthCoroutine != null)
+            StopCoroutine(m_growthCoroutine);
         if (m_targuetGrowth <= 0)
-            m_GrowthCoroutine = StartCoroutine(AlienRecover(m_deathTimeRecovery));
+            m_growthCoroutine = StartCoroutine(AlienRecover(m_deathTimeRecovery));
         else
-            m_GrowthCoroutine = StartCoroutine(AlienRecover(m_timeRecovery));
+            m_growthCoroutine = StartCoroutine(AlienRecover(m_timeRecovery));
     }
 
     private IEnumerator AlienRecover(float time)
@@ -63,7 +79,7 @@ public class AlienController : MonoBehaviour
         m_materialGrowth.DoSizeChange(m_targuetGrowth, true);
     }
 
-    private bool CheckDeath()
+    public bool CheckDeath()
     {
         if (m_targuetGrowth <= 0)
         {

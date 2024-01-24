@@ -50,7 +50,7 @@ public class LightProjectile : MonoBehaviour
         {
             try
             {
-                collision.GetComponent<AlienController>().AlienDamage(m_damage);
+                collision.GetComponent<AlienController>().AlienGetsHit(m_damage);
             }
             catch(NullReferenceException)
             {

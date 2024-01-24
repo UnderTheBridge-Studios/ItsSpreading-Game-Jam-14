@@ -14,17 +14,7 @@ public class I03_Key : MonoBehaviour, IInteractable
     {
         GameManager.instance.AddKey(m_id);
         Debug.Log("Key Grabbed");
-        Destroy(this.gameObject);
+        Destroy(gameObject);
         return true;
-    }
-
-    public void OnFocus()
-    {
-        return;
-    }
-
-    public void OnLoseFocus()
-    {
-        return;
     }
 }

@@ -1,0 +1,124 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &2598469594938491448
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.08
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_Name
+      value: I09_Flashlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1575975416206591277}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7965988017793902615}
+  m_SourcePrefab: {fileID: 100100000, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+--- !u!1 &2940559760174055273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 870f3d2f29db36c4695be7ab475623f1, type: 3}
+  m_PrefabInstance: {fileID: 2598469594938491448}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1575975416206591277
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940559760174055273}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0060017286, y: 0.001973434, z: 0.0025987774}
+  m_Center: {x: 0.00062633597, y: 0, z: -0.00034403452}
+--- !u!114 &7965988017793902615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940559760174055273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52111f77c5b9e242973d879debae0f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_id: 
+  m_prompt: Grab Flashlight
+  m_sprite: {fileID: 21300000, guid: 9fa853125bbfa334cbe3046dd7e18f38, type: 3}
+  m_text: Use Flashlight
+  m_time: 3

@@ -9,6 +9,12 @@ public interface IInteractable
 
     public bool Interact(PlayerInteract interactor);
 
-    public void OnFocus();
-    public void OnLoseFocus();
+    public void OnFocus()
+    {
+        HUBManager.instance.InteractPromptActive(true, InteractionPromt);
+    }
+    public void OnLoseFocus()
+    {
+        HUBManager.instance.InteractPromptActive(false, "");
+    }
 }
