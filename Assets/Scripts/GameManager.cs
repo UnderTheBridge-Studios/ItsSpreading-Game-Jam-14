@@ -62,10 +62,31 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ResetValues();
         m_player = GameObject.FindGameObjectWithTag("Player");
 
-        StartCoroutine(SceneLoadedStart());
+        StartCoroutine(SceneLoaded(m_useMainMenu));
+    }
+
+    public void RestartGame(bool showMainMenu)
+    {
+        SceneStreamer.SetCurrentScene(m_firstSceneName);
+        StartCoroutine(SceneLoaded(showMainMenu));
+    }
+
+    private IEnumerator SceneLoaded(bool showMainMenu)
+    {
+        if (m_isPaused)
+            m_player.GetComponent<InputManager>().ClosePauseMenu();
+
+        ResetValues();
+        HUBManager.instance.ResetHUB();
+
+        yield return new WaitUntil(() => SceneStreamer.IsSceneLoaded(m_firstSceneName) == true);
+
+        m_player.GetComponent<PlayerMovement>().ResetPosition();
+
+        if (showMainMenu)
+            m_player.GetComponent<InputManager>().OpenMainMenu();
     }
 
     public void ResetValues()
@@ -94,15 +115,12 @@ public class GameManager : MonoBehaviour
                 m_isFlickering = true;
         }
     }
-
-    private IEnumerator SceneLoadedStart()
+    private void CheckDeath()
     {
-        yield return new WaitUntil(() => SceneStreamer.IsSceneLoaded(m_firstSceneName) == true);
+        if (m_poison < 100)
+            return;
 
-        if (m_useMainMenu)
-            m_player.GetComponent<InputManager>().OpenMainMenu();
-        else
-            HUBManager.instance.MainMenuActive(false);
+        RestartGame(false);
     }
 
     #region Poison
@@ -178,13 +196,6 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    private void CheckDeath()
-    {
-        if (m_poison < 100)
-            return;
-
-        RestartGame(false);
-    }
     public void SetFlashlightActive(bool value)
     {
         m_isFlashlightActive = value;
@@ -208,30 +219,5 @@ public class GameManager : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
-    }
-
-    public void RestartGame(bool fromPauseMenu)
-    {
-        SceneStreamer.SetCurrentScene(m_firstSceneName);
-
-        StartCoroutine(SceneLoaded());
-        ResetValues();
-        HUBManager.instance.ResetHUB();
-
-        if (fromPauseMenu)
-        {
-            m_isPaused = true;
-            m_player.GetComponent<InputManager>().ClosePauseMenu();
-            m_player.GetComponent<InputManager>().OpenMainMenu();
-        }
-    }
-
-    private IEnumerator SceneLoaded()
-    {
-        yield return new WaitUntil(()=> SceneStreamer.IsSceneLoaded(m_firstSceneName) == true);
-
-        m_player.transform.position = Vector3.zero;
-        m_player.transform.rotation = Quaternion.identity;
-        m_player.GetComponentInChildren<Camera>().transform.rotation = Quaternion.identity;
     }
 }

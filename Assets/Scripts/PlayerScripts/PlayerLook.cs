@@ -57,4 +57,9 @@ public class PlayerLook : MonoBehaviour
         m_tween.SetAutoKill(true);
         m_tween = null;
     }
+
+    public void SetCameraRotation(Quaternion rotation)
+    {
+        m_playerCamera.rotation = rotation;
+    }
 }

@@ -34,11 +34,6 @@ public class HUBManager : MonoBehaviour
             instance = this;
     }
 
-    private void Start()
-    {
-        ResetHUB();
-    }
-
     private void Update()
     {
         //HealthBar
