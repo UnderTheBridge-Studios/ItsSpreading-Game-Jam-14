@@ -6,6 +6,11 @@ public class I04_DoorKey : I08_Door
 {
     [SerializeField] private string m_keyID;
 
+    [Header("Failed interaction prompt")]
+    [SerializeField] private Sprite m_sprite;
+    [SerializeField] private string m_text;
+    [SerializeField] float m_time;
+
     public override bool Interact(PlayerInteract interactor)
     {
         if (GameManager.instance.HasKey(m_keyID))
@@ -15,7 +20,7 @@ public class I04_DoorKey : I08_Door
         }
         else
         {
-            Debug.Log("Key is missing");
+            HUBManager.instance.UseActionPromp(m_sprite, m_text, m_time);
             return false;
         }
     }

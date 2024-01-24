@@ -18,14 +18,4 @@ public class I01_Button : MonoBehaviour, IInteractable
         Debug.Log("Button: The door " + m_doorButton.ID + " has been opened.");
         return true;
     }
-
-    public void OnFocus()
-    {
-        return;
-    }
-
-    public void OnLoseFocus()
-    {
-        return;
-    }
 }

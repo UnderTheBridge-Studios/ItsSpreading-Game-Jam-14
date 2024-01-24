@@ -10,6 +10,7 @@ public class HUBManager : MonoBehaviour
 
     [Header("Menu References")]
     [SerializeField] private GameObject m_interactPrompt;
+    [SerializeField] private GameObject m_actionPrompt;
     [SerializeField] private GameObject m_healthBar;
     [SerializeField] private RectTransform m_poisonBar;
     [SerializeField] private RectTransform m_poisonBarRate;
@@ -83,6 +84,7 @@ public class HUBManager : MonoBehaviour
     public void ResetHUB()
     {
         m_interactPrompt.SetActive(false);
+        m_actionPrompt.SetActive(false);
         m_healthBar.SetActive(false);
         m_pauseMenu.SetActive(false);
         m_rechargePrompt.SetActive(false);
@@ -95,9 +97,15 @@ public class HUBManager : MonoBehaviour
         m_oclusionMaterial.SetFloat("_VignetteRadius", 1);
     }
 
-    public void InteractPromptActive(bool value)
+    public void UseActionPromp(Sprite sprite, string text, float time)
+    {
+        m_actionPrompt.GetComponent<UIActionPrompt>().UseActionPrompt(sprite, text, time);
+    }
+
+    public void InteractPromptActive(bool value, string prompt)
     {
         m_interactPrompt.SetActive(value);
+        m_interactPrompt.GetComponentInChildren<TextMeshProUGUI>().text = prompt;
     }
 
     public void HealthBarActive(bool value)

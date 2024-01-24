@@ -22,12 +22,10 @@ public class PlayerInteract : MonoBehaviour
             {
                 hit.collider.TryGetComponent(out m_currentInteractable);
                 m_currentInteractable.OnFocus();
-                HUBManager.instance.InteractPromptActive(true);
             }
             else if (!hit.collider.gameObject.CompareTag("Interactable") && m_currentInteractable != null)
             {
                 m_currentInteractable.OnLoseFocus();
-                HUBManager.instance.InteractPromptActive(false);
 
                 m_currentInteractable = null;
             }
@@ -35,7 +33,6 @@ public class PlayerInteract : MonoBehaviour
         else if (m_currentInteractable != null)
         {
             m_currentInteractable.OnLoseFocus();
-            HUBManager.instance.InteractPromptActive(false);
             m_currentInteractable = null;
         }
     }

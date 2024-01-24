@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame(bool showMainMenu)
     {
+        SceneStreamer.UnloadAll();
         SceneStreamer.SetCurrentScene(m_firstSceneName);
         StartCoroutine(SceneLoaded(showMainMenu));
     }
@@ -88,6 +89,7 @@ public class GameManager : MonoBehaviour
 
         ResetValues();
         HUBManager.instance.ResetHUB();
+        m_player.GetComponent<FlashLight>().ResetValues();
 
         yield return new WaitUntil(() => SceneStreamer.IsSceneLoaded(m_firstSceneName) == true);
 

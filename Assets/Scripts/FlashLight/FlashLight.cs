@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,11 @@ public class FlashLight : MonoBehaviour
     [SerializeField] private float m_radius = 1f;
     [SerializeField] private float m_velocity = 2f;
 
+    [SerializeField] private GameObject m_flashlight;
+    [SerializeField] private Vector3 m_flashlightPosition;
+    [SerializeField] private float m_flashlightAnimationJump;
+    [SerializeField] private float m_flashlightAnimationTime;
+
     [Range(1f, 100f)]
     [SerializeField] private float m_projectileFov = 30f;
     [Range(0.01f, 1f)]
@@ -23,18 +29,34 @@ public class FlashLight : MonoBehaviour
 
     private Coroutine m_flickering;
 
+    private bool m_hasFlashlight;
     private bool m_isFlickering;
     private bool m_isFlashlightEnabled;
 
-    private void Awake()
+    private Tween m_tween;
+
+    public void ResetValues()
     {
         m_light.spotAngle = m_projectileFov;
+        m_hasFlashlight = false;
         m_isFlickering = false;
         m_isFlashlightEnabled = false;
+
+        m_flashlight.SetActive(false);
+    }
+
+    public void GetFlashlight()
+    {
+        m_flashlight.SetActive(true);
+        m_tween = m_flashlight.transform.DOLocalJump(m_flashlightPosition, m_flashlightAnimationJump, 1, m_flashlightAnimationTime);
+        m_tween.OnComplete( ()=> m_hasFlashlight = true);
     }
 
     public void ToggleFlashlight()
     {
+        if (!m_hasFlashlight)
+            return;
+
         if (!m_isFlashlightEnabled && GameManager.instance.Batery > 0 && !GameManager.instance.IsCharging)
         {
             m_isFlashlightEnabled = true;
