@@ -47,6 +47,7 @@ MonoBehaviour:
   m_firstPoisonRate: 0.01
   m_poisonRate: 0
   m_poison: 0
-  m_batteryTimeDuration: 10
-  m_batteryTimeFlicker: 2
+  m_batteryTimeDuration: 20
+  m_batteryTimeFlicker: 4
   m_chargeBatteryDuration: 3
+  m_inhibitorHealth: 40
