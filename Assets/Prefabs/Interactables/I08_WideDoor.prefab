@@ -300,7 +300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3920464218121490215, guid: 9a7e5c63870b40e4e8f5615bb9ab3ca5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: 2.45
       objectReference: {fileID: 0}
     - target: {fileID: 3920464218121490215, guid: 9a7e5c63870b40e4e8f5615bb9ab3ca5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -401,8 +401,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_id: 
   m_prompt: Open Door
+  m_material: {fileID: 0}
   m_topDoor: {fileID: 995150744137993623}
-  m_topOrigin: {x: 6, y: 2.5, z: 0}
+  m_topOrigin: {x: 6, y: 2.45, z: 0}
   m_topFinal: {x: 6, y: 6, z: 0}
   m_topTime: 1
   m_bottomDoor: {fileID: 442579272501683257}

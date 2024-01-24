@@ -6,6 +6,7 @@ public class I08_Door : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_id = "";
     [SerializeField] private string m_prompt = "Open Door";
+    [SerializeField] private Material m_material;
 
     public string ID => m_id;
     public string InteractionPromt => m_prompt;
