@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_TrimFloors01
+  m_Name: MAT_TrimFloors01 1
   m_Shader: {fileID: -6465566751694194690, guid: 3502d5f73bac595438c5b4a58a3c9b11, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -137,7 +137,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EMISSIVE: 1
     - _ENUM: 0
-    - _EmissiveAmount: 4
+    - _EmissiveAmount: 40
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
