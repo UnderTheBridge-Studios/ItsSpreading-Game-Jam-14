@@ -79,7 +79,7 @@ public class AlienController : MonoBehaviour
         m_materialGrowth.DoSizeChange(m_targuetGrowth, true);
     }
 
-    private bool CheckDeath()
+    public bool CheckDeath()
     {
         if (m_targuetGrowth <= 0)
         {
