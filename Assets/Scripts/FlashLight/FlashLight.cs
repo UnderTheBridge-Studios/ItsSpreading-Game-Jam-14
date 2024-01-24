@@ -42,7 +42,10 @@ public class FlashLight : MonoBehaviour
         m_isFlickering = false;
         m_isFlashlightEnabled = false;
 
-        m_flashlight.SetActive(false);
+        if (GameManager.instance.InitialFlashlight)
+            GetFlashlight();
+        else
+            m_flashlight.SetActive(false);
     }
 
     public void GetFlashlight()

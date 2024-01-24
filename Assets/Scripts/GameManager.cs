@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance { get; private set; }
 
     [SerializeField] private bool m_useMainMenu;
+    public bool InitialFlashlight;
     [SerializeField] private string m_firstSceneName;
 
     [Header("Poison Values")]
@@ -32,11 +33,13 @@ public class GameManager : MonoBehaviour
     private float m_battery;
     private float m_batteryRate;
     private Coroutine m_batteryCharging;
+    private GameObject m_player;
 
     private bool m_isPaused;
     private bool m_isFlickering;
     private bool m_isFlashlightActive;
     private bool m_isCharging;
+    private bool m_isPoisoned;
 
     private List<string> m_keyIDs = new List<string>();
     private float m_inhibitors;
@@ -46,9 +49,6 @@ public class GameManager : MonoBehaviour
     public float batery => m_battery;
     public bool isFlickering => m_isFlickering;
     public bool isCharging => m_isCharging;
-    private bool m_isPoisoned;
-
-    private GameObject m_player;
 
     public GameObject Player => m_player;
     public bool IsPaused => m_isPaused;
