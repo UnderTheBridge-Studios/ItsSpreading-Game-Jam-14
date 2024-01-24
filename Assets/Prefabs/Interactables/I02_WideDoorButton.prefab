@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 655877396945840559, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 1658387144211600828}
+    - target: {fileID: 2488795896192659987, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 1658387144211600828}
+    - target: {fileID: 2668839343927976864, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 1658387144211600828}
     - target: {fileID: 3929659479895333173, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
       propertyPath: m_door
       value: 
@@ -56,6 +68,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6787580918229732422, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7946134956166919728, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
     - {fileID: 3182148028585310681, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
@@ -83,10 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e5ca6b93ad0c0442bd733308c0c4c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_canReOpen: 1
   m_id: 
   m_prompt: Open Door
-  m_material: {fileID: 0}
   m_animation: {fileID: 4085040146189486983}
+  m_meshRenderer: {fileID: 6399204414399525076}
   m_sprite: {fileID: 21300000, guid: c3f93f9f366b8334a8965520f99f94ff, type: 3}
   m_text: Button must be presesd
   m_time: 3
@@ -101,3 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a124f2ffc1d93d448114b07311f587b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!23 &6399204414399525076 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8821765957104276884, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+  m_PrefabInstance: {fileID: 2496049618856486208}
+  m_PrefabAsset: {fileID: 0}

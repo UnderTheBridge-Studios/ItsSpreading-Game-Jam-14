@@ -8,9 +8,24 @@ public class I02_DoorButton : I08_Door
     [SerializeField] private Sprite m_sprite;
     [SerializeField] private string m_text;
     [SerializeField] float m_time;
+
+    private void Start()
+    {
+        LockDoor(true);
+    }
+
     public override bool Interact(PlayerInteract interactor)
     {
-        HUBManager.instance.UseActionPromp(m_sprite, m_text, m_time);
-        return false;
+        Debug.Log(IsLocked);
+        if (IsLocked)
+        {
+            HUBManager.instance.UseActionPromp(m_sprite, m_text, m_time);
+            return false;
+        }
+        else
+        {
+            OpenDoor();
+            return true;
+        }
     }
 }

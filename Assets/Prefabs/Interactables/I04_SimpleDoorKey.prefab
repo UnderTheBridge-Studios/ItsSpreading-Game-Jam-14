@@ -52,7 +52,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: I04_SimpleDoorKey
       objectReference: {fileID: 0}
+    - target: {fileID: 3458071367923137798, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 9095120696632794329}
+    - target: {fileID: 3717287232045545902, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196220677340504309, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 9095120696632794329}
     - target: {fileID: 7400261466145719678, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 9095120696632794329}
+    - target: {fileID: 7840454763800163033, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
       propertyPath: m_door
       value: 
       objectReference: {fileID: 9095120696632794329}
@@ -66,6 +82,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 9095120696632794329}
   m_SourcePrefab: {fileID: 100100000, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+--- !u!23 &2063786122768412030 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8675170620157317862, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+  m_PrefabInstance: {fileID: 7259924903340294040}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5203864727011835024 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3240261153588609800, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
@@ -83,10 +104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf27995b3255a34bae7fdce82c98b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_canReOpen: 1
   m_id: 
   m_prompt: Open Door
-  m_material: {fileID: 0}
   m_animation: {fileID: 8262809190473730678}
+  m_meshRenderer: {fileID: 2063786122768412030}
   m_keyID: Key01
   m_sprite: {fileID: 21300000, guid: c3f93f9f366b8334a8965520f99f94ff, type: 3}
   m_text: Missing Key

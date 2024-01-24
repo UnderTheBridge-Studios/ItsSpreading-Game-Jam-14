@@ -11,10 +11,17 @@ public class I04_DoorKey : I08_Door
     [SerializeField] private string m_text;
     [SerializeField] float m_time;
 
+    private void Start()
+    {
+        LockDoor(true);
+    }
+
     public override bool Interact(PlayerInteract interactor)
     {
+        Debug.Log(IsLocked);
         if (GameManager.instance.HasKey(m_keyID))
         {
+            LockDoor(false);
             OpenDoor();
             return true;
         }

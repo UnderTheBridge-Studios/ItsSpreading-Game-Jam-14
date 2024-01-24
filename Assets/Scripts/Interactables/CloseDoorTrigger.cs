@@ -6,11 +6,14 @@ public class CloseDoorTrigger : MonoBehaviour
 {
     [SerializeField] private I08_Door m_door;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (other.tag == "Player")
-            m_door.CloseDoor();
+        if (collision.gameObject.tag != "Player")
+            return;
 
-        gameObject.SetActive(false);
+        m_door.CloseDoor();
+
+        if (!m_door.CanReOpen)
+            gameObject.SetActive(false);
     }
 }

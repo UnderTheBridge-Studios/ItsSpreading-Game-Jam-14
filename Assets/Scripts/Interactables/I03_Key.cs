@@ -13,7 +13,6 @@ public class I03_Key : MonoBehaviour, IInteractable
     public bool Interact(PlayerInteract interactor)
     {
         GameManager.instance.AddKey(m_id);
-        Debug.Log("Key Grabbed");
         Destroy(gameObject);
         return true;
     }

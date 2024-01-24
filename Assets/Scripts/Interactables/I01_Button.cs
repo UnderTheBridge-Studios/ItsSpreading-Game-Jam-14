@@ -6,7 +6,7 @@ public class I01_Button : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_id = "";
     [SerializeField] private string m_prompt = "Press Button";
-    [SerializeField] private I08_Door m_doorButton;
+    [SerializeField] private I02_DoorButton m_doorButton;
 
     public string InteractionPromt => m_prompt;
 
@@ -14,8 +14,8 @@ public class I01_Button : MonoBehaviour, IInteractable
 
     public bool Interact(PlayerInteract interactor)
     {
-        m_doorButton.OpenDoor();
         gameObject.tag = "Untagged";
+        m_doorButton.LockDoor(false);
         return true;
     }
 }

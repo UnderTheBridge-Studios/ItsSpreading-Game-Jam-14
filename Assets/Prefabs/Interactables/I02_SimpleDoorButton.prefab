@@ -52,7 +52,23 @@ PrefabInstance:
       propertyPath: m_Name
       value: I02_SimpleDoorButton
       objectReference: {fileID: 0}
+    - target: {fileID: 3458071367923137798, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 4700017452540406443}
+    - target: {fileID: 3717287232045545902, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4196220677340504309, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 4700017452540406443}
     - target: {fileID: 7400261466145719678, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 4700017452540406443}
+    - target: {fileID: 7840454763800163033, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
       propertyPath: m_door
       value: 
       objectReference: {fileID: 4700017452540406443}
@@ -66,6 +82,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4700017452540406443}
   m_SourcePrefab: {fileID: 100100000, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+--- !u!23 &3244199710066228951 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8675170620157317862, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+  m_PrefabInstance: {fileID: 6152431413029104689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4830913071039175135 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1615395964482827758, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
@@ -94,10 +115,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e5ca6b93ad0c0442bd733308c0c4c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_canReOpen: 1
   m_id: 
   m_prompt: Open Door
-  m_material: {fileID: 0}
   m_animation: {fileID: 4830913071039175135}
+  m_meshRenderer: {fileID: 3244199710066228951}
   m_sprite: {fileID: 21300000, guid: c3f93f9f366b8334a8965520f99f94ff, type: 3}
   m_text: Button must be pressed
   m_time: 3
