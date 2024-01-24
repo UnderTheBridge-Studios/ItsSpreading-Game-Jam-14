@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
         ResetValues();
         HUBManager.instance.ResetHUB();
         m_player.GetComponent<FlashLight>().ResetValues();
+        m_player.GetComponent<PlayerMovement>().SetWalkingSpeed();
 
         yield return new WaitUntil(() => SceneStreamer.IsSceneLoaded(m_firstSceneName) == true);
 
@@ -179,6 +180,7 @@ public class GameManager : MonoBehaviour
     public void ChargeBattery()
     {
         m_isCharging = true;
+        m_player.GetComponent<PlayerMovement>().SetSlowSpeed();
         HUBManager.instance.RechargingPromptActive(true);
         m_batteryCharging = StartCoroutine(ChargingBattery());
     }
@@ -191,6 +193,7 @@ public class GameManager : MonoBehaviour
         StopCoroutine(m_batteryCharging);
         HUBManager.instance.RechargingPromptActive(false);
         m_isCharging = false;
+        m_player.GetComponent<PlayerMovement>().SetWalkingSpeed();
     }
 
     private IEnumerator ChargingBattery()
