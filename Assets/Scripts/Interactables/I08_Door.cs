@@ -7,10 +7,10 @@ public class I08_Door : MonoBehaviour, IInteractable
     [SerializeField] private string m_id = "";
     [SerializeField] private string m_prompt = "Open Door";
 
-    private BoxCollider m_collider;
-
     public string ID => m_id;
     public string InteractionPromt => m_prompt;
+
+    private BoxCollider m_collider;
 
     private void Awake()
     {
@@ -21,9 +21,14 @@ public class I08_Door : MonoBehaviour, IInteractable
         OpenDoor();
         return true;
     }
-    public void OpenDoor()
+    public virtual void OpenDoor()
     {
         m_collider.enabled = false;
-        Debug.Log("Door: The door " + ID + " has been opened.");
+    }
+
+    public virtual void CloseDoor()
+    {
+        gameObject.tag = "Untagged";
+        m_collider.enabled = true;
     }
 }
