@@ -50,7 +50,7 @@ public class HUBManager : MonoBehaviour
         m_rechargingPrompt.SetActive(false);
         m_noteDisplay.SetActive(false);
 
-        m_poisonMaxWidth = m_poisonBar.rect.width;
+        m_poisonMaxWidth = m_healthBar.GetComponent<RectTransform>().rect.width -10;
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
         m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
         m_noteContent = m_noteDisplay.GetComponentInChildren<TextMeshProUGUI>();
