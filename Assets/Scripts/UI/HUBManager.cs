@@ -11,15 +11,22 @@ public class HUBManager : MonoBehaviour
     [Header("Menu References")]
     [SerializeField] private GameObject m_interactPrompt;
     [SerializeField] private GameObject m_actionPrompt;
+    [SerializeField] private GameObject m_pauseMenu;
+    [SerializeField] private GameObject m_mainMenu;
+
+    [Header("Health")]
     [SerializeField] private GameObject m_healthBar;
     [SerializeField] private RectTransform m_poisonBar;
     [SerializeField] private RectTransform m_poisonBarRate;
-    [SerializeField] private GameObject m_pauseMenu;
-    [SerializeField] private GameObject m_mainMenu;
+    private float m_healthLearpSpeed;
+    private float m_poisonMaxWidth;
+
+    [Header("Battery")]
     [SerializeField] private GameObject m_rechargePrompt;
-    [SerializeField] private GameObject m_rechargingPrompt;
+    [SerializeField] private Image m_rechargingBar;
     [SerializeField] private GameObject m_noteDisplay;
     [SerializeField] private TextMeshProUGUI m_noteContent;
+    float m_batteryTimeElapsed;
 
     [Header("Material References")]
     [SerializeField] private Material m_oclusionMaterial;
@@ -29,10 +36,6 @@ public class HUBManager : MonoBehaviour
     [SerializeField] private GameObject m_inhibitorImage;
     [SerializeField] private GameObject m_noInhibitorImage;
     [SerializeField] private TextMeshProUGUI m_inhibitorNumbers;
-
-    private float m_learpSpeed;
-    private float m_poisonMaxWidth;
-
     private bool m_isInhibitorsFound; //if the player have picked up inhibitors for the first time
 
     private void Awake()
@@ -48,8 +51,9 @@ public class HUBManager : MonoBehaviour
         m_interactPrompt.SetActive(false);
         m_pauseMenu.SetActive(false);
         m_rechargePrompt.SetActive(false);
-        m_rechargingPrompt.SetActive(false);
+        m_rechargingBar.gameObject.SetActive(false);
         m_noteDisplay.SetActive(false);
+
 
         m_poisonMaxWidth = m_healthBar.GetComponent<RectTransform>().rect.width -10;
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
@@ -63,21 +67,31 @@ public class HUBManager : MonoBehaviour
     private void Update()
     {
         //HealthBar
-        m_learpSpeed = 5f * Time.deltaTime;
-        m_poisonBar.sizeDelta = new Vector2(Mathf.Clamp(Mathf.Lerp(m_poisonBar.rect.width, GameManager.instance.Poison / 100 * m_poisonMaxWidth, m_learpSpeed), 0f, m_poisonMaxWidth), m_poisonBar.rect.height);
+        m_healthLearpSpeed = 5f * Time.deltaTime;
+        m_poisonBar.sizeDelta = new Vector2(Mathf.Clamp(Mathf.Lerp(m_poisonBar.rect.width, GameManager.instance.Poison / 100 * m_poisonMaxWidth, m_healthLearpSpeed), 0f, m_poisonMaxWidth), m_poisonBar.rect.height);
 
-        m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), 1 - (GameManager.instance.Poison/100), m_learpSpeed));
+        m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), 1 - (GameManager.instance.Poison/100), m_healthLearpSpeed));
 
         //in case the poison its full poisonRate hides
         if (GameManager.instance.Poison == 100f)
-            m_poisonBarRate.sizeDelta = new Vector2(Mathf.Lerp(m_poisonBarRate.rect.width, 0, m_learpSpeed), m_poisonBarRate.rect.height);
+            m_poisonBarRate.sizeDelta = new Vector2(Mathf.Lerp(m_poisonBarRate.rect.width, 0, m_healthLearpSpeed), m_poisonBarRate.rect.height);
         else
         {
             //prevents the bar from coming out on the bar container
             if (m_poisonBarRate.rect.width < m_poisonBar.rect.width)
-                m_poisonBarRate.sizeDelta = new Vector2(Mathf.Clamp(Mathf.Lerp(m_poisonBarRate.rect.width, GameManager.instance.PoisonRate * 1000, m_learpSpeed), 0f, m_poisonMaxWidth), m_poisonBarRate.rect.height);
+                m_poisonBarRate.sizeDelta = new Vector2(Mathf.Clamp(Mathf.Lerp(m_poisonBarRate.rect.width, GameManager.instance.PoisonRate * 1000, m_healthLearpSpeed), 0f, m_poisonMaxWidth), m_poisonBarRate.rect.height);
             else
                 m_poisonBarRate.sizeDelta = new Vector2(m_poisonBar.rect.width, m_poisonBarRate.rect.height);
+        }
+
+        //Battery charging bar
+        if (GameManager.instance.IsCharging)
+        {
+            if (m_batteryTimeElapsed < GameManager.instance.ChargeBatteryDuration)
+            {
+                m_rechargingBar.fillAmount = Mathf.Lerp(0.0f, 1.0f, m_batteryTimeElapsed/GameManager.instance.ChargeBatteryDuration);
+                m_batteryTimeElapsed += Time.deltaTime;
+            }
         }
     }
 
@@ -88,7 +102,6 @@ public class HUBManager : MonoBehaviour
         m_healthBar.SetActive(false);
         m_pauseMenu.SetActive(false);
         m_rechargePrompt.SetActive(false);
-        m_rechargingPrompt.SetActive(false);
         m_noteDisplay.SetActive(false);
 
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
@@ -113,16 +126,6 @@ public class HUBManager : MonoBehaviour
         m_healthBar.SetActive(value);
     }
 
-    public void RechargePromptActive(bool value)
-    {
-        m_rechargePrompt.SetActive(value);
-    }
-
-    public void RechargingPromptActive(bool value)
-    {
-        m_rechargingPrompt.SetActive(value);
-    }
-
     public void PauseMenuActive(bool value)
     {
         m_pauseMenu.SetActive(value);
@@ -133,6 +136,22 @@ public class HUBManager : MonoBehaviour
         m_mainMenu.SetActive(value);
     }
 
+#region Battery
+    public void RechargePromptActive(bool value)
+    {
+        m_rechargePrompt.SetActive(value);
+    }
+
+    public void RechargingPromptActive(bool value)
+    {
+        m_rechargingBar.gameObject.SetActive(value);
+        m_rechargingBar.fillAmount = 0;
+        m_batteryTimeElapsed = 0;
+    }
+
+#endregion
+
+#region Note
     public void ShowNote(string noteContent)
     {
         m_noteDisplay.SetActive(true);
@@ -143,6 +162,8 @@ public class HUBManager : MonoBehaviour
     {
         m_noteDisplay.SetActive(false);
     }
+
+#endregion
 
 #region Inhibitors
     public void UpdateInhibitors()
@@ -177,6 +198,6 @@ public class HUBManager : MonoBehaviour
         m_inhibitors.SetActive(false);
     }
 
-    #endregion
+#endregion
 
 }

@@ -60,7 +60,7 @@ public class FlashLight : MonoBehaviour
         if (!m_hasFlashlight)
             return;
 
-        if (!m_isFlashlightEnabled && GameManager.instance.Batery > 0 && !GameManager.instance.IsCharging)
+        if (!m_isFlashlightEnabled && GameManager.instance.Battery > 0 && !GameManager.instance.IsCharging)
         {
             m_isFlashlightEnabled = true;
             StartCoroutine(ShootLightProjectile());
@@ -75,7 +75,7 @@ public class FlashLight : MonoBehaviour
         m_lightMesh.enabled = true;
         GameManager.instance.SetFlashlightActive(true);
 
-        while (m_isFlashlightEnabled && !GameManager.instance.IsCharging && GameManager.instance.Batery > 0)
+        while (m_isFlashlightEnabled && !GameManager.instance.IsCharging && GameManager.instance.Battery > 0)
         { 
             if (GameManager.instance.IsFlickering && !m_isFlickering)
                 StartFlickering();
@@ -95,7 +95,7 @@ public class FlashLight : MonoBehaviour
             yield return new WaitForSeconds(m_fireRate);
         }
 
-        if (GameManager.instance.Batery <= 0)
+        if (GameManager.instance.Battery <= 0)
             HUBManager.instance.RechargePromptActive(true);
 
         if (m_isFlickering)
