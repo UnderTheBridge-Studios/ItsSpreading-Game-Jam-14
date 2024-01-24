@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5230090441991878643
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3929659479895333173, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_door
+      value: 
+      objectReference: {fileID: 993805113498471657}
+    - target: {fileID: 3991980284055683041, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_Name
+      value: I04_WideDoorKey
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336276250234463579, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336276250234463579, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336276250234463579, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336276250234463579, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336276250234463579, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336276250234463579, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336276250234463579, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336276250234463579, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336276250234463579, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4336276250234463579, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7946134956166919728, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3991980284055683041, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 993805113498471657}
+  m_SourcePrefab: {fileID: 100100000, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+--- !u!4 &4997447335234042468 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 995150744137993623, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+  m_PrefabInstance: {fileID: 5230090441991878643}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &5670410210514998218 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 442579272501683257, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+  m_PrefabInstance: {fileID: 5230090441991878643}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9219817732501342226 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3991980284055683041, guid: cb7747f6236a8fc40815b8af6ed6656b, type: 3}
+  m_PrefabInstance: {fileID: 5230090441991878643}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &993805113498471657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9219817732501342226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d58f1f94f981b4ebab34187c144cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_id: 
+  m_prompt: Open Door
+  m_material: {fileID: 0}
+  m_topDoor: {fileID: 4997447335234042468}
+  m_topOrigin: 2.45
+  m_topFinal: 6
+  m_topTime: 1
+  m_bottomDoor: {fileID: 5670410210514998218}
+  m_bottomOrigin: 1.25
+  m_bottomFinal: -1.3
+  m_bottomTime: 1
+  m_keyID: Key02
+  m_sprite: {fileID: 21300000, guid: c3f93f9f366b8334a8965520f99f94ff, type: 3}
+  m_text: Key Missing
+  m_time: 3
