@@ -104,8 +104,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (!GameManager.instance.IsPoisoned)
         {
-            GameManager.instance.SetPoisonRate();
             HUBManager.instance.HealthBarActive(true);
+            GameManager.instance.SetPoisonRate();
         }
 
         if (m_currentAlien != null)
