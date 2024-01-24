@@ -225,7 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1c4fac19e8568e4586e67c9ffe44e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_door: {fileID: 3326369499726678363}
+  m_door: {fileID: 2508103687685125391}
 --- !u!1001 &2321273040457481817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,7 +311,10 @@ PrefabInstance:
       addedObject: {fileID: 6985071406219605502}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f66d40fe4a039cb40b628d1c240d5ef9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3326369499726678363}
+      addedObject: {fileID: 2508103687685125391}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f66d40fe4a039cb40b628d1c240d5ef9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1615395964482827758}
     - targetCorrespondingSourceObject: {fileID: 5509196692776682774, guid: f66d40fe4a039cb40b628d1c240d5ef9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6495497688996076865}
@@ -352,7 +355,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6, y: 6, z: 1.350184}
   m_Center: {x: 3, y: 3, z: 0.00017431378}
---- !u!114 &3326369499726678363
+--- !u!114 &2508103687685125391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -361,15 +364,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 3240261153588609800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e7392af8b6bfcf4594b5f7072794cff, type: 3}
+  m_Script: {fileID: 11500000, guid: fdfb9f2cb4145b741b8c485b6edaac2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_id: 
   m_prompt: Open Door
+  m_material: {fileID: 0}
+  m_animation: {fileID: 1615395964482827758}
+--- !u!114 &1615395964482827758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240261153588609800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c06f926c3a3b95a40ad251a09761c6f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_topDoor: {fileID: 5992618516588813321}
-  m_topOrigin: {x: 3, y: 2.2, z: 0}
-  m_topFinal: {x: 3, y: 7, z: 0}
-  m_animationTime: 1
+  m_topOrigin: 2.2
+  m_topFinal: 7
+  m_topTime: 1
 --- !u!4 &5992618516588813321 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -928621946560781744, guid: f66d40fe4a039cb40b628d1c240d5ef9, type: 3}

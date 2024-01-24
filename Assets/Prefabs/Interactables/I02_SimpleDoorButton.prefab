@@ -55,27 +55,34 @@ PrefabInstance:
     - target: {fileID: 7400261466145719678, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
       propertyPath: m_door
       value: 
-      objectReference: {fileID: 3986764931146086344}
+      objectReference: {fileID: 4700017452540406443}
     m_RemovedComponents:
     - {fileID: 3326369499726678363, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+    - {fileID: 2508103687685125391, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3240261153588609800, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3986764931146086344}
+      addedObject: {fileID: 4700017452540406443}
   m_SourcePrefab: {fileID: 100100000, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
---- !u!4 &453699246344482872 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5992618516588813321, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
+--- !u!114 &4830913071039175135 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1615395964482827758, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
   m_PrefabInstance: {fileID: 6152431413029104689}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8761308443151200057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c06f926c3a3b95a40ad251a09761c6f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8761308443151200057 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3240261153588609800, guid: c5d555a1c9d085e47abc37994b40538f, type: 3}
   m_PrefabInstance: {fileID: 6152431413029104689}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3986764931146086344
+--- !u!114 &4700017452540406443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,16 +91,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8761308443151200057}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92e4817b44935594ba62e261c9191f97, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e5ca6b93ad0c0442bd733308c0c4c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_id: 
   m_prompt: Open Door
   m_material: {fileID: 0}
-  m_topDoor: {fileID: 453699246344482872}
-  m_topOrigin: 2.2
-  m_topFinal: 7
-  m_animationTime: 0
-  m_sprite: {fileID: 0}
-  m_text: 
-  m_time: 0
+  m_animation: {fileID: 4830913071039175135}
+  m_sprite: {fileID: 21300000, guid: c3f93f9f366b8334a8965520f99f94ff, type: 3}
+  m_text: Button must be pressed
+  m_time: 3
