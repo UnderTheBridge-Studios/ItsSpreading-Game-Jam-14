@@ -22,14 +22,4 @@ public class I07_Locker : MonoBehaviour, IInteractable
         Debug.Log("The locker " + ID + " has been opened.");
         return true;
     }
-
-    public void OnFocus()
-    {
-        return;
-    }
-
-    public void OnLoseFocus()
-    {
-        return;
-    }
 }

@@ -230,6 +230,9 @@ MonoBehaviour:
   m_slowBounceTime: 0.5
   m_controller: {fileID: 3433966552042880969}
   m_playerLook: {fileID: 4204994667157738951}
+  m_initialPosition: {x: 0, y: 0, z: 0}
+  m_initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_initialCameraRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4204994667157738951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +298,10 @@ MonoBehaviour:
   m_range: 20
   m_radius: 1
   m_velocity: 2
+  m_flashlight: {fileID: 830440563735929926}
+  m_flashlightPosition: {x: 0.25, y: -0.18, z: 0.7}
+  m_flashlightAnimationJump: 0.25
+  m_flashlightAnimationTime: 1
   m_projectileFov: 30
   m_fireRate: 0.05
   m_fickerRandTime: 0.5
@@ -668,15 +675,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 18a88d26185a08140bb0beed31276a39, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.258
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 18a88d26185a08140bb0beed31276a39, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.185
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 18a88d26185a08140bb0beed31276a39, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.704
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 18a88d26185a08140bb0beed31276a39, type: 3}
       propertyPath: m_LocalRotation.w
@@ -748,6 +755,11 @@ PrefabInstance:
 --- !u!4 &57845196716408572 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 18a88d26185a08140bb0beed31276a39, type: 3}
+  m_PrefabInstance: {fileID: 524450120461392151}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &830440563735929926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 18a88d26185a08140bb0beed31276a39, type: 3}
   m_PrefabInstance: {fileID: 524450120461392151}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4592006882181454307
