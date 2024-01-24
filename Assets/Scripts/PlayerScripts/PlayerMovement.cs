@@ -21,6 +21,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterController m_controller;
     [SerializeField] private PlayerLook m_playerLook;
 
+    [Header("Initial Position")]
+    [SerializeField] private Vector3 m_initialPosition;
+    [SerializeField] private Quaternion m_initialRotation;
+    [SerializeField] private Quaternion m_initialCameraRotation;
+
+    private GameObject m_currentAlien;
+
     private Vector2 m_horizontalInput;
     private Vector3 m_horizontalVelocity;
     private Vector3 m_verticalVelocity;
@@ -70,6 +77,13 @@ public class PlayerMovement : MonoBehaviour
             m_playerLook.StopCameraBounce();
     }
 
+    public void ResetPosition()
+    {
+        gameObject.transform.position = m_initialPosition;
+        gameObject.transform.rotation = m_initialRotation;
+        m_playerLook.SetCameraRotation(m_initialCameraRotation);
+    }
+
     private void IsMovingCheck()
     {
         if(m_horizontalVelocity != Vector3.zero)
@@ -88,6 +102,18 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag != "Alien")
             return;
 
+        if (!GameManager.instance.IsPoisoned)
+        {
+            GameManager.instance.SetPoisonRate();
+            HUBManager.instance.HealthBarActive(true);
+        }
+
+        if (m_currentAlien != null)
+            m_currentAlien.GetComponent<AlienController>().AlienStopHit();
+
+        m_currentAlien = other.gameObject;
+        m_currentAlien.GetComponent<AlienController>().AlienHits();
+
         m_currentSpeed = m_slowSpeed;
         m_currentBounce = m_slowBounce;
         m_currentBounceTime = m_slowBounceTime;
@@ -97,6 +123,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag != "Alien")
             return;
+
+        if (m_currentAlien != other.gameObject)
+            return;
+
+        m_currentAlien.GetComponent<AlienController>().AlienStopHit();
+        m_currentAlien = null;
 
         m_currentSpeed = m_walkSpeed;
         m_currentBounce = m_walkBounce;
