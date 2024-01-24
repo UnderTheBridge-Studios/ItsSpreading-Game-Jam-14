@@ -11,9 +11,9 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: c3bbb266d0746e04184cc6cc516ebbd2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _ALPHATEST_ON
+  m_ValidKeywords:
+  - _NOISEMASKSELECT_CLOUDS2
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -68,6 +68,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_af8acc5bb2594aab8fd54740590b9400_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 3e3247bd83b9b8b4eb89b0be824c8f90, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -98,13 +102,23 @@ Material:
     - _DisplacePower: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _EmissiveAmount: 0
     - _EnvironmentReflections: 1
+    - _Float: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Growth: 1
+    - _GrowthWidth: 0
     - _InvertUVs: 0
+    - _MaxGrowth: -3.5
     - _Metallic: 0
+    - _NOISEMASKSELECT: 0
+    - _NoiseAmount: 1
+    - _NoisePower: 0
+    - _NoiseTiling: 0
+    - _NoiseTilingX: 0
+    - _NoiseTilingY: 0
     - _OcclusionStrength: 1
     - _Offset: -0.08
     - _Parallax: 0.005
@@ -125,12 +139,14 @@ Material:
     - _Surface: 0
     - _ThicknessAmount: 1
     - _ThicknessPow: 1.77
+    - _Variation: 0.5
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 0.730049, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissiveColor: {r: 0, g: 0.8708038, b: 1, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &551110904606246309

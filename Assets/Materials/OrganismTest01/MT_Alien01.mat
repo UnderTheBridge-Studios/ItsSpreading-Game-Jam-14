@@ -11,9 +11,9 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: c3bbb266d0746e04184cc6cc516ebbd2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords:
-  - _ALPHATEST_ON
+  m_ValidKeywords:
+  - _NOISEMASKSELECT_FRACTALSUMBASE
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -68,6 +68,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_af8acc5bb2594aab8fd54740590b9400_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 3e3247bd83b9b8b4eb89b0be824c8f90, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -82,8 +86,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaClip: 0.52
-    - _AlphaClipThreshold: 0.5
+    - _AlphaClip: 1
+    - _AlphaClipThreshold: 0.01
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
@@ -96,17 +100,28 @@ Material:
     - _DetailNormalMapScale: 1
     - _DisplaceAmount: 1
     - _DisplacePower: 1
+    - _Displacement: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _EmissiveAmount: 1.15
     - _EnvironmentReflections: 1
+    - _Float: -0.04
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Growth: 1
+    - _GrowthWidth: -0.33
     - _InvertUVs: 0
+    - _MaxGrowth: -3.5
     - _Metallic: 0
+    - _NOISEMASKSELECT: 2
+    - _NoiseAmount: 3.4
+    - _NoisePower: 1.12
+    - _NoiseTiling: 0
+    - _NoiseTilingX: 1.39
+    - _NoiseTilingY: 2.99
     - _OcclusionStrength: 1
-    - _Offset: 0.03
+    - _Offset: 0
     - _Parallax: 0.005
     - _PowBig: 0.71
     - _PowSmall: 1
@@ -114,10 +129,10 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Scale: 1
+    - _Scale: 2.25
     - _ScaleBig: 1.72
     - _ScaleSmall: 1.12
-    - _Smoothness: 0.8
+    - _Smoothness: 0.758
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -125,12 +140,15 @@ Material:
     - _Surface: 0
     - _ThicknessAmount: -3.56
     - _ThicknessPow: 1
+    - _Twist: 0.25
+    - _Variation: -1.5
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 0.26364803, g: 1, b: 0, a: 1}
+    - _Color: {r: 0.035488617, g: 0.05615748, b: 0.25943398, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissiveColor: {r: 1, g: 0.48310083, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &551110904606246309
