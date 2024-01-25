@@ -28,6 +28,9 @@ public class HUBManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_noteContent;
     float m_batteryTimeElapsed;
 
+    [Header("Pointer")]
+    [SerializeField] private GameObject m_pointerPrompt;
+
     [Header("Material References")]
     [SerializeField] private Material m_oclusionMaterial;
 
@@ -103,6 +106,7 @@ public class HUBManager : MonoBehaviour
         m_pauseMenu.SetActive(false);
         m_rechargePrompt.SetActive(false);
         m_noteDisplay.SetActive(false);
+        m_pointerPrompt.SetActive(true);
 
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
         m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
@@ -134,6 +138,11 @@ public class HUBManager : MonoBehaviour
     public void MainMenuActive(bool value)
     {
         m_mainMenu.SetActive(value);
+    }
+
+    public void PointerActive(bool value)
+    {
+        m_pointerPrompt.SetActive(value);
     }
 
 #region Battery

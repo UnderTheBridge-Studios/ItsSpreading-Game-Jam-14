@@ -7,8 +7,12 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
 
-    [SerializeField] private bool m_useMainMenu;
+    [Header("Testing Checks")]
+    public bool UseMainMenu;
     public bool InitialFlashlight;
+    public bool UseCinematics;
+
+    [Header("Scene Loader")]
     [SerializeField] private string m_firstSceneName;
 
     [Header("Poison Values")]
@@ -72,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         m_player = GameObject.FindGameObjectWithTag("Player");
 
-        StartCoroutine(SceneLoaded(m_useMainMenu));
+        StartCoroutine(SceneLoaded(UseMainMenu));
     }
 
     private void Update()
@@ -126,6 +130,11 @@ public class GameManager : MonoBehaviour
 
         if (showMainMenu)
             m_player.GetComponent<InputManager>().OpenMainMenu();
+
+        if (!UseCinematics)
+            m_player.GetComponent<PlayerCinematics>().enabled = false;
+        else
+            m_player.GetComponent<PlayerCinematics>().LaunchFirstCinematic();
     }
 
     private void CheckDeath()

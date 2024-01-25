@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 4424304689999144895}
   - component: {fileID: 7840657799937068534}
   - component: {fileID: 3125761959522696208}
+  - component: {fileID: 2820972683923355576}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -224,6 +225,7 @@ MonoBehaviour:
   m_groundMask:
     serializedVersion: 2
     m_Bits: 64
+  m_timeToStartBounce: 0.1
   m_walkBounce: 2.7
   m_walkBounceTime: 0.25
   m_slowBounce: 2.6
@@ -305,6 +307,24 @@ MonoBehaviour:
   m_projectileFov: 30
   m_fireRate: 0.05
   m_fickerRandTime: 0.5
+--- !u!114 &2820972683923355576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1459962071979092884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609530df6ea6c6d4fbd20fb30c3c601b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_movement: {fileID: 5730261161568649210}
+  m_look: {fileID: 4204994667157738951}
+  m_input: {fileID: 4424304689999144895}
+  m_stillTime: 8
+  m_forwardTime: 2
+  m_stillTime2: 2
 --- !u!1 &2941709444019296971
 GameObject:
   m_ObjectHideFlags: 0
