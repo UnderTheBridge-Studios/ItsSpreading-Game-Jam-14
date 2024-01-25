@@ -18,7 +18,6 @@ public class I04_DoorKey : I08_Door
 
     public override bool Interact(PlayerInteract interactor)
     {
-        Debug.Log(IsLocked);
         if (GameManager.instance.HasKey(m_keyID))
         {
             LockDoor(false);
