@@ -137,8 +137,71 @@ Transform:
   m_Children:
   - {fileID: 7437288392947676816}
   - {fileID: 6153859945656806480}
+  - {fileID: 6551952153700127197}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2951128043988383010
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7084021302850090153}
+    m_Modifications:
+    - target: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.034
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742162218533551685, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+      propertyPath: m_Name
+      value: CryoChamber
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+--- !u!4 &6551952153700127197 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8221803345241187583, guid: d3a08d3d76828074598bd45c0aa33095, type: 3}
+  m_PrefabInstance: {fileID: 2951128043988383010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5668724874648621075
 PrefabInstance:
   m_ObjectHideFlags: 0

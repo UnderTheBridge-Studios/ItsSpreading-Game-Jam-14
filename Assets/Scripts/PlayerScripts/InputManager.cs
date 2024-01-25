@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -65,6 +66,14 @@ public class InputManager : MonoBehaviour
         m_playerMovement.ReceiveInput(input);
     }
 
+    public void SetGameplayInputs()
+    {
+        m_gamePlay.Enable();
+        m_menuNavigation.Disable();
+        m_notesPopUp.Disable();
+    }
+
+    #region Menus
     public void OpenMainMenu()
     {
         GameManager.instance.PauseGame();
@@ -80,9 +89,8 @@ public class InputManager : MonoBehaviour
         GameManager.instance.PauseGame();
         HUBManager.instance.MainMenuActive(false);
 
-        m_gamePlay.Enable();
-        m_menuNavigation.Disable();
-        m_notesPopUp.Disable();
+        if (!GameManager.instance.UseCinematics)
+            SetGameplayInputs();
     }
 
     public void OpenPauseMenu()
@@ -100,9 +108,7 @@ public class InputManager : MonoBehaviour
         GameManager.instance.PauseGame();
         HUBManager.instance.PauseMenuActive(false);
 
-        m_gamePlay.Enable();
-        m_menuNavigation.Disable();
-        m_notesPopUp.Disable();
+        SetGameplayInputs();
     }
 
     public void OpenNotePopUp(string content)
@@ -120,8 +126,7 @@ public class InputManager : MonoBehaviour
         GameManager.instance.PauseGame();
         HUBManager.instance.HideNote();
 
-        m_gamePlay.Enable();
-        m_menuNavigation.Disable();
-        m_notesPopUp.Disable();
+        SetGameplayInputs();
     }
+    #endregion
 }
