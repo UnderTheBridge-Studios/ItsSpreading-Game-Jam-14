@@ -82,6 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_spreadSpeed: 10
   m_growSpeed: 0.8
+  m_stacksDamage: 1
 --- !u!1 &7514890468473136454
 GameObject:
   m_ObjectHideFlags: 0

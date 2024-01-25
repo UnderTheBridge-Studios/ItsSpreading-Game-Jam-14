@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Quaternion m_initialCameraRotation;
 
     private GameObject m_currentAlien;
+    private AlienController m_alienController;
 
     private Vector2 m_horizontalInput;
     private Vector3 m_horizontalVelocity;
@@ -142,11 +143,14 @@ public class PlayerMovement : MonoBehaviour
             GameManager.instance.SetPoisonRate();
         }
 
-        if (m_currentAlien != null)
-            m_currentAlien.GetComponent<AlienController>().AlienStopHit();
+        if (m_currentAlien != null && !m_alienController.StacksDamage)
+        {
+            m_alienController.AlienStopHit();
+        }
 
         m_currentAlien = other.gameObject;
-        m_currentAlien.GetComponent<AlienController>().AlienHits();
+        m_alienController = m_currentAlien.GetComponent<AlienController>();
+        m_alienController.AlienHits();
 
         SetSlowSpeed();
     }
@@ -156,10 +160,13 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag != "Alien")
             return;
 
+        if (other.gameObject.GetComponent<AlienController>().StacksDamage)
+            other.gameObject.GetComponent<AlienController>().AlienStopHit();
+
         if (m_currentAlien != other.gameObject)
             return;
 
-        m_currentAlien.GetComponent<AlienController>().AlienStopHit();
+        m_alienController.AlienStopHit();
         m_currentAlien = null;
 
         SetWalkingSpeed();

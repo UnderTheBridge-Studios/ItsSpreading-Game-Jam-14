@@ -6,6 +6,7 @@ public class AlienGroup : MonoBehaviour
 {
     [SerializeField] private float m_spreadSpeed;
     [SerializeField] private float m_growSpeed;
+    [SerializeField] private bool m_stacksDamage;
 
     private Transform m_spreadingCenter;
 
@@ -21,6 +22,7 @@ public class AlienGroup : MonoBehaviour
         {
             GameObject child = gameObject.transform.GetChild(i).gameObject;
             child.SetActive(false);
+            child.GetComponentInChildren<AlienController>().StacksDamage = m_stacksDamage;
             m_aliens.Add(Vector3.Distance(m_spreadingCenter.position, child.transform.position), child);
         }
     }
