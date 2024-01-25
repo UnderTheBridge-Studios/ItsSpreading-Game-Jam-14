@@ -14,8 +14,8 @@ public class I01_Button : MonoBehaviour, IInteractable
 
     public bool Interact(PlayerInteract interactor)
     {
-        m_doorButton.OpenDoor();
-        Debug.Log("Button: The door " + m_doorButton.ID + " has been opened.");
+        gameObject.tag = "Untagged";
+        m_doorButton.LockDoor(false);
         return true;
     }
 }
