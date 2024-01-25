@@ -11,7 +11,8 @@ public class InputManager : MonoBehaviour
 
     private PlayerControls m_controls;
     private PlayerControls.GamePlayActions m_gamePlay;
-    private PlayerControls.MenuNavigationActions m_menuNavigation;
+    private PlayerControls.MainMenuNavigationActions m_mainMenuNavigation;
+    private PlayerControls.PauseNavigationActions m_pauseNavigation;
     private PlayerControls.NotesPopUpActions m_notesPopUp;
 
     private Camera m_camera;
@@ -20,10 +21,9 @@ public class InputManager : MonoBehaviour
     {
         m_controls = new PlayerControls();
         m_gamePlay = m_controls.GamePlay;
-        m_menuNavigation = m_controls.MenuNavigation;
+        m_mainMenuNavigation = m_controls.MainMenuNavigation;
+        m_pauseNavigation = m_controls.PauseNavigation;
         m_notesPopUp = m_controls.NotesPopUp;
-
-        m_camera = Camera.main;
 
         //Gameplay Inputs
         m_gamePlay.HorizontalMovement.performed += ctx => HorizontalMovement(ctx);
@@ -37,7 +37,7 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Pause.performed += _ => OpenPauseMenu();
 
         //Menu Navigation Inputs
-        m_menuNavigation.Cancel.performed += _ => ClosePauseMenu();
+        m_pauseNavigation.Cancel.performed += _ => ClosePauseMenu();
 
         //Notes PopUp Inputs
         m_notesPopUp.CloseNote.performed += _ => CloseNotePopUp();
@@ -45,7 +45,8 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         m_controls.Enable();
-        m_menuNavigation.Disable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Disable();
         m_notesPopUp.Disable();
     }
 
@@ -69,7 +70,8 @@ public class InputManager : MonoBehaviour
     public void SetGameplayInputs()
     {
         m_gamePlay.Enable();
-        m_menuNavigation.Disable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Disable();
         m_notesPopUp.Disable();
     }
 
@@ -80,7 +82,8 @@ public class InputManager : MonoBehaviour
         HUBManager.instance.MainMenuActive(true);
 
         m_gamePlay.Disable();
-        m_menuNavigation.Enable();
+        m_mainMenuNavigation.Enable();
+        m_pauseNavigation.Disable();
         m_notesPopUp.Disable();
     }
 
@@ -99,7 +102,8 @@ public class InputManager : MonoBehaviour
         HUBManager.instance.PauseMenuActive(true);
 
         m_gamePlay.Disable();
-        m_menuNavigation.Enable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Enable();
         m_notesPopUp.Disable();
     }
 
@@ -117,7 +121,8 @@ public class InputManager : MonoBehaviour
         HUBManager.instance.ShowNote(content);
 
         m_gamePlay.Disable();
-        m_menuNavigation.Disable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Disable();
         m_notesPopUp.Enable();
     }
 

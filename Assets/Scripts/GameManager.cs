@@ -76,6 +76,11 @@ public class GameManager : MonoBehaviour
     {
         m_player = GameObject.FindGameObjectWithTag("Player");
 
+        if (!UseCinematics)
+            m_player.GetComponent<PlayerCinematics>().enabled = false;
+        else
+            m_player.GetComponent<PlayerCinematics>().LaunchFirstCinematic();
+
         StartCoroutine(SceneLoaded(UseMainMenu));
     }
 

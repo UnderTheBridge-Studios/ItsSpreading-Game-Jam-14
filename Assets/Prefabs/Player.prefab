@@ -266,7 +266,6 @@ MonoBehaviour:
   m_playerMovement: {fileID: 5730261161568649210}
   m_playerLook: {fileID: 4204994667157738951}
   m_playerInteract: {fileID: 7840657799937068534}
-  m_playerCinematics: {fileID: 0}
   m_flashlight: {fileID: 3125761959522696208}
 --- !u!114 &7840657799937068534
 MonoBehaviour:
@@ -322,7 +321,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_movement: {fileID: 5730261161568649210}
   m_look: {fileID: 4204994667157738951}
-  m_stillTime: 0
+  m_input: {fileID: 4424304689999144895}
+  m_stillTime: 8
+  m_forwardTime: 2
+  m_stillTime2: 2
 --- !u!1 &2941709444019296971
 GameObject:
   m_ObjectHideFlags: 0
