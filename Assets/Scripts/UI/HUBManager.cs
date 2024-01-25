@@ -73,7 +73,11 @@ public class HUBManager : MonoBehaviour
         m_healthLearpSpeed = 5f * Time.deltaTime;
         m_poisonBar.sizeDelta = new Vector2(Mathf.Clamp(Mathf.Lerp(m_poisonBar.rect.width, GameManager.instance.Poison / 100 * m_poisonMaxWidth, m_healthLearpSpeed), 0f, m_poisonMaxWidth), m_poisonBar.rect.height);
 
-        m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), 1 - (GameManager.instance.Poison/100), m_healthLearpSpeed));
+        if (GameManager.instance.IsDead)
+            m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), -1.2f, Time.deltaTime));
+        else
+            m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), 1 - (GameManager.instance.Poison / 100), m_healthLearpSpeed));
+            
 
         //in case the poison its full poisonRate hides
         if (GameManager.instance.Poison == 100f)
@@ -111,7 +115,9 @@ public class HUBManager : MonoBehaviour
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
         m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
         m_poisonMaxWidth = m_healthBar.GetComponent<RectTransform>().rect.width - 10;
-        m_oclusionMaterial.SetFloat("_VignetteRadius", 1);
+
+        if(!GameManager.instance.IsDead)
+            m_oclusionMaterial.SetFloat("_VignetteRadius", 1);
     }
 
     public void UseActionPromp(Sprite sprite, string text, float time)

@@ -58,8 +58,9 @@ public class PlayerLook : MonoBehaviour
         m_tween = null;
     }
 
-    public void SetCameraRotation(Quaternion rotation)
+    public void SetCameraPositionRotation(Vector3 position, Quaternion rotation)
     {
-        m_playerCamera.rotation = rotation;
+        m_playerCamera.localPosition = position;
+        m_playerCamera.localRotation = rotation;
     }
 }

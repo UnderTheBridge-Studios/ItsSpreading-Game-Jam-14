@@ -234,6 +234,7 @@ MonoBehaviour:
   m_playerLook: {fileID: 4204994667157738951}
   m_initialPosition: {x: 0, y: 0, z: 0}
   m_initialRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_initialCameraPosition: {x: 0, y: 2.5, z: 0}
   m_initialCameraRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4204994667157738951
 MonoBehaviour:
@@ -321,9 +322,14 @@ MonoBehaviour:
   m_movement: {fileID: 5730261161568649210}
   m_look: {fileID: 4204994667157738951}
   m_input: {fileID: 4424304689999144895}
+  m_camera: {fileID: 6979059136604869273}
   m_f_stillTime: 8
   m_f_forwardTime: 2
   m_f_stillTime2: 2
+  m_d_cameraPositionY: 0.5
+  m_d_cameraRotationZ: 60
+  m_d_moveDuration: 3
+  m_d_stillTime: 4
 --- !u!1 &2941709444019296971
 GameObject:
   m_ObjectHideFlags: 0

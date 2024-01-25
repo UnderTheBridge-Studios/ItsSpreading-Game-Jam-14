@@ -474,6 +474,10 @@ PrefabInstance:
       propertyPath: m_sensitivityX
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5730261161568649210, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
+      propertyPath: m_initialPosition.y
+      value: 0.479
+      objectReference: {fileID: 0}
     - target: {fileID: 5880607209560857850, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
