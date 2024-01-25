@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -44,24 +45,9 @@ public class HUBManager : MonoBehaviour
             Destroy(this);
         else
             instance = this;
-    }
 
-    private void Start()
-    {
-        m_interactPrompt.SetActive(false);
-        m_pauseMenu.SetActive(false);
-        m_rechargePrompt.SetActive(false);
-        m_rechargingBar.gameObject.SetActive(false);
-        m_noteDisplay.SetActive(false);
-
-
-        m_poisonMaxWidth = m_healthBar.GetComponent<RectTransform>().rect.width -10;
-        m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
-        m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
+        m_poisonMaxWidth = m_healthBar.GetComponent<RectTransform>().rect.width - 10;
         m_noteContent = m_noteDisplay.GetComponentInChildren<TextMeshProUGUI>();
-
-        m_isInhibitorsFound = false;
-        HideInhibitors();
     }
 
     private void Update()
@@ -102,13 +88,18 @@ public class HUBManager : MonoBehaviour
         m_healthBar.SetActive(false);
         m_pauseMenu.SetActive(false);
         m_rechargePrompt.SetActive(false);
+        m_rechargingBar.gameObject.SetActive(false);
         m_noteDisplay.SetActive(false);
 
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
         m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
-        m_poisonMaxWidth = m_healthBar.GetComponent<RectTransform>().rect.width - 10;
+        //m_poisonMaxWidth = m_healthBar.GetComponent<RectTransform>().rect.width - 10;
         m_oclusionMaterial.SetFloat("_VignetteRadius", 1);
+        HideInhibitors();
+        m_isInhibitorsFound = false;
+
     }
+
 
     public void UseActionPromp(Sprite sprite, string text, float time)
     {
@@ -118,12 +109,23 @@ public class HUBManager : MonoBehaviour
     public void InteractPromptActive(bool value, string prompt)
     {
         m_interactPrompt.SetActive(value);
-        m_interactPrompt.GetComponentInChildren<TextMeshProUGUI>().text = prompt;
+        //m_interactPrompt.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = prompt;
+        
+        if (value)
+            m_interactPrompt.transform.GetChild(1).GetComponent<ResizeTextConainer>().Initialize(prompt);
     }
 
     public void HealthBarActive(bool value)
     {
+        if (!m_healthBar.activeSelf && value)
+        {
+            m_healthBar.GetComponent<Image>().fillAmount = 0;
+            m_healthBar.GetComponent<Image>().DOFillAmount(1, 1f)
+                .OnComplete( () => m_healthBar.SetActive(true));
+        }
+
         m_healthBar.SetActive(value);
+
     }
 
     public void PauseMenuActive(bool value)
@@ -190,7 +192,13 @@ public class HUBManager : MonoBehaviour
 
     public void ShowInhibitors()
     {
+        float xPosition = m_inhibitors.transform.position.x;
+        m_inhibitors.transform.position = new Vector3(-200, m_inhibitors.transform.position.y, 0);
+
         m_inhibitors.SetActive(true);
+        m_inhibitors.transform.DOMoveX(xPosition, 0.3f).SetEase(Ease.OutBack);
+
+        HealthBarActive(true);
     }
 
     public void HideInhibitors()
