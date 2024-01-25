@@ -7,6 +7,9 @@ public class limitFPS : MonoBehaviour
     public enum limits
     {
         noLimit = 0,
+        limit10 = 10,
+        limit15 = 15,
+        limit20 = 20,
         limit30 = 30,
         limit60 = 60,
         limit90 = 90,
