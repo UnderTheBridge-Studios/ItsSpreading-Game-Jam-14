@@ -8,7 +8,6 @@ public class FlashLight : MonoBehaviour
 {
     [SerializeField] private Transform m_playerInteractPoint;
     [SerializeField] private Light m_light;
-    [SerializeField] private MeshRenderer m_lightMesh;
 
     [SerializeField] private GameObject m_LightProjectile;
     [SerializeField] private float m_range = 20f;
@@ -72,7 +71,6 @@ public class FlashLight : MonoBehaviour
     private IEnumerator ShootLightProjectile() {
 
         m_light.enabled = true;
-        m_lightMesh.enabled = true;
         GameManager.instance.SetFlashlightActive(true);
 
         while (m_isFlashlightEnabled && !GameManager.instance.IsCharging && GameManager.instance.Battery > 0)
@@ -103,7 +101,6 @@ public class FlashLight : MonoBehaviour
 
         m_isFlashlightEnabled = false;
         m_light.enabled = false;
-        m_lightMesh.enabled = false;
         GameManager.instance.SetFlashlightActive(false);
     }
 
@@ -128,10 +125,8 @@ public class FlashLight : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(0, m_fickerRandTime));
             m_light.enabled = false;
-            m_lightMesh.enabled = false;
             yield return new WaitForSeconds(0.1f);
             m_light.enabled = true;
-            m_lightMesh.enabled = true;
         }
     }
 
