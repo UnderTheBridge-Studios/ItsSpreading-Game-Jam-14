@@ -137,7 +137,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EMISSIVE: 1
     - _ENUM: 0
-    - _EmissiveAmount: 2
+    - _EmissiveAmount: 0.75
     - _EnvironmentReflections: 1
     - _FrenselPower: 1
     - _GlossMapScale: 0
@@ -183,5 +183,5 @@ Material:
     - _NoiseOffset: {r: 0, g: 0, b: 0, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _Tint: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0}
+    - _Tint: {r: 0.699, g: 0.699, b: 0.699, a: 0}
   m_BuildTextureStacks: []
