@@ -23,6 +23,8 @@ public class AlienController : MonoBehaviour
     private Coroutine m_hitPlayerCoroutine;
     private bool m_isTouchingPlayer = false;
 
+    public bool StacksDamage { get; set; }
+
     private void Awake()
     {
         m_targuetGrowth = m_materialGrowth.CurrentGrowth;
