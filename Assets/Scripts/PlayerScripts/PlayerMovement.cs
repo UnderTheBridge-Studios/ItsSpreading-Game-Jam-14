@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Initial Position")]
     [SerializeField] private Vector3 m_initialPosition;
     [SerializeField] private Quaternion m_initialRotation;
+    [SerializeField] private Vector3 m_initialCameraPosition;
     [SerializeField] private Quaternion m_initialCameraRotation;
 
     private GameObject m_currentAlien;
@@ -89,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
     {
         gameObject.transform.position = m_initialPosition;
         gameObject.transform.rotation = m_initialRotation;
-        m_playerLook.SetCameraRotation(m_initialCameraRotation);
+        m_playerLook.SetCameraPositionRotation(m_initialCameraPosition, m_initialCameraRotation);
     }
 
     private void IsMovingCheck()
