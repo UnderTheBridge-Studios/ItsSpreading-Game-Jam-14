@@ -75,6 +75,14 @@ public class InputManager : MonoBehaviour
         m_notesPopUp.Disable();
     }
 
+    public void SetCinematicInputs()
+    {
+        m_gamePlay.Disable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Disable();
+        m_notesPopUp.Disable();
+    }
+
     #region Menus
     public void OpenMainMenu()
     {

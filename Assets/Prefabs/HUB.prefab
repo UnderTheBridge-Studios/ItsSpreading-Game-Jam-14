@@ -2441,6 +2441,7 @@ MonoBehaviour:
   m_rechargingBar: {fileID: 3291512852483274311}
   m_noteDisplay: {fileID: 4056935748321271656}
   m_noteContent: {fileID: 515753658507696819}
+  m_pointerPrompt: {fileID: 6006736467025454871}
   m_oclusionMaterial: {fileID: 2100000, guid: f1c21f483e6071f489b868934c119e9f, type: 2}
   m_inhibitors: {fileID: 7859313232097106331}
   m_inhibitorImage: {fileID: 6189748028549814605}
