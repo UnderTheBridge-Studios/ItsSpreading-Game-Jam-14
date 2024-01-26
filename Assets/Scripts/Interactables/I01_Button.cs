@@ -15,6 +15,7 @@ public class I01_Button : MonoBehaviour, IInteractable
     public bool Interact(PlayerInteract interactor)
     {
         gameObject.tag = "Untagged";
+        SoundManager.instance.PlayClip(7,1);
         m_doorButton.LockDoor(false);
         return true;
     }
