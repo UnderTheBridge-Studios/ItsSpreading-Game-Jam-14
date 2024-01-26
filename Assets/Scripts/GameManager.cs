@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     private bool m_isFlickering;
     private bool m_isCharging;
     private bool m_isFlashlightActive;
+    private bool m_isDead;
 
     private GameObject m_player;
     private bool m_isPaused;
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
     public float PoisonRate => m_poisonRate;
     public bool IsPoisoned => m_isPoisoned;
     public float Inhibitors => m_inhibitors;
+    public bool IsDead => m_isDead;
     
     //Battery
     public float Battery => m_battery;
@@ -81,7 +83,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        CheckDeath();
+        if (!m_isDead)
+            CheckDeath();
 
         //*time.deltaTime
         m_poison = Mathf.Clamp(m_poisonRate + m_poison, 0f, 100f);
@@ -102,6 +105,7 @@ public class GameManager : MonoBehaviour
         m_isFlickering = false;
         m_isCharging = false;
         m_isPoisoned = false;
+        m_isDead = false;
         m_battery = m_batteryTimeDuration;
         m_poison = 0;
         m_poisonRate = 0;
@@ -142,7 +146,8 @@ public class GameManager : MonoBehaviour
         if (m_poison < 100)
             return;
 
-        RestartGame(false);
+        m_isDead = true;
+        m_player.GetComponent<PlayerCinematics>().LaunchDeathCinematic();
     }
 
     #endregion
