@@ -95,8 +95,6 @@ public class GameManager : MonoBehaviour
             if (m_battery < m_batteryTimeFlicker)
                 m_isFlickering = true;
         }
-
-        Debug.Log("m_isPaused: " +  m_isPaused);
     }
 
     #region Restart

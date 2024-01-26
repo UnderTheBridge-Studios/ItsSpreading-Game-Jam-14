@@ -15,6 +15,7 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private GameObject m_credits;
     private TextMeshProUGUI[] m_childs;
 
+    [ContextMenu("OpenMenu")]
     public void OpenMenu()
     {
         StartCoroutine(ShowMenu());
@@ -27,11 +28,14 @@ public class UIMainMenu : MonoBehaviour
 
         m_title.maxVisibleCharacters = 0;
 
+        m_title.alpha = 1;
+
         m_childs = new TextMeshProUGUI[5];
         for (int i = 0; i < 5; i++)
         {
             m_childs[i] = m_credits.transform.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>();
             m_childs[i].gameObject.SetActive(false);
+            m_childs[i].alpha = 1;
         }
 
         yield return new WaitForSecondsRealtime(1f);
@@ -68,6 +72,8 @@ public class UIMainMenu : MonoBehaviour
 
         StartCoroutine(HideMenu());
     }
+
+    [ContextMenu("HideMenu")]
 
     private IEnumerator HideMenu()
     {
