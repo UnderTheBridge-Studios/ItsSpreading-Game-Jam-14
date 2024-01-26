@@ -87,8 +87,11 @@ MonoBehaviour:
   m_stacksDamage: 1
   m_growthSource: {fileID: 4467354456737271828}
   m_growthTimeToStop: 0.5
+  m_growthVolume: 0.5
   m_burnSource: {fileID: 5488033336121546308}
   m_burnTimeToStop: 0.5
+  m_burnVolume: 0.5
+  m_fadeTime: 0.5
 --- !u!82 &4467354456737271828
 AudioSource:
   m_ObjectHideFlags: 0
@@ -100,8 +103,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 39e7add4b18e27544a7c6ece28483940, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -145,7 +148,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -196,8 +199,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: a860bb4276ece6648a958546b148525c, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -241,7 +244,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
