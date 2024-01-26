@@ -13,10 +13,12 @@ public class SimpleDoorAnimation : MonoBehaviour
     public virtual void OpenDoorAnimation()
     {
         m_topDoor.DOLocalMoveY(m_topFinal, m_topTime);
+        SoundManager.instance.SelectAudio(0,1);
     }
 
     public virtual void CloseDoorAnimation()
     {
         m_topDoor.DOLocalMoveY(m_topOrigin, m_topTime);
+        SoundManager.instance.SelectAudio(1, 1);
     }
 }
