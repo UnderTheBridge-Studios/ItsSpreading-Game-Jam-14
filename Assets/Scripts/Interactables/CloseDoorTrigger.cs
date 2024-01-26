@@ -14,6 +14,9 @@ public class CloseDoorTrigger : MonoBehaviour
         m_door.CloseDoor();
 
         if (!m_door.CanReOpen)
-            gameObject.SetActive(false);
+        {
+            m_door.tag = "Untagged";
+            m_door.LockDoor(true);
+        }
     }
 }

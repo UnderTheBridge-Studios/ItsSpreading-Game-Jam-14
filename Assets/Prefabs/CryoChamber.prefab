@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6068036584765411204}
   - component: {fileID: 236322937702546005}
   m_Layer: 0
-  m_Name: ChamberCollider (4)
-  m_TagString: Untagged
+  m_Name: FloorChamberCollider
+  m_TagString: Cinematic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 3131512450876350268}
   - component: {fileID: 6572518178143379249}
   m_Layer: 0
-  m_Name: ChamberCollider
+  m_Name: RightChamberCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 1841782700222807084}
   - component: {fileID: 3398882292856786532}
   m_Layer: 0
-  m_Name: ChamberCollider (1)
+  m_Name: LeftChamberCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,37 +212,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.1558813, y: 1, z: 4.7848644}
   m_Center: {x: 0.07794088, y: 0, z: 0.10756731}
---- !u!1 &8208571774037859968
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1612508930224364180}
-  m_Layer: 0
-  m_Name: ChamberCollider (5)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1612508930224364180
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8208571774037859968}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -4.628, z: 1.011}
-  m_LocalScale: {x: 2, y: 0.6, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3193476111257817948}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8425057843367695371
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +223,7 @@ GameObject:
   - component: {fileID: 6549807683634854446}
   - component: {fileID: 6946681491704491657}
   m_Layer: 0
-  m_Name: ChamberCollider (3)
+  m_Name: BehindChamberCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -372,9 +341,37 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 776494963945835444, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 776494963945835444, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 518954d7a7d1afc48b23a85c7aa21718, type: 2}
+    - target: {fileID: 776494963945835444, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: e8ffe75bd5c162f43bbbfc0926d91127, type: 2}
     - target: {fileID: 919132149155446097, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
       propertyPath: m_Name
       value: CryoChamber
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295286179923345716, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295286179923345716, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 53dcd156028038c4f9d66ca62fffdc4a, type: 2}
+    - target: {fileID: 2295286179923345716, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: e60c53b5a1dd75242a6686a2f8a84167, type: 2}
+    - target: {fileID: 5746570121732079815, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -391,9 +388,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6467888643098972232, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6068036584765411204}
-    - targetCorrespondingSourceObject: {fileID: 6467888643098972232, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1612508930224364180}
     - targetCorrespondingSourceObject: {fileID: -3801869719918154996, guid: 14f8871b1c4918b4cb63223ceabaae88, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3263253176912388160}

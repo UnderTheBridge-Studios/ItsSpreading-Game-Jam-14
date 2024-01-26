@@ -57,7 +57,7 @@ public class I08_Door : MonoBehaviour, IInteractable
 
     private void ChangePropertyBlock(float amount)
     {
-        //m_materialBlock.SetFloat("_Blocked", amount);
-        //m_meshRenderer.SetPropertyBlock(m_materialBlock);
+        m_materialBlock.SetFloat("_Blocked", amount);
+        m_meshRenderer.SetPropertyBlock(m_materialBlock);
     }
 }

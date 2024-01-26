@@ -122,6 +122,7 @@ Material:
     - _AlphaToMask: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
+    - _Blocked: 0
     - _BumpScale: 1
     - _CastShadows: 1
     - _ClearCoatMask: 0
@@ -136,10 +137,14 @@ Material:
     - _ENUM: 0
     - _EmissiveAmount: 5
     - _EnvironmentReflections: 1
+    - _FrenselPower: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _INTERACTABLE: 0
     - _INVERT: 0
+    - _InteractableEmissiveAmount: 1
+    - _InteractableFrequency: 1
     - _Metallic: 0
     - _NoiseContrast: 1
     - _NoiseRotate45: 0
@@ -169,6 +174,7 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _BlockedColor: {r: 1, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 1, g: 0, b: 0, a: 0}

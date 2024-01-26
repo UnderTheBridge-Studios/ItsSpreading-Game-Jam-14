@@ -16,7 +16,6 @@ public class I02_DoorButton : I08_Door
 
     public override bool Interact(PlayerInteract interactor)
     {
-        Debug.Log(IsLocked);
         if (IsLocked)
         {
             HUBManager.instance.UseActionPromp(m_sprite, m_text, m_time);

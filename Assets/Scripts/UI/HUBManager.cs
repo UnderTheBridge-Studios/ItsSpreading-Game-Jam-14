@@ -29,6 +29,9 @@ public class HUBManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI m_noteContent;
     float m_batteryTimeElapsed;
 
+    [Header("Pointer")]
+    [SerializeField] private GameObject m_pointerPrompt;
+
     [Header("Material References")]
     [SerializeField] private Material m_oclusionMaterial;
 
@@ -56,7 +59,11 @@ public class HUBManager : MonoBehaviour
         m_healthLearpSpeed = 5f * Time.deltaTime;
         m_poisonBar.sizeDelta = new Vector2(Mathf.Clamp(Mathf.Lerp(m_poisonBar.rect.width, GameManager.instance.Poison / 100 * m_poisonMaxWidth, m_healthLearpSpeed), 0f, m_poisonMaxWidth), m_poisonBar.rect.height);
 
-        m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), 1 - (GameManager.instance.Poison/100), m_healthLearpSpeed));
+        if (GameManager.instance.IsDead)
+            m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), -1.2f, Time.deltaTime));
+        else
+            m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), 1 - (GameManager.instance.Poison / 100), m_healthLearpSpeed));
+            
 
         //in case the poison its full poisonRate hides
         if (GameManager.instance.Poison == 100f)
@@ -90,14 +97,18 @@ public class HUBManager : MonoBehaviour
         m_rechargePrompt.SetActive(false);
         m_rechargingBar.gameObject.SetActive(false);
         m_noteDisplay.SetActive(false);
+        m_pointerPrompt.SetActive(true);
 
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
         m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
-        //m_poisonMaxWidth = m_healthBar.GetComponent<RectTransform>().rect.width - 10;
         m_oclusionMaterial.SetFloat("_VignetteRadius", 1);
         HideInhibitors();
         m_isInhibitorsFound = false;
 
+        m_poisonMaxWidth = m_healthBar.GetComponent<RectTransform>().rect.width - 10;
+
+        if(!GameManager.instance.IsDead)
+            m_oclusionMaterial.SetFloat("_VignetteRadius", 1);
     }
 
 
@@ -136,6 +147,11 @@ public class HUBManager : MonoBehaviour
     public void MainMenuActive(bool value)
     {
         m_mainMenu.SetActive(value);
+    }
+
+    public void PointerActive(bool value)
+    {
+        m_pointerPrompt.SetActive(value);
     }
 
 #region Battery
