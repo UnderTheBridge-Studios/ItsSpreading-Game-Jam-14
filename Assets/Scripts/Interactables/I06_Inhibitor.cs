@@ -13,8 +13,7 @@ public class I06_Inhibitor : MonoBehaviour, IInteractable
     public bool Interact(PlayerInteract interactor)
     {
         GameManager.instance.AddInhibitor();
-        Debug.Log("Inhibitor Grabbed");
-        Destroy(this.gameObject);
+        Destroy(gameObject);
         return true;
     }
 }

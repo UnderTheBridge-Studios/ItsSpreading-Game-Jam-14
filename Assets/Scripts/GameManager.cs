@@ -254,7 +254,7 @@ public class GameManager : MonoBehaviour
         m_inhibitors -= 1;
 
         HUBManager.instance.UpdateInhibitors();
-
+        SoundManager.instance.PlayClip(3,1);
     }
 
     #endregion
