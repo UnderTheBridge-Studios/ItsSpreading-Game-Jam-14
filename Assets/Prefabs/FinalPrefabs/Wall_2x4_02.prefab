@@ -19,7 +19,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1093614718272522824
 Transform:
@@ -412,6 +412,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 927d67c0f725878439603e4d21a69b28, type: 3}
       propertyPath: m_Name
       value: Wall_2x4_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 927d67c0f725878439603e4d21a69b28, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3451118302482216456, guid: 927d67c0f725878439603e4d21a69b28, type: 3}
