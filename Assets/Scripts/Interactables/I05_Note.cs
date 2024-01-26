@@ -6,6 +6,7 @@ public class I05_Note : MonoBehaviour, IInteractable
 {
     [SerializeField] private string m_id = "";
     [SerializeField] private string m_prompt = "Read Note";
+    [TextArea(10,7)]
     [SerializeField] private string m_content = "";
 
     private InputManager m_inputManager;

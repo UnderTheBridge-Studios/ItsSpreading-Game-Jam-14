@@ -95,6 +95,8 @@ public class GameManager : MonoBehaviour
             if (m_battery < m_batteryTimeFlicker)
                 m_isFlickering = true;
         }
+
+        Debug.Log("m_isPaused: " +  m_isPaused);
     }
 
     #region Restart
@@ -132,13 +134,15 @@ public class GameManager : MonoBehaviour
 
         m_player.GetComponent<PlayerMovement>().ResetPosition();
 
-        if (showMainMenu)
-            m_player.GetComponent<InputManager>().OpenMainMenu();
 
-        if (!UseCinematics)
-            m_player.GetComponent<PlayerCinematics>().enabled = false;
+        if (showMainMenu)
+        {
+            HUBManager.instance.MainMenuActive();
+            m_player.GetComponent<InputManager>().LockMovement(true);
+        }
         else
-            m_player.GetComponent<PlayerCinematics>().LaunchFirstCinematic();
+            m_player.GetComponent<InputManager>().LockMovement(false);
+
     }
 
     private void CheckDeath()

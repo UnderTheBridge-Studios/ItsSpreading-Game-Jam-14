@@ -25,8 +25,6 @@ public class HUBManager : MonoBehaviour
     [Header("Battery")]
     [SerializeField] private GameObject m_rechargePrompt;
     [SerializeField] private Image m_rechargingBar;
-    [SerializeField] private GameObject m_noteDisplay;
-    [SerializeField] private TextMeshProUGUI m_noteContent;
     float m_batteryTimeElapsed;
 
     [Header("Pointer")]
@@ -41,6 +39,15 @@ public class HUBManager : MonoBehaviour
     [SerializeField] private GameObject m_noInhibitorImage;
     [SerializeField] private TextMeshProUGUI m_inhibitorNumbers;
     private bool m_isInhibitorsFound; //if the player have picked up inhibitors for the first time
+   
+    [Space(15)]
+    [SerializeField] private GameObject m_noteDisplay;
+
+    [Space(15)]
+    [SerializeField] private Texture2D m_cursor;
+
+    [HideInInspector]
+    public bool isPauseMenuOpening; //or closing
 
     private void Awake()
     {
@@ -50,7 +57,8 @@ public class HUBManager : MonoBehaviour
             instance = this;
 
         m_poisonMaxWidth = m_healthBar.GetComponent<RectTransform>().rect.width - 10;
-        m_noteContent = m_noteDisplay.GetComponentInChildren<TextMeshProUGUI>();
+
+        Cursor.SetCursor(m_cursor, Vector2.zero, CursorMode.Auto);
     }
 
     private void Update()
@@ -117,7 +125,7 @@ public class HUBManager : MonoBehaviour
         m_actionPrompt.GetComponent<UIActionPrompt>().UseActionPrompt(sprite, text, time);
     }
 
-    public void InteractPromptActive(bool value, string prompt)
+    public void InteractPromptActive(bool value, string prompt = "")
     {
         m_interactPrompt.SetActive(value);
         //m_interactPrompt.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = prompt;
@@ -139,14 +147,21 @@ public class HUBManager : MonoBehaviour
 
     }
 
-    public void PauseMenuActive(bool value)
+    public void PauseMenuActive()
     {
-        m_pauseMenu.SetActive(value);
+        m_pauseMenu.SetActive(true);
+        m_pauseMenu.GetComponent<UIPauseMenu>().OpenPauseMenu();
     }
 
-    public void MainMenuActive(bool value)
+    public void ResumeGame()
     {
-        m_mainMenu.SetActive(value);
+        m_pauseMenu.GetComponent<UIPauseMenu>().Resume();
+    }
+
+    public void MainMenuActive()
+    {
+        m_mainMenu.SetActive(true);
+        m_mainMenu.GetComponent<UIMainMenu>().OpenMenu();
     }
 
     public void PointerActive(bool value)
@@ -172,13 +187,13 @@ public class HUBManager : MonoBehaviour
 #region Note
     public void ShowNote(string noteContent)
     {
-        m_noteDisplay.SetActive(true);
-        m_noteContent.text = noteContent;
+        m_noteDisplay.GetComponent<UINoteDisplay>().ShowNote(noteContent);
+        InteractPromptActive(false);
     }
 
-    public void HideNote()
+    public void  HideNote()
     {
-        m_noteDisplay.SetActive(false);
+        m_noteDisplay.GetComponent<UINoteDisplay>().HideNote();
     }
 
 #endregion
