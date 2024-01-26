@@ -74,7 +74,7 @@ public class HUBManager : MonoBehaviour
         m_poisonBar.sizeDelta = new Vector2(Mathf.Clamp(Mathf.Lerp(m_poisonBar.rect.width, GameManager.instance.Poison / 100 * m_poisonMaxWidth, m_healthLearpSpeed), 0f, m_poisonMaxWidth), m_poisonBar.rect.height);
 
         if (GameManager.instance.IsDead)
-            m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), -1.2f, Time.deltaTime));
+            m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), -1.2f, Time.deltaTime*0.5f));
         else
             m_oclusionMaterial.SetFloat("_VignetteRadius", Mathf.Lerp(m_oclusionMaterial.GetFloat("_VignetteRadius"), 1 - (GameManager.instance.Poison / 100), m_healthLearpSpeed));
             

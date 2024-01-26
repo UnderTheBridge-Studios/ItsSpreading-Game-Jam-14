@@ -425,5 +425,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_door: {fileID: 4516552199244064792}
   m_rotation: -60
-  m_duration: 3
-  m_timeBeforeOpen: 3
+  m_duration: 7
+  m_timeBeforeOpen: 2
+  m_soundVolume: 0.2
