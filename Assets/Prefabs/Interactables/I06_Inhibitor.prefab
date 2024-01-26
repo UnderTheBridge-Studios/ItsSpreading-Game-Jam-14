@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_id: 
   m_prompt: Grab HealthPack
+  m_soundVolume: 0.6
 --- !u!1001 &4795190599173213715
 PrefabInstance:
   m_ObjectHideFlags: 0
