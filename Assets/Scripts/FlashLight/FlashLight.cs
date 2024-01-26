@@ -59,6 +59,8 @@ public class FlashLight : MonoBehaviour
         if (!m_hasFlashlight)
             return;
 
+        SoundManager.instance.PlayClip(4,1);
+
         if (!m_isFlashlightEnabled && GameManager.instance.Battery > 0 && !GameManager.instance.IsCharging)
         {
             m_isFlashlightEnabled = true;

@@ -19,8 +19,8 @@ public class PlayerCinematics : MonoBehaviour
     [Header("Death Cinematic")]
     [SerializeField] private float m_d_cameraPositionY = 0.5f;
     [SerializeField] private float m_d_cameraRotationZ = 60f;
-    [SerializeField] private float m_d_moveDuration = 3f;
-    [SerializeField] private float m_d_stillTime = 4f;
+    [SerializeField] private float m_d_moveDuration = 6f;
+    [SerializeField] private float m_d_stillTime = 8f;
 
     public void LaunchFirstCinematic()
     {
@@ -33,6 +33,7 @@ public class PlayerCinematics : MonoBehaviour
     public void LaunchDeathCinematic()
     {
         m_input.SetCinematicInputs();
+        SoundManager.instance.PlayClip(6,1);
         HUBManager.instance.ResetHUB();
         HUBManager.instance.PointerActive(false);
 

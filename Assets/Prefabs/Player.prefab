@@ -320,8 +320,8 @@ MonoBehaviour:
   m_f_stillTime2: 2
   m_d_cameraPositionY: 0.5
   m_d_cameraRotationZ: 60
-  m_d_moveDuration: 3
-  m_d_stillTime: 4
+  m_d_moveDuration: 6
+  m_d_stillTime: 8
 --- !u!81 &5404484120587796355
 AudioListener:
   m_ObjectHideFlags: 0

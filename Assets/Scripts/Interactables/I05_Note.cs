@@ -16,7 +16,7 @@ public class I05_Note : MonoBehaviour, IInteractable
     {
         m_inputManager = interactor.GetComponent<InputManager>();
         m_inputManager.OpenNotePopUp(m_content);
-
+        SoundManager.instance.PlayClip(5,1);
         return true;
     }
 }
