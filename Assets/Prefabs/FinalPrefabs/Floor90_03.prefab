@@ -56,6 +56,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor90_03
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d3afb6aa9b83c2e4b8f9360116761ff0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
