@@ -21,6 +21,7 @@ public class PlayerCinematics : MonoBehaviour
     [SerializeField] private float m_d_cameraRotationZ = 60f;
     [SerializeField] private float m_d_moveDuration = 6f;
     [SerializeField] private float m_d_stillTime = 8f;
+    [SerializeField] private float m_d_soundVolume = 0.2f;
 
     public void LaunchFirstCinematic()
     {
@@ -33,7 +34,7 @@ public class PlayerCinematics : MonoBehaviour
     public void LaunchDeathCinematic()
     {
         m_input.SetCinematicInputs();
-        SoundManager.instance.PlayClip(6,1);
+        SoundManager.instance.PlayClip(6, m_d_soundVolume);
         HUBManager.instance.ResetHUB();
         HUBManager.instance.PointerActive(false);
 
