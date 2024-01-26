@@ -13,6 +13,7 @@ public class I03_Key : MonoBehaviour, IInteractable
     public bool Interact(PlayerInteract interactor)
     {
         GameManager.instance.AddKey(m_id);
+        SoundManager.instance.PlayClip(8, 1);
         Destroy(gameObject);
         return true;
     }

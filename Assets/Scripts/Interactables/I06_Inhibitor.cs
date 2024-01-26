@@ -13,6 +13,7 @@ public class I06_Inhibitor : MonoBehaviour, IInteractable
     public bool Interact(PlayerInteract interactor)
     {
         GameManager.instance.AddInhibitor();
+        SoundManager.instance.PlayClip(8,1);
         Destroy(gameObject);
         return true;
     }
