@@ -35,6 +35,15 @@ public class MaterialBlockGrowth : MonoBehaviour
 
     void Update()
     {
+        if (m_isGrowing)
+        {
+            gameObject.transform.parent.GetComponentInParent<AlienGroup>().IsGrowing();
+        }
+        else if (!m_isGrowing && m_isChangingSize)
+        {
+            gameObject.transform.parent.GetComponentInParent<AlienGroup>().IsBurning();
+        }
+
         if (!m_isChangingSize)
             return;
 

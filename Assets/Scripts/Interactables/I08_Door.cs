@@ -12,9 +12,11 @@ public class I08_Door : MonoBehaviour, IInteractable
     [SerializeField] private MeshRenderer m_meshRenderer;
 
     private bool m_isLocked = false;
+    private bool m_isOpen = false;
     private BoxCollider m_collider;
 
     public bool IsLocked => m_isLocked;
+    public bool IsOpen => m_isOpen;
     public bool CanReOpen => m_canReOpen;
     public string ID => m_id;
     public string InteractionPromt => m_prompt;
@@ -35,13 +37,21 @@ public class I08_Door : MonoBehaviour, IInteractable
 
     public virtual void OpenDoor()
     {
+        if (m_isOpen)
+            return;
+
         m_collider.enabled = false;
+        m_isOpen = true;
         m_animation.OpenDoorAnimation();
     }
 
     public virtual void CloseDoor()
     {
+        if (!m_isOpen)
+            return;
+
         m_collider.enabled = true;
+        m_isOpen = false;
         m_animation.CloseDoorAnimation();
     }
 
