@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_id: 
   m_prompt: Grab Key
+  m_soundVolume: 0.6
 --- !u!1001 &5813822379209817176
 PrefabInstance:
   m_ObjectHideFlags: 0

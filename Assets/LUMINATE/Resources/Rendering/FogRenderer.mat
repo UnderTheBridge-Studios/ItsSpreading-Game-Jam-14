@@ -43,15 +43,15 @@ Material:
     - _ADDITIONAL_LIGHT_SHADOWS: 1
     - _AdditionalCount: 0
     - _AdditionalLightsCount: 0
-    - _Anisotropy: 0.603
-    - _Brightness: 0.035
+    - _Anisotropy: 0.444
+    - _Brightness: 0.01
     - _Density: 1
     - _Jitter: 0.053
     - _LowResDist: 50
     - _LowResMultiplier: 10
     - _MAIN_LIGHT_CALCULATE_SHADOWS: 0
     - _MaxStepSize: 500
-    - _Min_Density: 0.008
+    - _Min_Density: 0
     - _Power: 1
     - _QueueControl: 0
     - _QueueOffset: 0
