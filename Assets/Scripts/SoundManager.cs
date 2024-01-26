@@ -17,7 +17,7 @@ public class SoundManager : MonoBehaviour
             instance = this;
     }
 
-    public void SelectAudio(int index, float volume)
+    public void PlayClip(int index, float volume)
     {
         m_source.PlayOneShot(m_clips[index], volume);
     }

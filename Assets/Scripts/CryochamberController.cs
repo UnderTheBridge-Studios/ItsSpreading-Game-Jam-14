@@ -18,6 +18,7 @@ public class CryochamberController : MonoBehaviour
     private IEnumerator OpenDoor()
     {
         yield return new WaitForSeconds(m_timeBeforeOpen);
+        SoundManager.instance.PlayClip(2,1);
         m_door.DOLocalRotate(new Vector3(m_rotation, 0, 0), m_duration);
     }
 }
