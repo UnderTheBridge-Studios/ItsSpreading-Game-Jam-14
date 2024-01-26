@@ -138,7 +138,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EMISSIVE: 1
     - _ENUM: 0
-    - _EmissiveAmount: 4
+    - _EmissiveAmount: 1
     - _EnvironmentReflections: 1
     - _FrenselPower: 1
     - _GlossMapScale: 0

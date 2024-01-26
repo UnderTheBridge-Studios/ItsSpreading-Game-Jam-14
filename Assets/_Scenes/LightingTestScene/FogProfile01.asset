@@ -92,7 +92,7 @@ MonoBehaviour:
     m_Value: 0.362
   additionalLightsIntensityMultiplier:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 10
   jitter:
     m_OverrideState: 1
     m_Value: 0.053
@@ -110,16 +110,16 @@ MonoBehaviour:
     m_Value: 1
   minDensity:
     m_OverrideState: 1
-    m_Value: 0.008
+    m_Value: 0
   fogColor:
     m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   brightness:
     m_OverrideState: 1
-    m_Value: 0.035
+    m_Value: 0.05
   anisotropy:
     m_OverrideState: 1
-    m_Value: 0.603
+    m_Value: 0.444
   blurRadius:
     m_OverrideState: 1
     m_Value: 0
