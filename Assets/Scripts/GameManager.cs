@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float m_poison = 0f;
     [Tooltip("How much poison the inhibitor heal, from 0 to 100")]
     [SerializeField] private float m_inhibitorHealth;
+    [SerializeField] private float m_inhibitorVolume = 0.5f;
     private bool m_isPoisoned;
     private float m_inhibitors;
 
@@ -196,6 +197,7 @@ public class GameManager : MonoBehaviour
         m_isCharging = true;
         m_player.GetComponent<PlayerMovement>().SetSlowSpeed();
         HUBManager.instance.RechargingPromptActive(true);
+        SoundManager.instance.PlayReload();
         m_batteryCharging = StartCoroutine(ChargingBattery());
     }
 
@@ -206,6 +208,7 @@ public class GameManager : MonoBehaviour
 
         StopCoroutine(m_batteryCharging);
         HUBManager.instance.RechargingPromptActive(false);
+        SoundManager.instance.StopReload();
         m_isCharging = false;
         m_player.GetComponent<PlayerMovement>().SetWalkingSpeed();
     }
@@ -254,7 +257,7 @@ public class GameManager : MonoBehaviour
         m_inhibitors -= 1;
 
         HUBManager.instance.UpdateInhibitors();
-
+        SoundManager.instance.PlayClip(3, m_inhibitorVolume);
     }
 
     #endregion

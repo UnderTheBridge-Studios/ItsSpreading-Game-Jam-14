@@ -7,6 +7,7 @@ public class I05_Note : MonoBehaviour, IInteractable
     [SerializeField] private string m_id = "";
     [SerializeField] private string m_prompt = "Read Note";
     [SerializeField] private string m_content = "";
+    [SerializeField] private float m_soundVolume = 0.5f;
 
     private InputManager m_inputManager;
     public string InteractionPromt => m_prompt;
@@ -16,7 +17,7 @@ public class I05_Note : MonoBehaviour, IInteractable
     {
         m_inputManager = interactor.GetComponent<InputManager>();
         m_inputManager.OpenNotePopUp(m_content);
-
+        SoundManager.instance.PlayClip(5, m_soundVolume);
         return true;
     }
 }

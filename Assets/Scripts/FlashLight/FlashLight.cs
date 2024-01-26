@@ -6,19 +6,24 @@ using UnityEngine.Experimental.GlobalIllumination;
 
 public class FlashLight : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private Transform m_playerInteractPoint;
     [SerializeField] private Light m_light;
 
+    [Header("Light Projectiles")]
     [SerializeField] private GameObject m_LightProjectile;
     [SerializeField] private float m_range = 20f;
     [SerializeField] private float m_radius = 1f;
     [SerializeField] private float m_velocity = 2f;
 
+    [Header("Animation and Sound")]
     [SerializeField] private GameObject m_flashlight;
     [SerializeField] private Vector3 m_flashlightPosition;
     [SerializeField] private float m_flashlightAnimationJump;
     [SerializeField] private float m_flashlightAnimationTime;
+    [SerializeField] private float m_toggleVolume = 0.3f;
 
+    [Header("Values")]
     [Range(1f, 100f)]
     [SerializeField] private float m_projectileFov = 30f;
     [Range(0.01f, 1f)]
@@ -58,6 +63,8 @@ public class FlashLight : MonoBehaviour
     {
         if (!m_hasFlashlight)
             return;
+
+        SoundManager.instance.PlayClip(4, m_toggleVolume);
 
         if (!m_isFlashlightEnabled && GameManager.instance.Battery > 0 && !GameManager.instance.IsCharging)
         {
