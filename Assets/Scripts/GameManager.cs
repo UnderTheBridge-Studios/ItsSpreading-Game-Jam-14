@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float m_poison = 0f;
     [Tooltip("How much poison the inhibitor heal, from 0 to 100")]
     [SerializeField] private float m_inhibitorHealth;
+    [SerializeField] private float m_inhibitorVolume = 0.5f;
     private bool m_isPoisoned;
     private float m_inhibitors;
 
@@ -254,7 +255,7 @@ public class GameManager : MonoBehaviour
         m_inhibitors -= 1;
 
         HUBManager.instance.UpdateInhibitors();
-        SoundManager.instance.PlayClip(3,1);
+        SoundManager.instance.PlayClip(3, m_inhibitorVolume);
     }
 
     #endregion

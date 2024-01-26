@@ -40,7 +40,8 @@ public class PlayerMovement : MonoBehaviour
     private float m_currentBounceTime;
 
     private bool m_isGrounded;
-    private bool m_isMoving;
+    private bool m_isMoving = false;
+    private bool m_isPreviouslyMoving = false;
 
     private float m_cameraTimer = 0;
 
@@ -95,10 +96,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void IsMovingCheck()
     {
-        if(m_horizontalVelocity != Vector3.zero)
+        m_isPreviouslyMoving = m_isMoving;
+
+        if (m_horizontalVelocity != Vector3.zero)
             m_isMoving = true;
         else
             m_isMoving = false;
+
+        if (m_isMoving && !m_isPreviouslyMoving)
+            SoundManager.instance.PlayFootSteps();
+        else if (!m_isMoving && m_isPreviouslyMoving)
+            SoundManager.instance.StopFootSteps();
     }
 
     public void ReceiveInput(Vector2 _horizontalInput)

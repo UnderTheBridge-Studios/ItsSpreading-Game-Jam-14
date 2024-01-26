@@ -296,6 +296,7 @@ MonoBehaviour:
   m_flashlightPosition: {x: 0.231, y: -0.24, z: 0.625}
   m_flashlightAnimationJump: 0.25
   m_flashlightAnimationTime: 1
+  m_soundVolume: 0.1
   m_projectileFov: 30
   m_fireRate: 0.05
   m_fickerRandTime: 0.5
