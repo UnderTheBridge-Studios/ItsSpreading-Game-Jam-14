@@ -197,6 +197,7 @@ public class GameManager : MonoBehaviour
         m_isCharging = true;
         m_player.GetComponent<PlayerMovement>().SetSlowSpeed();
         HUBManager.instance.RechargingPromptActive(true);
+        SoundManager.instance.PlayReload();
         m_batteryCharging = StartCoroutine(ChargingBattery());
     }
 
@@ -207,6 +208,7 @@ public class GameManager : MonoBehaviour
 
         StopCoroutine(m_batteryCharging);
         HUBManager.instance.RechargingPromptActive(false);
+        SoundManager.instance.StopReload();
         m_isCharging = false;
         m_player.GetComponent<PlayerMovement>().SetWalkingSpeed();
     }

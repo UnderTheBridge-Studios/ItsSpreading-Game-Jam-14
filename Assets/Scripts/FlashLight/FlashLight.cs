@@ -21,7 +21,7 @@ public class FlashLight : MonoBehaviour
     [SerializeField] private Vector3 m_flashlightPosition;
     [SerializeField] private float m_flashlightAnimationJump;
     [SerializeField] private float m_flashlightAnimationTime;
-    [SerializeField] private float m_soundVolume = 0.3f;
+    [SerializeField] private float m_toggleVolume = 0.3f;
 
     [Header("Values")]
     [Range(1f, 100f)]
@@ -64,7 +64,7 @@ public class FlashLight : MonoBehaviour
         if (!m_hasFlashlight)
             return;
 
-        SoundManager.instance.PlayClip(4, m_soundVolume);
+        SoundManager.instance.PlayClip(4, m_toggleVolume);
 
         if (!m_isFlashlightEnabled && GameManager.instance.Battery > 0 && !GameManager.instance.IsCharging)
         {
