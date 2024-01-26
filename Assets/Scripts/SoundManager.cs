@@ -68,7 +68,7 @@ public class SoundManager : MonoBehaviour
         m_reloadCoroutine = StartCoroutine(FadeOut(m_reloadSource, m_reloadFadeTime));
     }
 
-    private IEnumerator FadeIn(AudioSource audioSource, float finalVolume, float fadeTime)
+    public IEnumerator FadeIn(AudioSource audioSource, float finalVolume, float fadeTime)
     {
         float startVolume = 0.2f;
         audioSource.volume = 0;
@@ -85,7 +85,7 @@ public class SoundManager : MonoBehaviour
         m_walkCoroutine = null;
     }
 
-    private IEnumerator FadeOut(AudioSource audioSource, float fadeTime)
+    public IEnumerator FadeOut(AudioSource audioSource, float fadeTime)
     {
         float startVolume = audioSource.volume;
 
