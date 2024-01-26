@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Glass
+  m_Name: MAT_GlassOuter
   m_Shader: {fileID: -6465566751694194690, guid: 24438d17428d3bd4cb378ef6aa4d55ae, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -118,26 +118,26 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
     - _DstBlendAlpha: 0
-    - _EmissionAmount: 0
+    - _EmissionAmount: 0.12
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
     - _NOISEMASKSELECT: 3
-    - _NoiseAmount: 1.9
-    - _NoisePower: -1.01
+    - _NoiseAmount: 0.33
+    - _NoisePower: 0.65
     - _NoiseTiling: 1
     - _OcclusionStrength: 1
-    - _Opacity: 0
+    - _Opacity: 0.32
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Radius: 0.42
+    - _Radius: 1.08
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _Softness: 0.66
+    - _Softness: 0.96
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
