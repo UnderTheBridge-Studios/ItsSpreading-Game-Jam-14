@@ -118,7 +118,7 @@ MonoBehaviour:
   m_animation: {fileID: 8262809190473730678}
   m_meshRenderer: {fileID: 2063786122768412030}
   m_keyID: Key01
-  m_sprite: {fileID: 21300000, guid: c3f93f9f366b8334a8965520f99f94ff, type: 3}
+  m_sprite: {fileID: 21300000, guid: 2a747edb23c607e4f96abfb701926ba4, type: 3}
   m_text: Missing Key
   m_time: 3
 --- !u!114 &8262809190473730678 stripped

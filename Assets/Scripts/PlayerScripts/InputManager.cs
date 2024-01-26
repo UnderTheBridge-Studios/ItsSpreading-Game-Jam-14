@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -83,31 +84,28 @@ public class InputManager : MonoBehaviour
         m_notesPopUp.Disable();
     }
 
-    #region Menus
-    public void OpenMainMenu()
+    public void LockMovement(bool value)
     {
-        GameManager.instance.PauseGame();
-        HUBManager.instance.MainMenuActive(true);
-
-        m_gamePlay.Disable();
-        m_mainMenuNavigation.Enable();
+        m_gamePlay.Enable();
+        m_mainMenuNavigation.Disable();
         m_pauseNavigation.Disable();
         m_notesPopUp.Disable();
+
+        if (value)
+            m_gamePlay.HorizontalMovement.Disable();
+        else
+            m_gamePlay.HorizontalMovement.Enable();
     }
 
-    public void CloseMainMenu()
-    {
-        GameManager.instance.PauseGame();
-        HUBManager.instance.MainMenuActive(false);
-
-        if (!GameManager.instance.UseCinematics)
-            SetGameplayInputs();
-    }
+    #region Menus
 
     public void OpenPauseMenu()
     {
+        if (HUBManager.instance.isPauseMenuOpening)
+            return;
+
         GameManager.instance.PauseGame();
-        HUBManager.instance.PauseMenuActive(true);
+        HUBManager.instance.PauseMenuActive();
 
         m_gamePlay.Disable();
         m_mainMenuNavigation.Disable();
@@ -117,10 +115,10 @@ public class InputManager : MonoBehaviour
 
     public void ClosePauseMenu()
     {
-        GameManager.instance.PauseGame();
-        HUBManager.instance.PauseMenuActive(false);
+        if (HUBManager.instance.isPauseMenuOpening)
+            return;
 
-        SetGameplayInputs();
+        HUBManager.instance.ResumeGame();
     }
 
     public void OpenNotePopUp(string content)
@@ -136,10 +134,14 @@ public class InputManager : MonoBehaviour
 
     public void CloseNotePopUp()
     {
-        GameManager.instance.PauseGame();
         HUBManager.instance.HideNote();
-
-        SetGameplayInputs();
     }
+
+    public void RecoverControl()
+    {
+        SetGameplayInputs();
+        GameManager.instance.PauseGame();
+    }
+
     #endregion
 }

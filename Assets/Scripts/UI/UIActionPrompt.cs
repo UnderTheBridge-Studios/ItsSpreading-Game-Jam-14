@@ -7,25 +7,25 @@ using UnityEngine.UI;
 public class UIActionPrompt : MonoBehaviour
 {
     [SerializeField] private Image m_icon;
-    [SerializeField] private TextMeshProUGUI m_content;
+    [SerializeField] private GameObject m_textContainer;
 
     private Coroutine m_coroutine;
 
     public void UseActionPrompt(Sprite sprite, string text, float time)
     {
         if (m_coroutine != null)
-            return;
+            StopCoroutine(m_coroutine);
 
         m_icon.sprite = sprite;
-        m_content.text = text;
         gameObject.SetActive(true);
-
-        m_coroutine = StartCoroutine(ShowPrompt(time));
+        m_textContainer.GetComponent<ResizeTextConainer>().Initialize(text);
+        m_coroutine = StartCoroutine(HidePrompt(time));
     }
 
-    private IEnumerator ShowPrompt(float time)
+    private IEnumerator HidePrompt(float time)
     {
         yield return new WaitForSeconds(time);
+
         gameObject.SetActive(false);
         m_coroutine = null;
     }
