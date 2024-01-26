@@ -12,6 +12,8 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private Button m_Exit;
 
     [SerializeField] private TextMeshProUGUI m_title;
+    [SerializeField] private GameObject m_credits;
+    private TextMeshProUGUI[] m_childs;
 
     private void Start()
     {
@@ -24,6 +26,7 @@ public class UIMainMenu : MonoBehaviour
 
     private IEnumerator ShowMenu()
     {
+        //Hide everything
         m_title.maxVisibleCharacters = 0;
         m_StartButton.image.fillAmount = 0;
         m_SettingsButton.image.fillAmount = 0;
@@ -37,13 +40,22 @@ public class UIMainMenu : MonoBehaviour
         settingsText.maxVisibleCharacters = 0;
         exitText.maxVisibleCharacters = 0;
 
+
+        m_childs = new TextMeshProUGUI[5];
+        for (int i = 0; i < 5; i++)
+        {
+            m_childs[i] = m_credits.transform.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>();
+            m_childs[i].gameObject.SetActive(false);
+        }
+        ///
+
         yield return new WaitForSeconds(1f);
 
 
         while (m_title.maxVisibleCharacters < m_title.text.Length)
         {
             m_title.maxVisibleCharacters++;
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.2f);
         }
         yield return new WaitForSeconds(0.3f);
 
@@ -54,8 +66,9 @@ public class UIMainMenu : MonoBehaviour
         StartCoroutine(ShowButton(m_Exit.image, exitText));
 
 
+        yield return new WaitForSeconds(0.2f);
 
-
+        StartCoroutine(ShowsCredits());
         //m_StartButton.image.fillAmount = 0;
         //m_StartButton.image.DOFillAmount(1, 0.4f).SetEase(Ease.InOutCirc);
         //yield return new WaitForSeconds(0.1f);
@@ -70,8 +83,6 @@ public class UIMainMenu : MonoBehaviour
 
     private IEnumerator ShowButton(Image imageButton, TextMeshProUGUI textButton)
     {
-        Debug.Log(textButton.text);
-
         imageButton.DOFillAmount(1, 0.5f).SetEase(Ease.InOutCirc);
         //.OnComplete(() => while (true) { });
         yield return new WaitForSeconds(0.3f);
@@ -83,8 +94,21 @@ public class UIMainMenu : MonoBehaviour
         }
     }
 
-
-
+    private IEnumerator ShowsCredits()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            m_childs[i].maxVisibleCharacters = 0;
+            m_childs[i].gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.4f);
+            while (m_childs[i].maxVisibleCharacters < m_childs[i].text.Length)
+            {
+                m_childs[i].GetComponent<TextMeshProUGUI>().maxVisibleCharacters++;
+                yield return new WaitForSeconds(0.05f);
+            }
+            yield return new WaitForSeconds(0.2f);
+        }
+    }
 
     private void Resume()
     {
