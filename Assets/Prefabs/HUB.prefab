@@ -141,7 +141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Title of the game
+  m_text: Onboard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c2db9d15cc687e448932e1230ff1ce5, type: 2}
   m_sharedMaterial: {fileID: 5868050935184205235, guid: 1c2db9d15cc687e448932e1230ff1ce5, type: 2}
@@ -175,8 +175,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
