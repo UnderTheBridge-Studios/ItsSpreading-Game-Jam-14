@@ -116,7 +116,7 @@ MonoBehaviour:
   m_prompt: Open Door
   m_animation: {fileID: 4085040146189486983}
   m_meshRenderer: {fileID: 6399204414399525076}
-  m_sprite: {fileID: 21300000, guid: c3f93f9f366b8334a8965520f99f94ff, type: 3}
+  m_sprite: {fileID: 21300000, guid: 2a747edb23c607e4f96abfb701926ba4, type: 3}
   m_text: Button must be presesd
   m_time: 3
 --- !u!114 &4085040146189486983 stripped

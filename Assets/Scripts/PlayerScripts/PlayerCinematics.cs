@@ -11,25 +11,12 @@ public class PlayerCinematics : MonoBehaviour
 
     [SerializeField] private Transform m_camera;
 
-    [Header("First Cinematic")]
-    [SerializeField] private float m_f_stillTime = 8f;
-    [SerializeField] private float m_f_forwardTime = 2f;
-    [SerializeField] private float m_f_stillTime2 = 2f;
-
     [Header("Death Cinematic")]
     [SerializeField] private float m_d_cameraPositionY = 0.5f;
     [SerializeField] private float m_d_cameraRotationZ = 60f;
     [SerializeField] private float m_d_moveDuration = 6f;
     [SerializeField] private float m_d_stillTime = 8f;
     [SerializeField] private float m_d_soundVolume = 0.2f;
-
-    public void LaunchFirstCinematic()
-    {
-        m_input.SetCinematicInputs();
-        HUBManager.instance.PointerActive(false);
-        
-        StartCoroutine(FirstCinematic());
-    }
 
     public void LaunchDeathCinematic()
     {
@@ -39,22 +26,6 @@ public class PlayerCinematics : MonoBehaviour
         HUBManager.instance.PointerActive(false);
 
         StartCoroutine(DeathCinematic());
-    }
-
-    private IEnumerator FirstCinematic()
-    {
-        yield return new WaitForSeconds(m_f_stillTime);
-        
-        m_movement.SetSlowSpeed();
-        m_movement.ReceiveInput(Vector2.up);
-        yield return new WaitForSeconds(m_f_forwardTime);
-        
-        m_movement.ReceiveInput(Vector2.zero);
-        yield return new WaitForSeconds(m_f_stillTime2);
-        
-        m_movement.SetWalkingSpeed();
-        m_input.SetGameplayInputs();
-        HUBManager.instance.PointerActive(true);
     }
 
     private IEnumerator DeathCinematic()

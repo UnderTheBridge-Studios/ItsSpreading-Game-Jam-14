@@ -224,7 +224,7 @@ MonoBehaviour:
   m_slowBounceTime: 0.5
   m_controller: {fileID: 3433966552042880969}
   m_playerLook: {fileID: 4204994667157738951}
-  m_initialPosition: {x: 0, y: 0, z: 0}
+  m_initialPosition: {x: -55.05, y: 1.37, z: -4.811}
   m_initialRotation: {x: 0, y: 0, z: 0, w: 0}
   m_initialCameraPosition: {x: 0, y: 2.5, z: 0}
   m_initialCameraRotation: {x: 0, y: 0, z: 0, w: 0}

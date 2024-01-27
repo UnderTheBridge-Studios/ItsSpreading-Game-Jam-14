@@ -47,6 +47,13 @@ public class GameManager : MonoBehaviour
     private GameObject m_player;
     private bool m_isPaused;
 
+
+
+    private GameObject m_crychamber;
+    private float m_timeToOpenCryochamber;
+    public float TimeToOpenCryochamber => m_timeToOpenCryochamber;
+
+
     private List<string> m_keyIDs = new List<string>();
 
     public GameObject Player => m_player;
@@ -109,6 +116,7 @@ public class GameManager : MonoBehaviour
         m_isDead = false;
         m_battery = m_batteryTimeDuration;
         m_poison = 0;
+        m_timeToOpenCryochamber = 0;
         m_poisonRate = 0;
     }
 
@@ -133,13 +141,20 @@ public class GameManager : MonoBehaviour
 
         m_player.GetComponent<PlayerMovement>().ResetPosition();
 
-        if (showMainMenu)
-            m_player.GetComponent<InputManager>().OpenMainMenu();
 
-        if (!UseCinematics)
-            m_player.GetComponent<PlayerCinematics>().enabled = false;
+        if (showMainMenu)
+        {
+            m_crychamber.GetComponent<CryochamberController>().SetTime(15);
+            HUBManager.instance.MainMenuActive();
+            m_player.GetComponent<InputManager>().LockMovement(true);
+        }
         else
-            m_player.GetComponent<PlayerCinematics>().LaunchFirstCinematic();
+        {
+            m_crychamber.GetComponent<CryochamberController>().SetTime(2);
+            m_player.GetComponent<InputManager>().LockMovement(false);
+            m_timeToOpenCryochamber = 2;
+        }
+
     }
 
     private void CheckDeath()
@@ -152,6 +167,11 @@ public class GameManager : MonoBehaviour
     }
 
     #endregion
+
+    public void Cryochamber(GameObject chamber)
+    {
+        m_crychamber = chamber;
+    }
 
     public void PauseGame()
     {
