@@ -11,7 +11,7 @@ public class LightProjectile : MonoBehaviour
     private float m_radius = 0.5f;
     private float m_velocity = 0.5f;
     private float m_range = 20;
-    private float m_damage = 0.1f;
+    [SerializeField] private float m_damage = 0.1f;
 
     private void Awake()
     {

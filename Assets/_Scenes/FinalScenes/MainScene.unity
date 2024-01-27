@@ -669,6 +669,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4204994667157738951, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
+      propertyPath: m_sensitivityX
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204994667157738951, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
+      propertyPath: m_sensitivityY
+      value: 0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 4670126350463871204, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
       propertyPath: m_RenderMode
       value: 1
