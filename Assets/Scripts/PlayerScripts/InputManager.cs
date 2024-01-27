@@ -15,6 +15,7 @@ public class InputManager : MonoBehaviour
     private PlayerControls.MainMenuNavigationActions m_mainMenuNavigation;
     private PlayerControls.PauseNavigationActions m_pauseNavigation;
     private PlayerControls.NotesPopUpActions m_notesPopUp;
+    private PlayerControls.EndScreaActions m_endScrean;
 
     private Camera m_camera;
 
@@ -25,6 +26,7 @@ public class InputManager : MonoBehaviour
         m_mainMenuNavigation = m_controls.MainMenuNavigation;
         m_pauseNavigation = m_controls.PauseNavigation;
         m_notesPopUp = m_controls.NotesPopUp;
+        m_endScrean = m_controls.EndScrea;
 
         //Gameplay Inputs
         m_gamePlay.HorizontalMovement.performed += ctx => HorizontalMovement(ctx);
@@ -42,6 +44,10 @@ public class InputManager : MonoBehaviour
 
         //Notes PopUp Inputs
         m_notesPopUp.CloseNote.performed += _ => CloseNotePopUp();
+
+        //EndgameScrean
+        m_endScrean.Restart.performed += _ => CloseGame();
+
     }
     private void OnEnable()
     {
@@ -49,6 +55,7 @@ public class InputManager : MonoBehaviour
         m_mainMenuNavigation.Disable();
         m_pauseNavigation.Disable();
         m_notesPopUp.Disable();
+        m_endScrean.Disable();
     }
 
     private void OnDisable()
@@ -74,6 +81,7 @@ public class InputManager : MonoBehaviour
         m_mainMenuNavigation.Disable();
         m_pauseNavigation.Disable();
         m_notesPopUp.Disable();
+        m_endScrean.Disable();
     }
 
     public void SetCinematicInputs()
@@ -82,6 +90,7 @@ public class InputManager : MonoBehaviour
         m_mainMenuNavigation.Disable();
         m_pauseNavigation.Disable();
         m_notesPopUp.Disable();
+        m_endScrean.Disable();
     }
 
     public void LockMovement(bool value)
@@ -90,6 +99,7 @@ public class InputManager : MonoBehaviour
         m_mainMenuNavigation.Disable();
         m_pauseNavigation.Disable();
         m_notesPopUp.Disable();
+        m_endScrean.Disable();
 
         if (value)
             m_gamePlay.HorizontalMovement.Disable();
@@ -110,6 +120,7 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Disable();
         m_mainMenuNavigation.Disable();
         m_pauseNavigation.Enable();
+        m_endScrean.Disable();
         m_notesPopUp.Disable();
     }
 
@@ -129,6 +140,7 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Disable();
         m_mainMenuNavigation.Disable();
         m_pauseNavigation.Disable();
+        m_endScrean.Disable();
         m_notesPopUp.Enable();
     }
 
@@ -141,6 +153,25 @@ public class InputManager : MonoBehaviour
     {
         SetGameplayInputs();
         GameManager.instance.PauseGame();
+    }
+
+    public void EnableEndScrean()
+    {
+        m_gamePlay.Disable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Disable();
+        m_notesPopUp.Disable();
+        m_endScrean.Enable();
+    }
+
+    private void CloseGame()
+    {
+#if UNITY_STANDALONE
+        Application.Quit();
+#endif
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 
     #endregion
