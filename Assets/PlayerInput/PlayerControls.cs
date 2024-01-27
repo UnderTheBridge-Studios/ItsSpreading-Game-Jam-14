@@ -713,6 +713,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""EndScrea"",
+            ""id"": ""d206f6d6-6890-4bea-b122-ba09948832e8"",
+            ""actions"": [
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""1f813e45-629e-4968-8584-2ec71b1dd002"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a822bb7a-340d-470f-bc1e-47dbd7b061fb"",
+                    ""path"": ""<Keyboard>/anyKey"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -742,6 +770,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // NotesPopUp
         m_NotesPopUp = asset.FindActionMap("NotesPopUp", throwIfNotFound: true);
         m_NotesPopUp_CloseNote = m_NotesPopUp.FindAction("CloseNote", throwIfNotFound: true);
+        // EndScrea
+        m_EndScrea = asset.FindActionMap("EndScrea", throwIfNotFound: true);
+        m_EndScrea_Restart = m_EndScrea.FindAction("Restart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1087,6 +1118,52 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public NotesPopUpActions @NotesPopUp => new NotesPopUpActions(this);
+
+    // EndScrea
+    private readonly InputActionMap m_EndScrea;
+    private List<IEndScreaActions> m_EndScreaActionsCallbackInterfaces = new List<IEndScreaActions>();
+    private readonly InputAction m_EndScrea_Restart;
+    public struct EndScreaActions
+    {
+        private @PlayerControls m_Wrapper;
+        public EndScreaActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Restart => m_Wrapper.m_EndScrea_Restart;
+        public InputActionMap Get() { return m_Wrapper.m_EndScrea; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(EndScreaActions set) { return set.Get(); }
+        public void AddCallbacks(IEndScreaActions instance)
+        {
+            if (instance == null || m_Wrapper.m_EndScreaActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_EndScreaActionsCallbackInterfaces.Add(instance);
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
+        }
+
+        private void UnregisterCallbacks(IEndScreaActions instance)
+        {
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
+        }
+
+        public void RemoveCallbacks(IEndScreaActions instance)
+        {
+            if (m_Wrapper.m_EndScreaActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IEndScreaActions instance)
+        {
+            foreach (var item in m_Wrapper.m_EndScreaActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_EndScreaActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public EndScreaActions @EndScrea => new EndScreaActions(this);
     public interface IGamePlayActions
     {
         void OnHorizontalMovement(InputAction.CallbackContext context);
@@ -1115,5 +1192,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface INotesPopUpActions
     {
         void OnCloseNote(InputAction.CallbackContext context);
+    }
+    public interface IEndScreaActions
+    {
+        void OnRestart(InputAction.CallbackContext context);
     }
 }

@@ -46,6 +46,9 @@ public class HUBManager : MonoBehaviour
     [Space(15)]
     [SerializeField] private Texture2D m_cursor;
 
+    [Space(15)]
+    [SerializeField] private GameObject m_EndScrean;
+
     [HideInInspector]
     public bool isPauseMenuOpening; //or closing
 
@@ -106,6 +109,7 @@ public class HUBManager : MonoBehaviour
         m_rechargingBar.gameObject.SetActive(false);
         m_noteDisplay.SetActive(false);
         m_pointerPrompt.SetActive(true);
+        m_EndScrean.SetActive(false);
 
         m_poisonBar.sizeDelta = new Vector2(0f, m_poisonBar.rect.height);
         m_poisonBarRate.sizeDelta = new Vector2(0f, m_poisonBarRate.rect.height);
@@ -239,4 +243,8 @@ public class HUBManager : MonoBehaviour
 
 #endregion
 
+    public void ShowEndSream()
+    {
+        m_EndScrean.SetActive(true);
+    }
 }
