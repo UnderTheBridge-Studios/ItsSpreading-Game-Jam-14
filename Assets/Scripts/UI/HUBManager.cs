@@ -25,6 +25,7 @@ public class HUBManager : MonoBehaviour
     [Header("Battery")]
     [SerializeField] private GameObject m_rechargePrompt;
     [SerializeField] private Image m_rechargingBar;
+    [SerializeField] private Sprite m_rechargeKey;
     float m_batteryTimeElapsed;
 
     [Header("Pointer")]
@@ -176,7 +177,9 @@ public class HUBManager : MonoBehaviour
 #region Battery
     public void RechargePromptActive(bool value)
     {
-        m_rechargePrompt.SetActive(value);
+        //m_rechargePrompt.SetActive(value);
+        if(value)
+            m_actionPrompt.GetComponent<UIActionPrompt>().UseActionPrompt(m_rechargeKey, "Need to Recharge", 10f);
     }
 
     public void RechargingPromptActive(bool value)

@@ -3007,6 +3007,7 @@ MonoBehaviour:
   m_poisonBarRate: {fileID: 6987066860175726540}
   m_rechargePrompt: {fileID: 572024771275460494}
   m_rechargingBar: {fileID: 3291512852483274311}
+  m_rechargeKey: {fileID: 21300000, guid: 5556153bfb6fe38478b0480fb8f3050b, type: 3}
   m_pointerPrompt: {fileID: 6006736467025454871}
   m_oclusionMaterial: {fileID: 2100000, guid: f1c21f483e6071f489b868934c119e9f, type: 2}
   m_inhibitors: {fileID: 7859313232097106331}
@@ -5999,7 +6000,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Title of the game
+  m_text: Onboard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1c2db9d15cc687e448932e1230ff1ce5, type: 2}
   m_sharedMaterial: {fileID: 5868050935184205235, guid: 1c2db9d15cc687e448932e1230ff1ce5, type: 2}
@@ -6033,8 +6034,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
