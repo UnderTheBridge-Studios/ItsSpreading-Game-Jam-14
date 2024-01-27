@@ -316,9 +316,6 @@ MonoBehaviour:
   m_look: {fileID: 4204994667157738951}
   m_input: {fileID: 4424304689999144895}
   m_camera: {fileID: 6979059136604869273}
-  m_f_stillTime: 8
-  m_f_forwardTime: 2
-  m_f_stillTime2: 2
   m_d_cameraPositionY: 0.5
   m_d_cameraRotationZ: 60
   m_d_moveDuration: 6
@@ -601,7 +598,7 @@ Transform:
   m_GameObject: {fileID: 8722426279355277561}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.523, y: 0, z: -0}
+  m_LocalPosition: {x: -0.088, y: 0.075, z: 0}
   m_LocalScale: {x: 416.66672, y: 416.66663, z: 416.66666}
   m_ConstrainProportionsScale: 0
   m_Children: []
