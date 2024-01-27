@@ -680,6 +680,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "EndScrea",
+            "id": "d206f6d6-6890-4bea-b122-ba09948832e8",
+            "actions": [
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "1f813e45-629e-4968-8584-2ec71b1dd002",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a822bb7a-340d-470f-bc1e-47dbd7b061fb",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
