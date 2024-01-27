@@ -132,7 +132,7 @@ Material:
     - _VignetteNoiseAmount: 1
     - _VignetteNoisePower: 1.15
     - _VignetteNoiseTiling: 1.5
-    - _VignetteRadius: 0.9608653
+    - _VignetteRadius: 0.8193223
     - _VignetteSoftness: 1.5
     - _WorkflowMode: 1
     - _ZWrite: 1

@@ -602,7 +602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2881071025459158636, guid: 5bdf00fef51eef94089626787096ca85, type: 3}
       propertyPath: UseMainMenu
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2881071025459158636, guid: 5bdf00fef51eef94089626787096ca85, type: 3}
       propertyPath: m_firstSceneName
@@ -668,6 +668,14 @@ PrefabInstance:
     - target: {fileID: 1459962071979092884, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204994667157738951, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
+      propertyPath: m_sensitivityX
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204994667157738951, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
+      propertyPath: m_sensitivityY
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 4670126350463871204, guid: 3f7608b043521f247bdd4e721b504682, type: 3}
       propertyPath: m_RenderMode
