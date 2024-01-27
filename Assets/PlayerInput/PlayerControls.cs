@@ -172,7 +172,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9fe7730f-f1ca-475b-b9ec-96d1df53869f"",
-                    ""path"": ""<Keyboard>/{Cancel}"",
+                    ""path"": ""<Keyboard>/0"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -621,7 +621,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b7c7ac63-1e99-4a44-be3d-d0b9d81b54e4"",
-                    ""path"": ""<Keyboard>/{Cancel}"",
+                    ""path"": ""<Keyboard>/0"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
