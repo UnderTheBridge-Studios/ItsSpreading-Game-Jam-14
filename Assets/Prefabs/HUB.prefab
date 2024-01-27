@@ -3006,6 +3006,7 @@ MonoBehaviour:
   m_poisonBarRate: {fileID: 6987066860175726540}
   m_rechargePrompt: {fileID: 572024771275460494}
   m_rechargingBar: {fileID: 3291512852483274311}
+  m_rechargeKey: {fileID: 21300000, guid: 5556153bfb6fe38478b0480fb8f3050b, type: 3}
   m_pointerPrompt: {fileID: 6006736467025454871}
   m_oclusionMaterial: {fileID: 2100000, guid: f1c21f483e6071f489b868934c119e9f, type: 2}
   m_inhibitors: {fileID: 7859313232097106331}
