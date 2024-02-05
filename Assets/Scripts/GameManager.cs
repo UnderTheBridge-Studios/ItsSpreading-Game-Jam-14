@@ -13,10 +13,7 @@ public class GameManager : MonoBehaviour
     public bool UseCinematics;
 
     [Header("Scene Loader")]
-    [SerializeField] private string m_firstSceneName;
-
-    [Header("InputManager")]
-    [SerializeField] private InputManager m_input;
+    [SerializeField] private string m_firstSceneName;  
 
     [Header("Poison Values")]
     [Range(0, 0.1f)]
@@ -48,6 +45,7 @@ public class GameManager : MonoBehaviour
     private bool m_isDead;
 
     private GameObject m_player;
+    private InputManager m_input;
     private bool m_isPaused;
 
     //Player references
@@ -100,6 +98,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         m_player = GameObject.FindGameObjectWithTag("Player");
+        m_input = GetComponent<InputManager>();
 
         //Player references
         m_playerMovement = m_player.GetComponent<PlayerMovement>();
@@ -150,9 +149,6 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SceneLoaded(bool showMainMenu)
     {
-        /*if (m_isPaused)
-            m_player.GetComponent<InputManager>().ClosePauseMenu();*/
-
         if (m_isPaused)
             HUBManager.instance.ResumeGame();
 
@@ -178,7 +174,6 @@ public class GameManager : MonoBehaviour
             m_input.SetGameplayInput(false);
             m_timeToOpenCryochamber = 2;
         }
-
     }
 
     private void CheckDeath()

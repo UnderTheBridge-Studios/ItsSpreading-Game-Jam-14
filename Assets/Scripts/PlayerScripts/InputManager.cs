@@ -48,11 +48,6 @@ public class InputManager : MonoBehaviour
     {
         m_controls.Enable();
         SetGameplayInput(false);
-
-        /*m_mainMenuNavigation.Disable();
-        m_pauseNavigation.Disable();
-        m_notesPopUp.Disable();
-        m_endScrean.Disable();*/
     }
 
     private void OnDisable()
@@ -88,7 +83,7 @@ public class InputManager : MonoBehaviour
         GameManager.instance.PauseGame();
     }
 
-    public void SetGameplayInput(bool lockHorizontalMovement)
+    public void SetGameplayInput(bool lockHorizontalMovement = false)
     {
         m_gamePlay.Enable();
         m_mainMenuNavigation.Disable();
@@ -137,44 +132,4 @@ public class InputManager : MonoBehaviour
         m_endScrean.Disable();
         m_notesPopUp.Enable();
     }
-
-    /*public void OpenPauseMenu()
-    {
-        if (HUBManager.instance.isPauseMenuOpening)
-            return;
-
-        GameManager.instance.PauseGame();
-        HUBManager.instance.PauseMenuActive();
-
-        m_gamePlay.Disable();
-        m_mainMenuNavigation.Disable();
-        m_pauseNavigation.Enable();
-        m_endScrean.Disable();
-        m_notesPopUp.Disable();
-    }*/
-
-    /*public void ClosePauseMenu()
-    {
-        if (HUBManager.instance.isPauseMenuOpening)
-            return;
-
-        HUBManager.instance.ResumeGame();
-    }*/
-
-    /*public void OpenNotePopUp(string content)
-    {
-        GameManager.instance.PauseGame();
-        HUBManager.instance.ShowNote(content);
-
-        m_gamePlay.Disable();
-        m_mainMenuNavigation.Disable();
-        m_pauseNavigation.Disable();
-        m_endScrean.Disable();
-        m_notesPopUp.Enable();
-    }*/
-
-    /*public void CloseNotePopUp()
-    {
-        HUBManager.instance.HideNote();
-    }*/
 }
