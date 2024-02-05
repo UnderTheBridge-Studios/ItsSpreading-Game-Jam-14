@@ -74,7 +74,7 @@ public class UINoteDisplay : MonoBehaviour
             .OnComplete(() => { 
                 gameObject.SetActive(false);
                 isClosing = false;
-                GameManager.instance.Player.GetComponent<InputManager>().RecoverControl();
+                GameManager.instance.InputManager.RecoverControl();
             });
     }
 }

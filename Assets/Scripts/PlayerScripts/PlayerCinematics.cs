@@ -7,7 +7,6 @@ public class PlayerCinematics : MonoBehaviour
 {
     [SerializeField] private PlayerMovement m_movement;
     [SerializeField] private PlayerLook m_look;
-    [SerializeField] private InputManager m_input;
 
     [SerializeField] private Transform m_camera;
 
@@ -20,7 +19,7 @@ public class PlayerCinematics : MonoBehaviour
 
     public void LaunchDeathCinematic()
     {
-        m_input.SetCinematicInputs();
+        GameManager.instance.InputManager.SetGameplayInput(false);
         SoundManager.instance.PlayClip(6, m_d_soundVolume);
         HUBManager.instance.ResetHUB();
         HUBManager.instance.PointerActive(false);

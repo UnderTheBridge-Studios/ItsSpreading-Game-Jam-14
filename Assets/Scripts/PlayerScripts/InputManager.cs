@@ -25,32 +25,34 @@ public class InputManager : MonoBehaviour
         //Gameplay Inputs
         m_gamePlay.HorizontalMovement.performed += ctx => HorizontalMovement(ctx);
         m_gamePlay.Look.performed += ctx => Look(ctx);
-
         m_gamePlay.Interact.performed += _ => Interact();
         m_gamePlay.Flashlight.performed += _ => ToggleFlashLight();
+
         m_gamePlay.Recharge.performed += _ => GameManager.instance.ChargeBattery();
         m_gamePlay.Recharge.canceled += _ => GameManager.instance.StopChargingBattery();
         m_gamePlay.Inhibitor.performed += _ => GameManager.instance.UseInhibitor();
-        m_gamePlay.Pause.performed += _ => OpenPauseMenu();
+        m_gamePlay.Pause.performed += _ => GameManager.instance.OpenPauseMenu();
 
         //Menu Navigation Inputs
-        m_pauseNavigation.Cancel.performed += _ => ClosePauseMenu();
+        m_pauseNavigation.Cancel.performed += _ => HUBManager.instance.ResumeGame();
 
         //Notes PopUp Inputs
-        m_notesPopUp.CloseNote.performed += _ => CloseNotePopUp();
+        m_notesPopUp.CloseNote.performed += _ => HUBManager.instance.HideNote();
 
         //EndgameScrean
-        m_endScrean.Restart.performed += _ => CloseGame();
+        m_endScrean.Restart.performed += _ => GameManager.instance.CloseGame();
 
     }
 
     private void OnEnable()
     {
         m_controls.Enable();
-        m_mainMenuNavigation.Disable();
+        SetGameplayInput(false);
+
+        /*m_mainMenuNavigation.Disable();
         m_pauseNavigation.Disable();
         m_notesPopUp.Disable();
-        m_endScrean.Disable();
+        m_endScrean.Disable();*/
     }
 
     private void OnDisable()
@@ -70,38 +72,6 @@ public class InputManager : MonoBehaviour
         GameManager.instance.PlayerMovement.ReceiveInput(input);
     }
 
-    public void SetGameplayInputs()
-    {
-        m_gamePlay.Enable();
-        m_mainMenuNavigation.Disable();
-        m_pauseNavigation.Disable();
-        m_notesPopUp.Disable();
-        m_endScrean.Disable();
-    }
-
-    public void SetCinematicInputs()
-    {
-        m_gamePlay.Disable();
-        m_mainMenuNavigation.Disable();
-        m_pauseNavigation.Disable();
-        m_notesPopUp.Disable();
-        m_endScrean.Disable();
-    }
-
-    public void LockMovement(bool value)
-    {
-        m_gamePlay.Enable();
-        m_mainMenuNavigation.Disable();
-        m_pauseNavigation.Disable();
-        m_notesPopUp.Disable();
-        m_endScrean.Disable();
-
-        if (value)
-            m_gamePlay.HorizontalMovement.Disable();
-        else
-            m_gamePlay.HorizontalMovement.Enable();
-    }
-
     private void Interact()
     {
         GameManager.instance.PlayerInteract.OnInteractPressed();
@@ -112,9 +82,63 @@ public class InputManager : MonoBehaviour
         GameManager.instance.Flashlight.ToggleFlashlight();
     }
 
-    #region Menus
+    public void RecoverControl()
+    {
+        SetGameplayInput(false);
+        GameManager.instance.PauseGame();
+    }
 
-    public void OpenPauseMenu()
+    public void SetGameplayInput(bool lockHorizontalMovement)
+    {
+        m_gamePlay.Enable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Disable();
+        m_notesPopUp.Disable();
+        m_endScrean.Disable();
+
+        if (lockHorizontalMovement)
+            m_gamePlay.HorizontalMovement.Disable();
+        else
+            m_gamePlay.HorizontalMovement.Enable();
+    }
+
+    public void SetPauseInput()
+    {
+        m_gamePlay.Disable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Enable();
+        m_endScrean.Disable();
+        m_notesPopUp.Disable();
+    }
+
+    public void SetMainMenuInput()
+    {
+        m_gamePlay.Disable();
+        m_mainMenuNavigation.Enable();
+        m_pauseNavigation.Disable();
+        m_endScrean.Disable();
+        m_notesPopUp.Disable();
+    }
+
+    public void SetEndScreenInput()
+    {
+        m_gamePlay.Disable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Disable();
+        m_notesPopUp.Disable();
+        m_endScrean.Enable();
+    }
+
+    public void SetNoteInput()
+    {
+        m_gamePlay.Disable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Disable();
+        m_endScrean.Disable();
+        m_notesPopUp.Enable();
+    }
+
+    /*public void OpenPauseMenu()
     {
         if (HUBManager.instance.isPauseMenuOpening)
             return;
@@ -127,17 +151,17 @@ public class InputManager : MonoBehaviour
         m_pauseNavigation.Enable();
         m_endScrean.Disable();
         m_notesPopUp.Disable();
-    }
+    }*/
 
-    public void ClosePauseMenu()
+    /*public void ClosePauseMenu()
     {
         if (HUBManager.instance.isPauseMenuOpening)
             return;
 
         HUBManager.instance.ResumeGame();
-    }
+    }*/
 
-    public void OpenNotePopUp(string content)
+    /*public void OpenNotePopUp(string content)
     {
         GameManager.instance.PauseGame();
         HUBManager.instance.ShowNote(content);
@@ -147,37 +171,10 @@ public class InputManager : MonoBehaviour
         m_pauseNavigation.Disable();
         m_endScrean.Disable();
         m_notesPopUp.Enable();
-    }
+    }*/
 
-    public void CloseNotePopUp()
+    /*public void CloseNotePopUp()
     {
         HUBManager.instance.HideNote();
-    }
-
-    public void RecoverControl()
-    {
-        SetGameplayInputs();
-        GameManager.instance.PauseGame();
-    }
-
-    public void EnableEndScrean()
-    {
-        m_gamePlay.Disable();
-        m_mainMenuNavigation.Disable();
-        m_pauseNavigation.Disable();
-        m_notesPopUp.Disable();
-        m_endScrean.Enable();
-    }
-
-    private void CloseGame()
-    {
-#if UNITY_STANDALONE
-        Application.Quit();
-#endif
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-    }
-
-    #endregion
+    }*/
 }

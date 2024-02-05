@@ -11,14 +11,13 @@ public class TriggerEndSreen : MonoBehaviour
             return;
 
         HUBManager.instance.ShowEndSream();
-        StartCoroutine(close());
+        StartCoroutine(Close());
     }
 
 
-    private IEnumerator close()
+    private IEnumerator Close()
     {
         yield return new WaitForSecondsRealtime(1f);
-        GameManager.instance.Player.GetComponent<InputManager>().EnableEndScrean();
-
+        GameManager.instance.InputManager.SetEndScreenInput();
     }
 }

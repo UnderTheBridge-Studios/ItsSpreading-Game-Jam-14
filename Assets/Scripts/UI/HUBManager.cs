@@ -160,6 +160,9 @@ public class HUBManager : MonoBehaviour
 
     public void ResumeGame()
     {
+        if (isPauseMenuOpening)
+            return;
+
         m_pauseMenu.GetComponent<UIPauseMenu>().Resume();
     }
 

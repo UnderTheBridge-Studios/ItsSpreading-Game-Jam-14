@@ -150,8 +150,11 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SceneLoaded(bool showMainMenu)
     {
+        /*if (m_isPaused)
+            m_player.GetComponent<InputManager>().ClosePauseMenu();*/
+
         if (m_isPaused)
-            m_player.GetComponent<InputManager>().ClosePauseMenu();
+            HUBManager.instance.ResumeGame();
 
         ResetValues();
         HUBManager.instance.ResetHUB();
@@ -167,12 +170,12 @@ public class GameManager : MonoBehaviour
         {
             m_crychamber.GetComponent<CryochamberController>().SetTime(15);
             HUBManager.instance.MainMenuActive();
-            m_input.LockMovement(true);
+            m_input.SetGameplayInput(true);
         }
         else
         {
             m_crychamber.GetComponent<CryochamberController>().SetTime(2);
-            m_input.LockMovement(false);
+            m_input.SetGameplayInput(false);
             m_timeToOpenCryochamber = 2;
         }
 
@@ -194,6 +197,17 @@ public class GameManager : MonoBehaviour
         m_crychamber = chamber;
     }
 
+    public void OpenPauseMenu()
+    {
+        if (HUBManager.instance.isPauseMenuOpening)
+            return;
+
+        PauseGame();
+        HUBManager.instance.PauseMenuActive();
+
+        InputManager.SetPauseInput();
+    }
+
     public void PauseGame()
     {
         if (!m_isPaused)
@@ -212,6 +226,16 @@ public class GameManager : MonoBehaviour
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    public void CloseGame()
+    {
+#if UNITY_STANDALONE
+        Application.Quit();
+#endif
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 
     #region Poison
