@@ -143,7 +143,6 @@ GameObject:
   - component: {fileID: 3433966552042880969}
   - component: {fileID: 5730261161568649210}
   - component: {fileID: 4204994667157738951}
-  - component: {fileID: 4424304689999144895}
   - component: {fileID: 7840657799937068534}
   - component: {fileID: 3125761959522696208}
   - component: {fileID: 2820972683923355576}
@@ -244,22 +243,6 @@ MonoBehaviour:
   m_playerInteractPoint: {fileID: 1759276995494068830}
   m_sensitivityX: 15
   m_sensitivityY: 0.5
---- !u!114 &4424304689999144895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1459962071979092884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd53dfcf0eb5c4b4581f3c12b70a246d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_playerMovement: {fileID: 5730261161568649210}
-  m_playerLook: {fileID: 4204994667157738951}
-  m_playerInteract: {fileID: 7840657799937068534}
-  m_flashlight: {fileID: 3125761959522696208}
 --- !u!114 &7840657799937068534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,7 +297,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_movement: {fileID: 5730261161568649210}
   m_look: {fileID: 4204994667157738951}
-  m_input: {fileID: 4424304689999144895}
+  m_input: {fileID: 0}
   m_camera: {fileID: 6979059136604869273}
   m_d_cameraPositionY: 0.5
   m_d_cameraRotationZ: 60

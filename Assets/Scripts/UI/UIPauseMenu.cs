@@ -171,7 +171,7 @@ public class UIPauseMenu : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(0.3f);
         HUBManager.instance.isPauseMenuOpening = false;
-        GameManager.instance.Player.GetComponent<InputManager>().RecoverControl();
+        GameManager.instance.InputManager.RecoverControl();
     }
 
     private IEnumerator HideButton(Image imageButton, TextMeshProUGUI textButton)

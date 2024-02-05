@@ -5,11 +5,6 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement m_playerMovement;
-    [SerializeField] private PlayerLook m_playerLook;
-    [SerializeField] private PlayerInteract m_playerInteract;
-    [SerializeField] private FlashLight m_flashlight;
-
     private PlayerControls m_controls;
     private PlayerControls.GamePlayActions m_gamePlay;
     private PlayerControls.MainMenuNavigationActions m_mainMenuNavigation;
@@ -17,10 +12,9 @@ public class InputManager : MonoBehaviour
     private PlayerControls.NotesPopUpActions m_notesPopUp;
     private PlayerControls.EndScreaActions m_endScrean;
 
-    private Camera m_camera;
-
     private void Awake()
     {
+        //Input Maps
         m_controls = new PlayerControls();
         m_gamePlay = m_controls.GamePlay;
         m_mainMenuNavigation = m_controls.MainMenuNavigation;
@@ -32,8 +26,8 @@ public class InputManager : MonoBehaviour
         m_gamePlay.HorizontalMovement.performed += ctx => HorizontalMovement(ctx);
         m_gamePlay.Look.performed += ctx => Look(ctx);
 
-        m_gamePlay.Interact.performed += _ => m_playerInteract.OnInteractPressed();
-        m_gamePlay.Flashlight.performed += _ => m_flashlight.ToggleFlashlight();
+        m_gamePlay.Interact.performed += _ => Interact();
+        m_gamePlay.Flashlight.performed += _ => ToggleFlashLight();
         m_gamePlay.Recharge.performed += _ => GameManager.instance.ChargeBattery();
         m_gamePlay.Recharge.canceled += _ => GameManager.instance.StopChargingBattery();
         m_gamePlay.Inhibitor.performed += _ => GameManager.instance.UseInhibitor();
@@ -49,6 +43,7 @@ public class InputManager : MonoBehaviour
         m_endScrean.Restart.performed += _ => CloseGame();
 
     }
+
     private void OnEnable()
     {
         m_controls.Enable();
@@ -66,13 +61,13 @@ public class InputManager : MonoBehaviour
     private void Look(InputAction.CallbackContext context)
     {
         Vector2 input = context.ReadValue<Vector2>();
-        m_playerLook.ReceiveInput(input);
+        GameManager.instance.PlayerLook.ReceiveInput(input);
     }
 
     private void HorizontalMovement(InputAction.CallbackContext context)
     {
         Vector2 input = context.ReadValue<Vector2>();
-        m_playerMovement.ReceiveInput(input);
+        GameManager.instance.PlayerMovement.ReceiveInput(input);
     }
 
     public void SetGameplayInputs()
@@ -105,6 +100,16 @@ public class InputManager : MonoBehaviour
             m_gamePlay.HorizontalMovement.Disable();
         else
             m_gamePlay.HorizontalMovement.Enable();
+    }
+
+    private void Interact()
+    {
+        GameManager.instance.PlayerInteract.OnInteractPressed();
+    }
+
+    private void ToggleFlashLight()
+    {
+        GameManager.instance.Flashlight.ToggleFlashlight();
     }
 
     #region Menus

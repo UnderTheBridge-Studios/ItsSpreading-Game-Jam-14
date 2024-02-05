@@ -23,7 +23,7 @@ public class UIMainMenu : MonoBehaviour
 
     private IEnumerator ShowMenu()
     {
-        GameManager.instance.Player.GetComponent<InputManager>().LockMovement(true);
+        GameManager.instance.InputManager.LockMovement(true);
         HUBManager.instance.isPauseMenuOpening = true;
 
         m_title.maxVisibleCharacters = 0;
@@ -95,7 +95,7 @@ public class UIMainMenu : MonoBehaviour
 
         m_title.DOFade(0f, 0.4f)
             .OnComplete(() => {
-                GameManager.instance.Player.GetComponent<InputManager>().LockMovement(false);
+                GameManager.instance.InputManager.LockMovement(false);
                 HUBManager.instance.isPauseMenuOpening = false;
             });
         

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7085644527518342296}
   - component: {fileID: 2881071025459158636}
+  - component: {fileID: 2186495916223859236}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   InitialFlashlight: 0
   UseCinematics: 0
   m_firstSceneName: 
+  m_input: {fileID: 2186495916223859236}
   m_firstPoisonRate: 0.01
   m_poisonRate: 0
   m_poison: 0
@@ -56,3 +58,15 @@ MonoBehaviour:
   m_batteryTimeDuration: 20
   m_batteryTimeFlicker: 4
   m_chargeBatteryDuration: 3
+--- !u!114 &2186495916223859236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731219950633317410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd53dfcf0eb5c4b4581f3c12b70a246d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

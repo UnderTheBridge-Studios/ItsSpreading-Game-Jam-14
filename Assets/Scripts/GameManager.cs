@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [Header("Scene Loader")]
     [SerializeField] private string m_firstSceneName;
 
+    [Header("InputManager")]
+    [SerializeField] private InputManager m_input;
+
     [Header("Poison Values")]
     [Range(0, 0.1f)]
     [Tooltip("The poison rate you get when first poisoned")]
@@ -47,6 +50,18 @@ public class GameManager : MonoBehaviour
     private GameObject m_player;
     private bool m_isPaused;
 
+    //Player references
+    private PlayerMovement m_playerMovement;
+    private PlayerLook m_playerLook;
+    private PlayerInteract m_playerInteract;
+    private FlashLight m_flashlight;
+
+    public PlayerMovement PlayerMovement => m_playerMovement;
+    public PlayerLook PlayerLook => m_playerLook;
+    public PlayerInteract PlayerInteract => m_playerInteract;
+    public FlashLight Flashlight => m_flashlight;
+
+    public InputManager InputManager => m_input;
 
 
     private GameObject m_crychamber;
@@ -85,6 +100,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         m_player = GameObject.FindGameObjectWithTag("Player");
+
+        //Player references
+        m_playerMovement = m_player.GetComponent<PlayerMovement>();
+        m_playerLook = m_player.GetComponent<PlayerLook>();
+        m_playerInteract = m_player.GetComponent<PlayerInteract>();
+        m_flashlight = m_player.GetComponent<FlashLight>();
 
         StartCoroutine(SceneLoaded(UseMainMenu));
     }
@@ -134,24 +155,24 @@ public class GameManager : MonoBehaviour
 
         ResetValues();
         HUBManager.instance.ResetHUB();
-        m_player.GetComponent<FlashLight>().ResetValues();
-        m_player.GetComponent<PlayerMovement>().SetWalkingSpeed();
+        m_flashlight.ResetValues();
+        m_playerMovement.SetWalkingSpeed();
 
         yield return new WaitUntil(() => SceneStreamer.IsSceneLoaded(m_firstSceneName) == true);
 
-        m_player.GetComponent<PlayerMovement>().ResetPosition();
+        m_playerMovement.ResetPosition();
 
 
         if (showMainMenu)
         {
             m_crychamber.GetComponent<CryochamberController>().SetTime(15);
             HUBManager.instance.MainMenuActive();
-            m_player.GetComponent<InputManager>().LockMovement(true);
+            m_input.LockMovement(true);
         }
         else
         {
             m_crychamber.GetComponent<CryochamberController>().SetTime(2);
-            m_player.GetComponent<InputManager>().LockMovement(false);
+            m_input.LockMovement(false);
             m_timeToOpenCryochamber = 2;
         }
 
@@ -215,7 +236,7 @@ public class GameManager : MonoBehaviour
     public void ChargeBattery()
     {
         m_isCharging = true;
-        m_player.GetComponent<PlayerMovement>().SetSlowSpeed();
+        m_playerMovement.SetSlowSpeed();
         HUBManager.instance.RechargingPromptActive(true);
         SoundManager.instance.PlayReload();
         m_batteryCharging = StartCoroutine(ChargingBattery());
@@ -230,7 +251,7 @@ public class GameManager : MonoBehaviour
         HUBManager.instance.RechargingPromptActive(false);
         SoundManager.instance.StopReload();
         m_isCharging = false;
-        m_player.GetComponent<PlayerMovement>().SetWalkingSpeed();
+        m_playerMovement.SetWalkingSpeed();
     }
 
     private IEnumerator ChargingBattery()
