@@ -11,10 +11,10 @@ public interface IInteractable
 
     public void OnFocus()
     {
-        HUBManager.instance.InteractPromptActive(true, InteractionPromt);
+        GameManager.instance.CanvasManager.InteractPromptActive(true, InteractionPromt);
     }
     public void OnLoseFocus()
     {
-        HUBManager.instance.InteractPromptActive(false, "");
+        GameManager.instance.CanvasManager.InteractPromptActive(false);
     }
 }

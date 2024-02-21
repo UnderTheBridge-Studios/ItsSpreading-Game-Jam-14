@@ -148,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!GameManager.instance.IsPoisoned)
         {
-            HUBManager.instance.HealthBarActive(true);
+            GameManager.instance.CanvasManager.ShowHealth();
             GameManager.instance.SetPoisonRate();
         }
 

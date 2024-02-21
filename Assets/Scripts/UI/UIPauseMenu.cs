@@ -28,7 +28,7 @@ public class UIPauseMenu : MonoBehaviour
     }
 
     public void OpenPauseMenu()
-    {
+    { 
         StartCoroutine(ShowMenu());
     }
 

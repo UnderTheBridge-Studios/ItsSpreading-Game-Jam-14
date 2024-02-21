@@ -21,8 +21,8 @@ public class PlayerCinematics : MonoBehaviour
     {
         GameManager.instance.InputManager.SetGameplayInput(false);
         SoundManager.instance.PlayClip(6, m_d_soundVolume);
-        HUBManager.instance.ResetHUB();
-        HUBManager.instance.PointerActive(false);
+        GameManager.instance.CanvasManager.ResetHUD();
+        GameManager.instance.CanvasManager.PointerActive(true);
 
         StartCoroutine(DeathCinematic());
     }

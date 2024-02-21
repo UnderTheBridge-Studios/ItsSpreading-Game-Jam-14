@@ -14,15 +14,16 @@ public class UINoteDisplay : MonoBehaviour
     [SerializeField] private GameObject m_closeIcon;
 
     private bool isOpening;
-    private bool isClosing;
+    private bool isClosing; 
 
     private void Start()
     {
         m_BackgroundButton.Select();
-        m_BackgroundButton.onClick.AddListener(HideNote);
+        m_BackgroundButton.onClick.AddListener(CloseNoteButton);
     }
 
-    public void ShowNote(string noteContent)
+    //Show note animation, return the animation duration
+    public float ShowNote(string noteContent)
     {
         gameObject.SetActive(true);
 
@@ -34,7 +35,7 @@ public class UINoteDisplay : MonoBehaviour
         m_noteText.alpha = 0;
         isOpening = true;
 
-        DOTween.Sequence()
+        Sequence mySequence = DOTween.Sequence()
             .Append(m_note.DOSizeDelta(new Vector2(50, 50), 0.2f).SetEase(Ease.InOutQuad))
             .Append(m_note.DOSizeDelta(new Vector2(900, 50), 0.5f).SetEase(Ease.InOutQuad))
             .Append(m_note.DOSizeDelta(new Vector2(900, 700), 0.5f).SetEase(Ease.InOutQuad))
@@ -52,12 +53,14 @@ public class UINoteDisplay : MonoBehaviour
                 isOpening = false;
             })
             .SetUpdate(true);
+        return mySequence.Duration();
     }
 
-    public void HideNote()
+    //Hide note animation, return the animation duration
+    public float HideNote()
     {
         if (isOpening || isClosing)
-            return;
+            return 0;
 
         isClosing = true;
         m_closeInfo.SetActive(false);
@@ -76,5 +79,12 @@ public class UINoteDisplay : MonoBehaviour
                 isClosing = false;
                 GameManager.instance.InputManager.RecoverControl();
             });
+
+        return mySequence.Duration();
+    }
+
+    public void CloseNoteButton()
+    {
+        Debug.LogError("Close button not implemented");
     }
 }

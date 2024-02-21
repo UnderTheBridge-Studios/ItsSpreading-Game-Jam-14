@@ -18,7 +18,7 @@ public class I02_DoorButton : I08_Door
     {
         if (IsLocked)
         {
-            HUBManager.instance.UseActionPromp(m_sprite, m_text, m_time);
+            GameManager.instance.CanvasManager.UseActionPrompt(m_sprite, m_text, m_time);
             return false;
         }
         else

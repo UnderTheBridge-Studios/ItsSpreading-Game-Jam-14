@@ -18,7 +18,8 @@ public class I09_Flashlight : MonoBehaviour, IInteractable
     public bool Interact(PlayerInteract interactor)
     {
         interactor.GetComponent<FlashLight>().GetFlashlight();
-        HUBManager.instance.UseActionPromp(m_sprite, m_text, m_time);
+        GameManager.instance.CanvasManager.UseActionPrompt(m_sprite, m_text, m_time);
+
         Destroy(gameObject);
         return true;
     }

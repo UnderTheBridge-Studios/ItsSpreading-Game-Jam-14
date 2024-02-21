@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject m_player;
     private InputManager m_input;
+    private CanvasManager m_canvas;
     private bool m_isPaused;
 
     //Player references
@@ -60,6 +61,7 @@ public class GameManager : MonoBehaviour
     public FlashLight Flashlight => m_flashlight;
 
     public InputManager InputManager => m_input;
+    public CanvasManager CanvasManager => m_canvas;
 
 
     private GameObject m_crychamber;
@@ -305,7 +307,7 @@ public class GameManager : MonoBehaviour
     {
         m_inhibitors += 1;
 
-        HUBManager.instance.UpdateInhibitors();
+        m_canvas.UpdateInhibitors();
     }
 
     public void UseInhibitor()
@@ -316,7 +318,7 @@ public class GameManager : MonoBehaviour
         m_poison = Mathf.Clamp(m_poison - m_inhibitorHealth, 0f, 100f);
         m_inhibitors -= 1;
 
-        HUBManager.instance.UpdateInhibitors();
+        m_canvas.UpdateInhibitors();
         SoundManager.instance.PlayClip(3, m_inhibitorVolume);
     }
 
