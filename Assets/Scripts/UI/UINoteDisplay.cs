@@ -35,6 +35,8 @@ public class UINoteDisplay : MonoBehaviour
         m_noteText.alpha = 0;
         isOpening = true;
 
+        m_BackgroundButton.enabled = false;
+
         Sequence mySequence = DOTween.Sequence()
             .Append(m_note.DOSizeDelta(new Vector2(50, 50), 0.2f).SetEase(Ease.InOutQuad))
             .Append(m_note.DOSizeDelta(new Vector2(900, 50), 0.5f).SetEase(Ease.InOutQuad))
@@ -51,6 +53,8 @@ public class UINoteDisplay : MonoBehaviour
                 m_closeInfo.SetActive(true);
                 m_closeIcon.SetActive(true);
                 isOpening = false;
+                m_BackgroundButton.enabled = true;
+
             })
             .SetUpdate(true);
         return mySequence.Duration();
@@ -85,6 +89,6 @@ public class UINoteDisplay : MonoBehaviour
 
     public void CloseNoteButton()
     {
-        Debug.LogError("Close button not implemented");
+        GameManager.instance.CanvasManager.HideNote();
     }
 }

@@ -39,7 +39,7 @@ public class UIPauseMenu : MonoBehaviour
     
     private void Restart()
     {
-        GameManager.instance.PauseGame();
+        GameManager.instance.ResumeGame();
         GameManager.instance.RestartGame(true);
     }
 
@@ -57,7 +57,7 @@ public class UIPauseMenu : MonoBehaviour
 
     private IEnumerator ShowMenu()
     {
-        HUBManager.instance.isPauseMenuOpening = true;
+        //HUBManager.instance.isPauseMenuOpening = true;
 
         //Hide everything
         m_title.alpha = 0;
@@ -77,7 +77,6 @@ public class UIPauseMenu : MonoBehaviour
         restartText.maxVisibleCharacters = 0;
         exitText.maxVisibleCharacters = 0;
 
-
         m_childs = new TextMeshProUGUI[5];
         for (int i = 0; i < 5; i++)
         {
@@ -86,7 +85,33 @@ public class UIPauseMenu : MonoBehaviour
         }
 
         //Animations
-        StartCoroutine(ShowsCredits());
+        //StartCoroutine(ShowsCredits());
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(m_childs[0].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
+            .AppendInterval(0.1f)
+            .Join(m_childs[1].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
+            .AppendInterval(0.1f)
+            .Join(m_childs[2].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
+            .AppendInterval(0.1f)
+            .Join(m_childs[3].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
+            .AppendInterval(0.1f)
+            .Join(m_childs[4].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
+            .SetUpdate(true);
+
+        Debug.Log("Duration: " + sequence.Duration());
+
+
+        //credits
+
+        //float a = 0.1f;
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    sequence.Insert(a, m_childs[i].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
+        //        //.AppendInterval(0.1f)
+        //        .SetUpdate(true);
+
+        //    a += 0.1f;
+        //}
 
         m_title.DOFade(1f, 0.4f).SetUpdate(true);
 
@@ -99,7 +124,7 @@ public class UIPauseMenu : MonoBehaviour
         StartCoroutine(ShowButton(m_Exit.image, exitText));
 
         yield return new WaitForSecondsRealtime(0.3f);
-        HUBManager.instance.isPauseMenuOpening = false;
+        //HUBManager.instance.isPauseMenuOpening = false;
     }
 
     private IEnumerator ShowButton(Image imageButton, TextMeshProUGUI textButton)

@@ -6,19 +6,24 @@ public class CanvasManager : MonoBehaviour
 {
     [SerializeField] private Texture2D m_cursor;
 
-    private GameObject m_canvas;
+    [SerializeField] private GameObject m_canvas;
     private HUDManager m_HUD;
     private UINoteDisplay m_note;
+    private UIPauseMenu m_pause;
 
 
     private void Awake()
     {
         Cursor.SetCursor(m_cursor, Vector2.zero, CursorMode.Auto);
 
-        m_canvas = GameObject.Find("Canvas");
-        m_HUD = m_canvas.GetComponentInChildren<HUDManager>();
-        m_note = m_canvas.GetComponentInChildren<UINoteDisplay>();
+        m_HUD = m_canvas.GetComponentInChildren<HUDManager>(true); //include inactive objects
+        m_note = m_canvas.GetComponentInChildren<UINoteDisplay>(true);
+        m_pause = m_canvas.GetComponentInChildren<UIPauseMenu>(true);
+    }
 
+    private void Start()
+    {
+        ResetHUD();
     }
 
     #region HUD
@@ -67,13 +72,47 @@ public class CanvasManager : MonoBehaviour
     #region Note
     public void ShowNote(string noteContent)
     {
-        m_note.ShowNote(noteContent);
+        GameManager.instance.PauseGame();
+        GameManager.instance.InputManager.RemoveAllControls();
+        HideHUD();
         InteractPromptActive(false);
+
+
+        float animationTime = m_note.ShowNote(noteContent);
+        StartCoroutine(EnableNoteControl(animationTime));
+    }
+
+    private IEnumerator EnableNoteControl(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        GameManager.instance.InputManager.SetNoteInput();
     }
 
     public void HideNote()
     {
-        m_note.HideNote();
+        GameManager.instance.InputManager.RemoveAllControls();
+        float animationTime = m_note.HideNote();
+        StartCoroutine(ExitNote(animationTime));
     }
+
+    private IEnumerator ExitNote(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+        ShowHUD();
+        GameManager.instance.ResumeGame();
+        GameManager.instance.InputManager.SetGameplayInput();
+    }
+
     #endregion
+
+    public void OpenPauseMenu()
+    {
+        GameManager.instance.PauseGame();
+
+        m_pause.gameObject.SetActive(true);
+        m_pause.OpenPauseMenu();
+
+        GameManager.instance.InputManager.SetPauseInput();
+    }
+
 }

@@ -16,11 +16,9 @@ public class I05_Note : MonoBehaviour, IInteractable
 
     public bool Interact(PlayerInteract interactor)
     {
-        GameManager.instance.PauseGame();
-        GameManager.instance.InputManager.SetNoteInput();
-        HUBManager.instance.ShowNote(m_content);
-
+        GameManager.instance.CanvasManager.ShowNote(m_content);
         SoundManager.instance.PlayClip(5, m_soundVolume);
+
         return true;
     }
 }

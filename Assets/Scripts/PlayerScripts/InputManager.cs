@@ -31,13 +31,13 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Recharge.performed += _ => GameManager.instance.ChargeBattery();
         m_gamePlay.Recharge.canceled += _ => GameManager.instance.StopChargingBattery();
         m_gamePlay.Inhibitor.performed += _ => GameManager.instance.UseInhibitor();
-        m_gamePlay.Pause.performed += _ => GameManager.instance.OpenPauseMenu();
+        m_gamePlay.Pause.performed += _ => GameManager.instance.CanvasManager.OpenPauseMenu();
 
         //Menu Navigation Inputs
         m_pauseNavigation.Cancel.performed += _ => HUBManager.instance.ResumeGame();
 
         //Notes PopUp Inputs
-        m_notesPopUp.CloseNote.performed += _ => HUBManager.instance.HideNote();
+        m_notesPopUp.CloseNote.performed += _ => GameManager.instance.CanvasManager.HideNote();
 
         //EndgameScrean
         m_endScrean.Restart.performed += _ => GameManager.instance.CloseGame();
@@ -80,7 +80,7 @@ public class InputManager : MonoBehaviour
     public void RecoverControl()
     {
         SetGameplayInput(false);
-        GameManager.instance.PauseGame();
+        GameManager.instance.ResumeGame();
     }
 
     public void SetGameplayInput(bool lockHorizontalMovement = false)
@@ -131,5 +131,14 @@ public class InputManager : MonoBehaviour
         m_pauseNavigation.Disable();
         m_endScrean.Disable();
         m_notesPopUp.Enable();
+    }
+
+    public void RemoveAllControls()
+    {
+        m_gamePlay.Disable();
+        m_mainMenuNavigation.Disable();
+        m_pauseNavigation.Disable();
+        m_endScrean.Disable();
+        m_notesPopUp.Disable();
     }
 }

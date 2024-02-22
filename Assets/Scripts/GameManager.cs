@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
     {
         m_player = GameObject.FindGameObjectWithTag("Player");
         m_input = GetComponent<InputManager>();
+        m_canvas = GetComponent<CanvasManager>();
 
         //Player references
         m_playerMovement = m_player.GetComponent<PlayerMovement>();
@@ -207,22 +208,20 @@ public class GameManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (!m_isPaused)
-        {
-            Time.timeScale = 0;
-            m_isPaused = true;
+        Time.timeScale = 0;
+        m_isPaused = true;
 
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
-        else
-        {
-            Time.timeScale = 1;
-            m_isPaused = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
 
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        m_isPaused = false;
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void CloseGame()
