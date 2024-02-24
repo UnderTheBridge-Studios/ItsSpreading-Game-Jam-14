@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     private bool m_isFlickering;
     private bool m_isCharging;
     private bool m_isFlashlightActive;
+    private bool m_hasFlashlight;
     private bool m_isDead;
 
     private GameObject m_player;
@@ -81,8 +82,9 @@ public class GameManager : MonoBehaviour
     public bool IsPoisoned => m_isPoisoned;
     public float Inhibitors => m_inhibitors;
     public bool IsDead => m_isDead;
-    
+
     //Battery
+    public bool hasFlashlight => m_hasFlashlight;
     public float Battery => m_battery;
     public float ChargeBatteryDuration => m_chargeBatteryDuration;
     public bool IsFlickering => m_isFlickering;
@@ -137,6 +139,7 @@ public class GameManager : MonoBehaviour
         m_isCharging = false;
         m_isPoisoned = false;
         m_isDead = false;
+        m_hasFlashlight = false;
         m_battery = m_batteryTimeDuration;
         m_poison = 0;
         m_timeToOpenCryochamber = 0;
@@ -248,6 +251,11 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Flashlight
+    public void GetFlashLight()
+    {
+        m_hasFlashlight = true;
+    }
+
     public void SetFlashlightActive(bool value)
     {
         m_isFlashlightActive = value;
@@ -255,9 +263,12 @@ public class GameManager : MonoBehaviour
 
     public void ChargeBattery()
     {
+        if (!GameManager.instance.hasFlashlight)
+            return;
+
         m_isCharging = true;
         m_playerMovement.SetSlowSpeed();
-        HUBManager.instance.RechargingPromptActive(true);
+        GameManager.instance.CanvasManager.RechargingBar(true);
         SoundManager.instance.PlayReload();
         m_batteryCharging = StartCoroutine(ChargingBattery());
     }
@@ -268,7 +279,7 @@ public class GameManager : MonoBehaviour
             return;
 
         StopCoroutine(m_batteryCharging);
-        HUBManager.instance.RechargingPromptActive(false);
+        GameManager.instance.CanvasManager.RechargingBar(false);
         SoundManager.instance.StopReload();
         m_isCharging = false;
         m_playerMovement.SetWalkingSpeed();
@@ -280,8 +291,8 @@ public class GameManager : MonoBehaviour
         m_isFlickering = false;
         m_isCharging = false;
         m_battery = m_batteryTimeDuration;
-        HUBManager.instance.RechargePromptActive(false);
-        HUBManager.instance.RechargingPromptActive(false);
+        GameManager.instance.CanvasManager.NeedToReharge(false);
+        GameManager.instance.CanvasManager.RechargingBar(false);
     }
 #endregion
 

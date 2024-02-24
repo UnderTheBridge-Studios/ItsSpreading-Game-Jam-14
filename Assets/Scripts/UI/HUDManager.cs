@@ -195,12 +195,12 @@ public class HUDManager : MonoBehaviour
     #region Battery
     public void RechargePromptActive(bool value)
     {
-        //m_rechargePrompt.SetActive(value);
-        if (value)
-            m_actionPrompt.GetComponent<UIActionPrompt>().UseActionPrompt(m_rechargeKey, "Need to Recharge", 10f);
+        m_rechargePrompt.SetActive(value);
+        //if (value)
+        //    m_actionPrompt.GetComponent<UIActionPrompt>().UseActionPrompt(m_rechargeKey, "Need to Recharge", 10f);
     }
 
-    public void RechargingPromptActive(bool value)
+    public void RechargingBarActive(bool value)
     {
         m_rechargingBar.gameObject.SetActive(value);
         m_rechargingBar.fillAmount = 0;

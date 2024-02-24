@@ -571,7 +571,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7706129645092689902
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6372,8 +6372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ResumeButton: {fileID: 5873023227711139764}
-  m_Restart: {fileID: 6818320294823080794}
-  m_Exit: {fileID: 1255893779737163255}
+  m_RestartButton: {fileID: 6818320294823080794}
+  m_ExitButton: {fileID: 1255893779737163255}
   m_title: {fileID: 3269788166629035707}
   m_credits: {fileID: 5860756983452003178}
 --- !u!1 &8904169657224167675
@@ -6445,7 +6445,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8626887634087949898
 RectTransform:
   m_ObjectHideFlags: 0

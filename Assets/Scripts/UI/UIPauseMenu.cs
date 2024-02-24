@@ -11,32 +11,29 @@ using DG.Tweening;
 public class UIPauseMenu : MonoBehaviour
 {
     [SerializeField] private Button m_ResumeButton;
-    //[SerializeField] private Button m_SettingsButton;
-    [SerializeField] private Button m_Restart;
-    [SerializeField] private Button m_Exit;
+    [SerializeField] private Button m_RestartButton;
+    [SerializeField] private Button m_ExitButton;
 
     [SerializeField] private TextMeshProUGUI m_title;
     [SerializeField] private GameObject m_credits;
-    private TextMeshProUGUI[] m_childs;
+    private TextMeshProUGUI[] m_creditsNames;
+
+    private TextMeshProUGUI m_startText;
+    private TextMeshProUGUI m_restartText;
+    private TextMeshProUGUI m_exitText;
+
 
     private void Awake()
     {
-        m_ResumeButton.onClick.AddListener(Resume);
-        //m_SettingsButton.onClick.AddListener(OpenSettings);
-        m_Exit.onClick.AddListener(Exit);
-        m_Restart.onClick.AddListener(Restart);
+        m_ResumeButton.onClick.AddListener(GameManager.instance.CanvasManager.ResumeGame);
+        m_ExitButton.onClick.AddListener(Exit);
+        m_RestartButton.onClick.AddListener(Restart);
+
+        m_startText = m_ResumeButton.GetComponentInChildren<TextMeshProUGUI>();
+        m_restartText = m_RestartButton.GetComponentInChildren<TextMeshProUGUI>();
+        m_exitText = m_ExitButton.GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public void OpenPauseMenu()
-    { 
-        StartCoroutine(ShowMenu());
-    }
-
-    public void Resume()
-    {
-        StartCoroutine(HideMenu());
-    }
-    
     private void Restart()
     {
         GameManager.instance.ResumeGame();
@@ -53,174 +50,112 @@ public class UIPauseMenu : MonoBehaviour
 #endif
     }
 
-    #region Show Menu
-
-    private IEnumerator ShowMenu()
+    public float ShowMenu()
     {
-        //HUBManager.instance.isPauseMenuOpening = true;
-
         //Hide everything
         m_title.alpha = 0;
 
+        //buttons
         m_ResumeButton.image.fillAmount = 0;
-        //m_SettingsButton.image.fillAmount = 0;
-        m_Restart.image.fillAmount = 0;
-        m_Exit.image.fillAmount = 0;
+        m_RestartButton.image.fillAmount = 0;
+        m_ExitButton.image.fillAmount = 0;
 
-        TextMeshProUGUI startText = m_ResumeButton.GetComponentInChildren<TextMeshProUGUI>();
-        //TextMeshProUGUI settingsText = m_SettingsButton.GetComponentInChildren<TextMeshProUGUI>();
-        TextMeshProUGUI restartText = m_Restart.GetComponentInChildren<TextMeshProUGUI>();
-        TextMeshProUGUI exitText = m_Exit.GetComponentInChildren<TextMeshProUGUI>();
+        m_startText.alpha = 0;
+        m_restartText.alpha = 0;
+        m_exitText.alpha = 0;
 
-        startText.maxVisibleCharacters = 0;
-        //settingsText.maxVisibleCharacters = 0;
-        restartText.maxVisibleCharacters = 0;
-        exitText.maxVisibleCharacters = 0;
-
-        m_childs = new TextMeshProUGUI[5];
+        //credits
+        m_creditsNames = new TextMeshProUGUI[5];
         for (int i = 0; i < 5; i++)
         {
-            m_childs[i] = m_credits.transform.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>();
-            m_childs[i].alpha = 0;
+            m_creditsNames[i] = m_credits.transform.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>();
+            m_creditsNames[i].alpha = 0;
+        }
+
+        //Animations
+        Sequence sequence = DOTween.Sequence();
+
+        //Credits
+        //Time delay between when each name of the credit appears
+        float creditDelay = 0.1f;
+        for (int i = 0; i < 5; i++)
+            sequence.Insert(i* creditDelay, m_creditsNames[i].DOFade(1, 0.5f).SetEase(Ease.InOutCirc));
+
+        //Title
+        sequence.Insert(0, m_title.DOFade(1f, 0.4f).SetUpdate(true));
+
+        //Buttons
+        sequence
+            .Insert(0, m_ResumeButton.image.DOFillAmount(1, 0.5f).SetEase(Ease.InOutCirc))
+            .Insert(0.1f, m_RestartButton.image.DOFillAmount(1, 0.5f).SetEase(Ease.InOutCirc))
+            .Insert(0.2f, m_ExitButton.image.DOFillAmount(1, 0.5f).SetEase(Ease.InOutCirc));
+
+        sequence
+            .Insert(0.3f, m_startText.DOFade(1, 0.2f))
+            .Insert(0.4f, m_restartText.DOFade(1, 0.2f))
+            .Insert(0.5f, m_exitText.DOFade(1, 0.2f));
+
+        //input delay to avoid problems
+        sequence.AppendInterval(0.1f);
+        sequence.SetUpdate(true);
+        
+        return sequence.Duration();
+    }
+
+    public float HideMenu()
+    {
+        //prepare everything
+        m_title.alpha = 1;
+
+        m_ResumeButton.image.fillAmount = 1;
+        m_RestartButton.image.fillAmount = 1;
+        m_ExitButton.image.fillAmount = 1;
+
+        TextMeshProUGUI startText = m_ResumeButton.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI restartText = m_RestartButton.GetComponentInChildren<TextMeshProUGUI>();
+        TextMeshProUGUI exitText = m_ExitButton.GetComponentInChildren<TextMeshProUGUI>();
+
+        startText.maxVisibleCharacters = startText.text.Length;
+        restartText.maxVisibleCharacters = restartText.text.Length;
+        exitText.maxVisibleCharacters = exitText.text.Length;
+
+
+        m_creditsNames = new TextMeshProUGUI[5];
+        for (int i = 0; i < 5; i++)
+        {
+            m_creditsNames[i] = m_credits.transform.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>();
+            m_creditsNames[i].alpha = 1;
         }
 
         //Animations
         //StartCoroutine(ShowsCredits());
         Sequence sequence = DOTween.Sequence();
-        sequence.Append(m_childs[0].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
-            .AppendInterval(0.1f)
-            .Join(m_childs[1].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
-            .AppendInterval(0.1f)
-            .Join(m_childs[2].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
-            .AppendInterval(0.1f)
-            .Join(m_childs[3].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
-            .AppendInterval(0.1f)
-            .Join(m_childs[4].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
-            .SetUpdate(true);
 
-        Debug.Log("Duration: " + sequence.Duration());
-
-
-        //credits
-
-        //float a = 0.1f;
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    sequence.Insert(a, m_childs[i].DOFade(1, 0.5f).SetEase(Ease.InOutCirc))
-        //        //.AppendInterval(0.1f)
-        //        .SetUpdate(true);
-
-        //    a += 0.1f;
-        //}
-
-        m_title.DOFade(1f, 0.4f).SetUpdate(true);
-
-        StartCoroutine(ShowButton(m_ResumeButton.image, startText));
-        yield return new WaitForSecondsRealtime(0.1f);
-        //StartCoroutine(ShowButton(m_SettingsButton.image, settingsText));
-        //yield return new WaitForSecondsRealtime(0.1f);
-        StartCoroutine(ShowButton(m_Restart.image, restartText));
-        yield return new WaitForSecondsRealtime(0.1f);
-        StartCoroutine(ShowButton(m_Exit.image, exitText));
-
-        yield return new WaitForSecondsRealtime(0.3f);
-        //HUBManager.instance.isPauseMenuOpening = false;
-    }
-
-    private IEnumerator ShowButton(Image imageButton, TextMeshProUGUI textButton)
-    {
-        imageButton.DOFillAmount(1, 0.5f).SetEase(Ease.InOutCirc).SetUpdate(true);
-        yield return new WaitForSecondsRealtime(0.3f);
-        textButton.maxVisibleCharacters = 0;
-        while (textButton.maxVisibleCharacters < textButton.text.Length)
-        {
-            textButton.maxVisibleCharacters++;
-            yield return new WaitForSecondsRealtime(0.01f);
-        }
-    }
-
-    private IEnumerator ShowsCredits()
-    {
+        //Credits
+        //Time delay between when each name of the credit appears
+        float creditDelay = 0.05f;
         for (int i = 0; i < 5; i++)
-        {
-            m_childs[i].DOFade(1,0.5f).SetEase(Ease.InOutCirc).SetUpdate(true);
-            yield return new WaitForSecondsRealtime(0.1f);
-        }
+            sequence.Insert(i * creditDelay, m_creditsNames[i].DOFade(0, 0.25f).SetEase(Ease.InOutCirc));
+
+        //Title
+        sequence.Insert(0, m_title.DOFade(0f, 0.2f));
+
+        //Buttons
+        sequence
+            .Insert(0, m_ResumeButton.image.DOFillAmount(0, 0.25f).SetEase(Ease.InOutCirc))
+            .Insert(0.05f, m_RestartButton.image.DOFillAmount(0, 0.25f).SetEase(Ease.InOutCirc))
+            .Insert(0.1f, m_ExitButton.image.DOFillAmount(0, 0.25f).SetEase(Ease.InOutCirc));
+
+        //Buttons Text
+        sequence
+            .Insert(0.15f, startText.DOFade(0, 0.1f))
+            .Insert(0.2f, restartText.DOFade(0, 0.1f))
+            .Insert(0.25f, exitText.DOFade(0, 0.1f));
+
+        //input delay to avoid problems
+        sequence.AppendInterval(0.1f);
+        sequence.SetUpdate(true);
+
+        return sequence.Duration();
     }
-
-    #endregion
-
-    #region Hide Menu
-
-    private IEnumerator HideMenu()
-    {
-        HUBManager.instance.isPauseMenuOpening = true;
-        //prepare everything
-        m_title.alpha = 1;
-
-        m_ResumeButton.image.fillAmount = 1;
-        //m_SettingsButton.image.fillAmount = 1;
-        m_Restart.image.fillAmount = 1;
-        m_Exit.image.fillAmount = 1;
-
-        TextMeshProUGUI startText = m_ResumeButton.GetComponentInChildren<TextMeshProUGUI>();
-        //TextMeshProUGUI settingsText = m_SettingsButton.GetComponentInChildren<TextMeshProUGUI>();
-        TextMeshProUGUI restartText = m_Restart.GetComponentInChildren<TextMeshProUGUI>();
-        TextMeshProUGUI exitText = m_Exit.GetComponentInChildren<TextMeshProUGUI>();
-
-        startText.maxVisibleCharacters = startText.text.Length;
-        //settingsText.maxVisibleCharacters = settingsText.text.Length;
-        restartText.maxVisibleCharacters = restartText.text.Length;
-        exitText.maxVisibleCharacters = exitText.text.Length;
-
-
-        m_childs = new TextMeshProUGUI[5];
-        for (int i = 0; i < 5; i++)
-        {
-            m_childs[i] = m_credits.transform.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>();
-            m_childs[i].alpha = 1;
-        }
-
-        //Animations
-        StartCoroutine(HideCredits());
-
-        m_title.DOFade(0f, 0.2f).SetUpdate(true);
-
-        StartCoroutine(HideButton(m_ResumeButton.image, startText));
-        yield return new WaitForSecondsRealtime(0.05f);
-        //StartCoroutine(HideButton(m_SettingsButton.image, settingsText));
-        //yield return new WaitForSecondsRealtime(0.05f);
-        StartCoroutine(HideButton(m_Restart.image, restartText));
-        yield return new WaitForSecondsRealtime(0.05f);
-        StartCoroutine(HideButton(m_Exit.image, exitText));
-
-        yield return new WaitForSecondsRealtime(0.3f);
-        HUBManager.instance.isPauseMenuOpening = false;
-        GameManager.instance.InputManager.RecoverControl();
-    }
-
-    private IEnumerator HideButton(Image imageButton, TextMeshProUGUI textButton)
-    {
-        imageButton.DOFillAmount(0, 0.25f).SetEase(Ease.InOutCirc).SetUpdate(true);
-        yield return new WaitForSecondsRealtime(0.15f);
-        textButton.maxVisibleCharacters = textButton.text.Length;
-        while (textButton.maxVisibleCharacters > 0)
-        {
-            textButton.maxVisibleCharacters -= 3;
-            yield return new WaitForSecondsRealtime(0.01f);
-        }
-    }
-
-    private IEnumerator HideCredits()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            m_childs[i].DOFade(0, 0.5f).SetEase(Ease.InOutCirc).SetUpdate(true);
-            yield return new WaitForSecondsRealtime(0.05f);
-        }
-    }
-
-#endregion
-
-
 }

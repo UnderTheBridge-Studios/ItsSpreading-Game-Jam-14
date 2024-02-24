@@ -9,7 +9,8 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] private GameObject m_canvas;
     private HUDManager m_HUD;
     private UINoteDisplay m_note;
-    private UIPauseMenu m_pause;
+    private UIPauseMenu m_pauseMenu;
+    private UIMainMenu m_mainMenu;
 
 
     private void Awake()
@@ -18,7 +19,8 @@ public class CanvasManager : MonoBehaviour
 
         m_HUD = m_canvas.GetComponentInChildren<HUDManager>(true); //include inactive objects
         m_note = m_canvas.GetComponentInChildren<UINoteDisplay>(true);
-        m_pause = m_canvas.GetComponentInChildren<UIPauseMenu>(true);
+        m_pauseMenu = m_canvas.GetComponentInChildren<UIPauseMenu>(true);
+        m_mainMenu = m_canvas.GetComponentInChildren<UIMainMenu>(true);
     }
 
     private void Start()
@@ -67,6 +69,19 @@ public class CanvasManager : MonoBehaviour
         m_HUD.UseActionPrompt(sprite, text, time);
     }
 
+    public void RechargingBar(bool value)
+    {
+        if (GameManager.instance.hasFlashlight)
+            m_HUD.RechargingBarActive(value);
+        else
+            m_HUD.RechargingBarActive(false);
+    }
+
+    public void NeedToReharge(bool value)
+    {
+        m_HUD.RechargePromptActive(value);
+    }
+
     #endregion
 
     #region Note
@@ -77,12 +92,11 @@ public class CanvasManager : MonoBehaviour
         HideHUD();
         InteractPromptActive(false);
 
-
         float animationTime = m_note.ShowNote(noteContent);
-        StartCoroutine(EnableNoteControl(animationTime));
+        StartCoroutine(EnterNote(animationTime));
     }
 
-    private IEnumerator EnableNoteControl(float time)
+    private IEnumerator EnterNote(float time)
     {
         yield return new WaitForSecondsRealtime(time);
         GameManager.instance.InputManager.SetNoteInput();
@@ -105,14 +119,51 @@ public class CanvasManager : MonoBehaviour
 
     #endregion
 
+    #region PauseMenu
     public void OpenPauseMenu()
     {
         GameManager.instance.PauseGame();
+        GameManager.instance.InputManager.RemoveAllControls();
+        HideHUD();
+        InteractPromptActive(false);
 
-        m_pause.gameObject.SetActive(true);
-        m_pause.OpenPauseMenu();
+        m_pauseMenu.gameObject.SetActive(true);
+        float animationTime = m_pauseMenu.ShowMenu();
+        StartCoroutine(EnterPauseMenu(animationTime));
+    }
 
+    private IEnumerator EnterPauseMenu(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
         GameManager.instance.InputManager.SetPauseInput();
     }
 
+    public void ResumeGame()
+    {
+        GameManager.instance.InputManager.RemoveAllControls();
+        float animationDuration = m_pauseMenu.HideMenu();
+        StartCoroutine(ExitPauseMenu(animationDuration));
+    }
+
+    private IEnumerator ExitPauseMenu(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+
+        ShowHUD();
+        GameManager.instance.ResumeGame();
+        GameManager.instance.InputManager.SetGameplayInput();
+        m_pauseMenu.gameObject.SetActive(false);
+    }
+
+    #endregion
+
+    #region MainMenu
+    public void ShowMainMenu()
+    {
+        GameManager.instance.InputManager.SetGameplayInput(true);
+        m_mainMenu.gameObject.SetActive(true);
+        m_mainMenu.OpenMenu();
+    }
+
+    #endregion
 }

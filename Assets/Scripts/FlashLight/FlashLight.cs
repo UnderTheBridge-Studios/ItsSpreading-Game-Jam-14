@@ -33,7 +33,6 @@ public class FlashLight : MonoBehaviour
 
     private Coroutine m_flickering;
 
-    private bool m_hasFlashlight;
     private bool m_isFlickering;
     private bool m_isFlashlightEnabled;
 
@@ -42,7 +41,6 @@ public class FlashLight : MonoBehaviour
     public void ResetValues()
     {
         m_light.spotAngle = m_projectileFov;
-        m_hasFlashlight = false;
         m_isFlickering = false;
         m_isFlashlightEnabled = false;
 
@@ -56,12 +54,12 @@ public class FlashLight : MonoBehaviour
     {
         m_flashlight.SetActive(true);
         m_tween = m_flashlight.transform.DOLocalJump(m_flashlightPosition, m_flashlightAnimationJump, 1, m_flashlightAnimationTime);
-        m_tween.OnComplete( ()=> m_hasFlashlight = true);
+        m_tween.OnComplete( ()=> GameManager.instance.GetFlashLight());
     }
 
     public void ToggleFlashlight()
     {
-        if (!m_hasFlashlight)
+        if (!GameManager.instance.hasFlashlight)
             return;
 
         SoundManager.instance.PlayClip(4, m_toggleVolume);
@@ -101,7 +99,7 @@ public class FlashLight : MonoBehaviour
         }
 
         if (GameManager.instance.Battery <= 0)
-            HUBManager.instance.RechargePromptActive(true);
+            GameManager.instance.CanvasManager.NeedToReharge(true);
 
         if (m_isFlickering)
             StopFlickering();

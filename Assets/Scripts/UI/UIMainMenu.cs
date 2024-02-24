@@ -7,13 +7,9 @@ using DG.Tweening;
 
 public class UIMainMenu : MonoBehaviour
 {
-    //[SerializeField] private Button m_StartButton;
-    //[SerializeField] private Button m_SettingsButton;
-    //[SerializeField] private Button m_Exit;
-
     [SerializeField] private TextMeshProUGUI m_title;
     [SerializeField] private GameObject m_credits;
-    private TextMeshProUGUI[] m_childs;
+    private TextMeshProUGUI[] m_creditsNames;
 
     [ContextMenu("OpenMenu")]
     public void OpenMenu()
@@ -30,12 +26,12 @@ public class UIMainMenu : MonoBehaviour
 
         m_title.alpha = 1;
 
-        m_childs = new TextMeshProUGUI[5];
+        m_creditsNames = new TextMeshProUGUI[5];
         for (int i = 0; i < 5; i++)
         {
-            m_childs[i] = m_credits.transform.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>();
-            m_childs[i].gameObject.SetActive(false);
-            m_childs[i].alpha = 1;
+            m_creditsNames[i] = m_credits.transform.GetChild(i).gameObject.GetComponent<TextMeshProUGUI>();
+            m_creditsNames[i].gameObject.SetActive(false);
+            m_creditsNames[i].alpha = 1;
         }
 
         yield return new WaitForSecondsRealtime(1f);
@@ -58,12 +54,12 @@ public class UIMainMenu : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            m_childs[i].maxVisibleCharacters = 0;
-            m_childs[i].gameObject.SetActive(true);
+            m_creditsNames[i].maxVisibleCharacters = 0;
+            m_creditsNames[i].gameObject.SetActive(true);
             yield return new WaitForSecondsRealtime(0.4f);
-            while (m_childs[i].maxVisibleCharacters < m_childs[i].text.Length)
+            while (m_creditsNames[i].maxVisibleCharacters < m_creditsNames[i].text.Length)
             {
-                m_childs[i].GetComponent<TextMeshProUGUI>().maxVisibleCharacters++;
+                m_creditsNames[i].GetComponent<TextMeshProUGUI>().maxVisibleCharacters++;
                 yield return new WaitForSecondsRealtime(0.05f);
             }
             yield return new WaitForSecondsRealtime(0.2f);
@@ -77,18 +73,9 @@ public class UIMainMenu : MonoBehaviour
 
     private IEnumerator HideMenu()
     {
-        //m_childs[0].transform.parent.GetComponent<VerticalLayoutGroup>().enabled = false; 
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    m_childs[i].transform.DOLocalMoveX(300f , 0.3f);
-        //    m_childs[i].DOFade(0f, 0.2f);
-
-        //    yield return new WaitForSecondsRealtime(0.03f);
-        //}
-
         for (int i = 0; i < 5; i++)
         {
-            m_childs[i].DOFade(0f, 0.2f);
+            m_creditsNames[i].DOFade(0f, 0.2f);
 
             yield return new WaitForSecondsRealtime(0.03f);
         }
@@ -96,9 +83,6 @@ public class UIMainMenu : MonoBehaviour
         m_title.DOFade(0f, 0.4f)
             .OnComplete(() => {
                 GameManager.instance.InputManager.SetGameplayInput(false);
-                HUBManager.instance.isPauseMenuOpening = false;
             });
-        
-
     }
 }

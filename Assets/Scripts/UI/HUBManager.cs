@@ -155,7 +155,7 @@ public class HUBManager : MonoBehaviour
     public void PauseMenuActive()
     {
         m_pauseMenu.SetActive(true);
-        m_pauseMenu.GetComponent<UIPauseMenu>().OpenPauseMenu();
+        //m_pauseMenu.GetComponent<UIPauseMenu>().OpenPauseMenu();
     }
 
     public void ResumeGame()
@@ -163,7 +163,7 @@ public class HUBManager : MonoBehaviour
         if (isPauseMenuOpening)
             return;
 
-        m_pauseMenu.GetComponent<UIPauseMenu>().Resume();
+       // m_pauseMenu.GetComponent<UIPauseMenu>().Resume();
     }
 
     public void MainMenuActive()

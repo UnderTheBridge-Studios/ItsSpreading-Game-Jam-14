@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviour
         m_gamePlay.Pause.performed += _ => GameManager.instance.CanvasManager.OpenPauseMenu();
 
         //Menu Navigation Inputs
-        m_pauseNavigation.Cancel.performed += _ => HUBManager.instance.ResumeGame();
+        m_pauseNavigation.Cancel.performed += _ => GameManager.instance.CanvasManager.ResumeGame();
 
         //Notes PopUp Inputs
         m_notesPopUp.CloseNote.performed += _ => GameManager.instance.CanvasManager.HideNote();
@@ -140,5 +140,7 @@ public class InputManager : MonoBehaviour
         m_pauseNavigation.Disable();
         m_endScrean.Disable();
         m_notesPopUp.Disable();
+
+        GameManager.instance.PlayerMovement.ReceiveInput(Vector2.zero);
     }
 }
