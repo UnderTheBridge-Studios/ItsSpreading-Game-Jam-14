@@ -156,10 +156,11 @@ public class GameManager : MonoBehaviour
     private IEnumerator SceneLoaded(bool showMainMenu)
     {
         if (m_isPaused)
-            HUBManager.instance.ResumeGame();
+            GameManager.instance.CanvasManager.ResumeGame();            
+            
 
         ResetValues();
-        HUBManager.instance.ResetHUB();
+        GameManager.instance.CanvasManager.ResetHUD();
         m_flashlight.ResetValues();
         m_playerMovement.SetWalkingSpeed();
 
@@ -167,16 +168,21 @@ public class GameManager : MonoBehaviour
 
         m_playerMovement.ResetPosition();
 
-
         if (showMainMenu)
         {
-            m_crychamber.GetComponent<CryochamberController>().SetTime(15);
-            HUBManager.instance.MainMenuActive();
+            Debug.Log("Show Main Menus");
+
+            //m_crychamber.GetComponent<CryochamberController>().SetTime(15);
+            GameManager.instance.CanvasManager.ShowMainMenu();
             m_input.SetGameplayInput(true);
+            m_timeToOpenCryochamber = 15;
+
         }
         else
         {
-            m_crychamber.GetComponent<CryochamberController>().SetTime(2);
+            Debug.Log("NOT Show Main Menus");
+
+            //m_crychamber.GetComponent<CryochamberController>().SetTime(2);
             m_input.SetGameplayInput(false);
             m_timeToOpenCryochamber = 2;
         }
@@ -196,17 +202,6 @@ public class GameManager : MonoBehaviour
     public void Cryochamber(GameObject chamber)
     {
         m_crychamber = chamber;
-    }
-
-    public void OpenPauseMenu()
-    {
-        if (HUBManager.instance.isPauseMenuOpening)
-            return;
-
-        PauseGame();
-        HUBManager.instance.PauseMenuActive();
-
-        InputManager.SetPauseInput();
     }
 
     public void PauseGame()

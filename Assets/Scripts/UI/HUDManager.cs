@@ -84,7 +84,6 @@ public class HUDManager : MonoBehaviour
 
     public void ResetHUD()
     {
-        Debug.Log("Reset");
         //pointer
         m_pointerPrompt.SetActive(true);
         

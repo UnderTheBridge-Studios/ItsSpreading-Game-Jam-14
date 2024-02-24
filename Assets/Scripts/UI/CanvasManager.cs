@@ -26,6 +26,7 @@ public class CanvasManager : MonoBehaviour
     private void Start()
     {
         ResetHUD();
+        m_pauseMenu.gameObject.SetActive(false);
     }
 
     #region HUD
@@ -160,6 +161,7 @@ public class CanvasManager : MonoBehaviour
     #region MainMenu
     public void ShowMainMenu()
     {
+        HideHUD();
         GameManager.instance.InputManager.SetGameplayInput(true);
         m_mainMenu.gameObject.SetActive(true);
         m_mainMenu.OpenMenu();

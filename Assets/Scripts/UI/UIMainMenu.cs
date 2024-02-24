@@ -11,7 +11,6 @@ public class UIMainMenu : MonoBehaviour
     [SerializeField] private GameObject m_credits;
     private TextMeshProUGUI[] m_creditsNames;
 
-    [ContextMenu("OpenMenu")]
     public void OpenMenu()
     {
         StartCoroutine(ShowMenu());
@@ -19,9 +18,6 @@ public class UIMainMenu : MonoBehaviour
 
     private IEnumerator ShowMenu()
     {
-        GameManager.instance.InputManager.SetGameplayInput(true);
-        HUBManager.instance.isPauseMenuOpening = true;
-
         m_title.maxVisibleCharacters = 0;
 
         m_title.alpha = 1;
@@ -83,6 +79,7 @@ public class UIMainMenu : MonoBehaviour
         m_title.DOFade(0f, 0.4f)
             .OnComplete(() => {
                 GameManager.instance.InputManager.SetGameplayInput(false);
+                GameManager.instance.CanvasManager.ShowHUD();
             });
     }
 }
